@@ -47,8 +47,10 @@ return [
     'services' => [
         \FastD\ServiceProvider\RouteServiceProvider::class,
         \FastD\ServiceProvider\LoggerServiceProvider::class,
+        \ServiceProvider\EnvConfigServiceProvider::class,
         \FastD\ServiceProvider\DatabaseServiceProvider::class,
         \FastD\ServiceProvider\CacheServiceProvider::class,
+        \ServiceProvider\WechatServiceProvider::class
     ],
 
     /**
@@ -76,6 +78,10 @@ return [
                     'code' => 401
                 ]
             ]
-        ])
+        ]),
+        // 登录检查
+        'login' => new Middleware\LoginCheck(),
+        // 分发
+        'dispatch' => new Middleware\Dispatch(),
     ],
 ];

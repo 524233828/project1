@@ -9,6 +9,6 @@
 
 return [
     'default' => [
-        'adapter' => \Symfony\Component\Cache\Adapter\FilesystemAdapter::class,
+        'adapter' => \Symfony\Component\Cache\Adapter\RedisAdapter::class,
     ]
 ];

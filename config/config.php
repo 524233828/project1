@@ -9,4 +9,5 @@
 
 return [
 
+    "upload_dir" => app()->getPath()."/upload",
 ];
