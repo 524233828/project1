@@ -48,6 +48,7 @@ class ClassController extends BaseController
      * @returnParam introduce[].title|string|介绍标题
      * @returnParam introduce[].content|string|介绍内容
      * @returnParam introduce[].sort|int|排序，大的在前
+     * @returnParam introduce[].url|string|图片跳转地址
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

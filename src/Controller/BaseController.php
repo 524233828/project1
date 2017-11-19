@@ -22,6 +22,7 @@ class BaseController
 {
     /**
      * @param $data
+     * @param $isFilter //是否进行参数过滤
      * @param string $msg
      * @param int $code
      * @param int $status
@@ -35,6 +36,11 @@ class BaseController
         return new ApiResponse($msg, $code, $data, $status);
     }
 
+    /**
+     * 根据当前方法的注释进行参数过滤
+     * @param $data
+     * @return array
+     */
     public function responseFilter($data)
     {
         try
@@ -61,6 +67,13 @@ class BaseController
 
     }
 
+    /**
+     * 参数过滤处理方法
+     * @param $data
+     * @param $param
+     * @param array $response_data
+     * @return string
+     */
     private function filterHandler($data,$param,&$response_data = [])
     {
         $list = explode('.',$param);
@@ -95,6 +108,12 @@ class BaseController
         }
     }
 
+    /**
+     * 获取响应参数
+     * @param $callbackController
+     * @param $callbackMethod
+     * @return array
+     */
     private function _genDoc($callbackController,$callbackMethod)
     {
         $reflect = new \ReflectionClass($callbackController);

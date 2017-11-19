@@ -28,6 +28,8 @@ class ApiDocConsole extends Command
     // 输出的md路径
     public $output;
 
+    public $file;
+
     public function configure()
     {
         $this->setName('yd:gen-apidoc')
@@ -35,13 +37,15 @@ class ApiDocConsole extends Command
             ->addOption('controller', 'c', InputOption::VALUE_REQUIRED,
                 '要生成文档的控制器')
             ->addOption('output', 'o', InputOption::VALUE_OPTIONAL,
-                '输出md的文件夹路径(请用绝对路径),默认放在doc目录');
+                '输出md的文件夹路径(请用绝对路径),默认放在doc目录')
+            ->addOption('filename','f',InputOption::VALUE_OPTIONAL);
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $this->controller = ucfirst($input->getOption('controller')) . 'Controller';
         $this->output = $input->getOption('output') ? $input->getOption('output') : './doc';
+        $this->file = $input->getOption('filename') ? $input->getOption('filename') : '接口文档';
 
         $this->_genMd($this->_genDoc());
     }
@@ -190,6 +194,6 @@ class ApiDocConsole extends Command
             mkdir($this->output, 0755);
         }
 
-        file_put_contents($this->output . '/' . $this->controller . '.md', $text);
+        file_put_contents($this->output . '/' . $this->file . '.md', $text);
     }
 }
