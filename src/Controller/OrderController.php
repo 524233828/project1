@@ -33,6 +33,10 @@ class OrderController extends BaseController
         }
     }
 
+    /**
+     * @name 支付回调
+     * @return \Service\ApiResponse
+     */
     public function notifyOrder()
     {
         $payment = wechat()->payment;

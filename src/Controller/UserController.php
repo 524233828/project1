@@ -13,6 +13,9 @@ use Logic\UserLogic;
 
 class UserController
 {
+    /**
+     * @name 登录回调
+     */
     public function login(ServerRequest $request)
     {
         UserLogic::getInstance()->login();
