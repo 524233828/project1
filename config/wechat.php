@@ -36,7 +36,7 @@ return [
      */
     'oauth' => [
         'scopes'   => ['snsapi_userinfo'],
-        'callback' => '/v1/user/login',
+        'callback' => '/user/login',
     ],
     /**
      * 微信支付
@@ -46,6 +46,7 @@ return [
         'key'                => 'key-for-signature',
         'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
         'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+        'notify_url'         => '/order/notify',      // XXX: 绝对路径！！！！
         // 'device_info'     => '013467007045764',
         // 'sub_app_id'      => '',
         // 'sub_merchant_id' => '',

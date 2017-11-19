@@ -9,11 +9,12 @@
 namespace Controller;
 
 use FastD\Http\ServerRequest;
+use Logic\UserLogic;
 
 class UserController
 {
     public function login(ServerRequest $request)
     {
-
+        UserLogic::getInstance()->login();
     }
 }

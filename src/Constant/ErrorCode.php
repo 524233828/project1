@@ -37,6 +37,11 @@ class ErrorCode
     const CLASS_NOT_FOUND = 1100; //课程不存在
     const CLASS_NO_CHAPTER = 1101;
 
+    /**
+     * 12xx订单系统错误
+     */
+    const ORDER_CREATE_FAIL = 1200;
+
 
 
     /**
@@ -53,6 +58,7 @@ class ErrorCode
         self::USER_NOT_LOGIN        => ['未登录', Response::HTTP_FORBIDDEN],
         self::CLASS_NOT_FOUND       => ['课程不存在', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_CHAPTER      => ['该课程没有章节', Response::HTTP_NOT_FOUND],
+        self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],
 
     ];
 

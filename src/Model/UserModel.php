@@ -7,15 +7,16 @@
 
 namespace Model;
 
+use Exception\BaseException;
 use FastD\Model\Model;
 
 class UserModel extends Model
 {
-    const TABLE_NAME = "db_user";
+    const USER_TABLE = "db_user";
 
     public static function getUser($uid)
     {
-        $user = database()->get(self::TABLE_NAME,"*",[
+        $user = database()->get(self::USER_TABLE,"*",[
             "id" => $uid
         ]);
 
@@ -24,6 +25,20 @@ class UserModel extends Model
 
     public static function addUser($data)
     {
-        
+        $user = database()->insert(self::USER_TABLE,$data);
+
+        if(!$user){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function getUserByOpenId($openid)
+    {
+        $user = database()->get(self::USER_TABLE,"*",[
+            "openid" => $openid
+        ]);
+
+        return $user;
     }
 }

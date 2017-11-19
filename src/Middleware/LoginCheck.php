@@ -22,6 +22,8 @@ class LoginCheck extends Middleware
         //开启session会话
         session_start();
 
+        $_SESSION['channel'] = isset($_GET['channel'])?$_GET['channel']:isset($_SESSION['channel'])?$_SESSION['channel']:"";
+
         if (isset($_SESSION['uid'])&&!empty($_SESSION['uid'])) {
             $response = $next($request);
         } else {

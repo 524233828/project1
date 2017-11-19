@@ -31,7 +31,7 @@ class ClassController extends BaseController
     {
 
         $page = $request->getParam("page",1);
-        return $this->response(ClassLogic::getInstance()->listClass($page));
+        return $this->response(ClassLogic::getInstance()->listClass($page),true);
 
     }
 
@@ -55,7 +55,7 @@ class ClassController extends BaseController
     {
         $class_id = $request->getParam("class_id");
 
-        return $this->response(ClassLogic::getInstance()->getClass($class_id));
+        return $this->response(ClassLogic::getInstance()->getClass($class_id),true);
     }
 
     /**
@@ -82,22 +82,18 @@ class ClassController extends BaseController
     }
 
     /**
-     * @name 问题章节
-     * @apiParam class_id|int|问题ID|true
+     * @name 课程章节
+     * @apiParam class_id|int|课程ID|true
      * @returnParam [].id|int|章节ID
      * @returnParam [].title|string|章节标题
-     * @returnParam [].chapter_id|int|第几章
-     * @returnParam lesson.[].id|int|课时ID
-     * @returnParam lesson.[].lesson_no|int|第几课
-     * @returnParam lesson.[].desc|string|课程描述
-     * @returnParam lesson.[].resource_type|int|资源类型，0-视频 1-文章
-     * @returnParam lesson.[].resource.id|int|资源ID
-     * @returnParam lesson.[].resource.media_url|string|视频地址， resource_type=0时存在
-     * @returnParam lesson.[].resource.media_time|int|视频长度，单位：秒， resource_type=0时存在
-     * @returnParam lesson.[].resource.size|int|视频大小，单位：byte， resource_type=0时存在
-     * @returnParam lesson.[].resource.title|string|文章标题，resource_type=1时存在
-     * @returnParam lesson.[].resource.img_url|string|文章图片地址，resource_type=1时存在
-     * @returnParam lesson.[].resource.content|string|文章内容，resource_type=1时存在
+     * @returnParam [].chapter_no|int|第几章
+     * @returnParam [].lesson[].id|int|课时ID
+     * @returnParam [].lesson[].lesson_no|int|第几课
+     * @returnParam [].lesson[].desc|string|课程描述
+     * @returnParam [].lesson[].resource_type|int|资源类型，0-视频 1-文章
+     * @returnParam [].lesson[].resource.media_time|int|视频长度，单位：秒， resource_type=0时存在
+     * @returnParam [].lesson[].resource.title|string|文章标题，resource_type=1时存在
+     * @returnParam [].lesson[].resource.img_url|string|文章图片地址，resource_type=1时存在
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -105,7 +101,7 @@ class ClassController extends BaseController
     {
         $class_id = $request->getParam("class_id");
 
-        return $this->response(ClassLogic::getInstance()->getClassChapter($class_id));
+        return $this->response(ClassLogic::getInstance()->getClassChapter($class_id),true);
     }
 
 }
