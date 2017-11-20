@@ -18,4 +18,5 @@ route()->group("/order",function(){
 
 route()->group("/user",function(){
     route()->get("/login","UserController@login");
+    route()->get("/class","UserController@login");
 });

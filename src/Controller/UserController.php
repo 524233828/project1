@@ -20,4 +20,9 @@ class UserController
     {
         UserLogic::getInstance()->login();
     }
+
+    public function getClass(ServerRequest $request)
+    {
+
+    }
 }
