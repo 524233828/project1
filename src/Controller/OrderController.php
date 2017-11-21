@@ -25,6 +25,7 @@ class OrderController extends BaseController
     public function createOrder(ServerRequest $request)
     {
         $class_id = $request->getParam("class_id");
+        $channel = $request->getParam("channel");
 
         if(!$result = OrderLogic::getInstance()->buyClass($class_id)){
             OrderException::OrderCreateFail();

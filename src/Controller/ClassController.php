@@ -15,13 +15,15 @@ class ClassController extends BaseController
 {
 
     /**
-     * @name 首页获取文章列表
+     * @name 首页获取课程列表
      * @apiParam page|int|分页页数，默认为1|false
      * @returnParam [].id|int|课程ID
      * @returnParam [].sold|int|卖出数量
      * @returnParam [].price|float|售价
      * @returnParam [].img_url|string|图片地址
      * @returnParam [].title|string|课程标题
+     * @returnParam [].tag|string|课程标签
+     * @returnParam [].desc|string|课程描述
      * @returnParam current_page|int|当前页数
      * @returnParam total_page|string|总页数
      * @param ServerRequest $request
@@ -65,6 +67,9 @@ class ClassController extends BaseController
      * @returnParam [].id|int|课程ID
      * @returnParam [].resource_type|int|资源类型，0-视频 1-文章
      * @returnParam [].sort|int|试听列表排序 大的在前
+     * @returnParam [].title|int|试听列表排序 大的在前
+     * @returnParam [].desc|int|试听列表排序 大的在前
+     * @returnParam [].img_url|int|试听列表排序 大的在前
      * @returnParam [].resource.id|int|资源ID
      * @returnParam [].resource.media_url|string|视频地址， resource_type=0时存在
      * @returnParam [].resource.media_time|int|视频长度， resource_type=0时存在
@@ -88,9 +93,12 @@ class ClassController extends BaseController
      * @returnParam [].id|int|章节ID
      * @returnParam [].title|string|章节标题
      * @returnParam [].chapter_no|int|第几章
+     * @returnParam [].desc|int|第几章
      * @returnParam [].lesson[].id|int|课时ID
      * @returnParam [].lesson[].lesson_no|int|第几课
+     * @returnParam [].lesson[].title|int|课程标题
      * @returnParam [].lesson[].desc|string|课程描述
+     * @returnParam [].lesson[].img_url|string|课程图片
      * @returnParam [].lesson[].resource_type|int|资源类型，0-视频 1-文章
      * @returnParam [].lesson[].resource.media_time|int|视频长度，单位：秒， resource_type=0时存在
      * @returnParam [].lesson[].resource.title|string|文章标题，resource_type=1时存在

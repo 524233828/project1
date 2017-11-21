@@ -1,6 +1,6 @@
 <?php
 
-route()->group("/class",function(){
+route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
     route()->get("/list","ClassController@listClass");
     route()->get("/info","ClassController@getClass");
     route()->get("/try","ClassController@getClassTry");
@@ -12,11 +12,11 @@ route()->group("/banner",function(){
 });
 
 route()->group("/order",function(){
-    route()->get("/buyClass","OrderController@createOrder")->withMiddleware("login");
+    route()->post("/buyClass","OrderController@createOrder")->withMiddleware("login");
     route()->get("/notify","OrderController@notifyOrder");
 });
 
-route()->group("/user",function(){
+route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
     route()->get("/login","UserController@login");
-    route()->get("/class","UserController@login");
+    route()->get("/class","UserController@listUserClass");
 });

@@ -12,6 +12,9 @@ class Dispatch extends Middleware
 
     public function handle(ServerRequestInterface $request, DelegateInterface $next)
     {
+        //开启session会话
+        session_start();
+
         try {
             $response = $next($request);
         } catch (\Exception $e) {

@@ -8,6 +8,7 @@
 
 namespace Logic;
 
+use Model\BuyModel;
 use Model\UserModel;
 
 class UserLogic extends BaseLogic
@@ -32,7 +33,12 @@ class UserLogic extends BaseLogic
 
 
         $targetUrl = empty($_SESSION['redirect_url']) ? '/' : $_SESSION['redirect_url'];
-        header('location:'. $targetUrl); // 跳转到 user/profile
+        header('location:'. $targetUrl); // 跳转到原来的页面
         exit;
+    }
+
+    public function listUserClass($user_id)
+    {
+        return BuyModel::listUserClass($user_id);
     }
 }

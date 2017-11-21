@@ -18,4 +18,9 @@ class BannerLogic extends BaseLogic
 
         return $banner;
     }
+
+    public function addBanner()
+    {
+
+    }
 }

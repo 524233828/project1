@@ -42,6 +42,11 @@ class ErrorCode
      */
     const ORDER_CREATE_FAIL = 1200;
 
+    /**
+     * 13xx通用系统错误
+     */
+    const UPLOAD_FAIL = 1300;
+
 
 
     /**
@@ -59,6 +64,7 @@ class ErrorCode
         self::CLASS_NOT_FOUND       => ['课程不存在', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_CHAPTER      => ['该课程没有章节', Response::HTTP_NOT_FOUND],
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],
+        self::UPLOAD_FAIL           => ['上传失败', Response::HTTP_BAD_GATEWAY],
 
     ];
 

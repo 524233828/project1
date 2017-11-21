@@ -19,8 +19,7 @@ class LoginCheck extends Middleware
 
     public function handle(ServerRequestInterface $request, DelegateInterface $next)
     {
-        //开启session会话
-        session_start();
+
 
         $_SESSION['channel'] = isset($_GET['channel'])?$_GET['channel']:isset($_SESSION['channel'])?$_SESSION['channel']:"";
 
@@ -29,7 +28,7 @@ class LoginCheck extends Middleware
         } else {
             $wechat = \wechat();
 
-            $_SESSION['redirect_url'] = $_SERVER['HTTP_REFERER'];
+            $_SESSION['redirect_url'] = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"/";
 
             $oauth = $wechat->oauth;
 

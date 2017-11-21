@@ -8,6 +8,8 @@
 
 namespace Model;
 
+use Exception\BaseException;
+
 class BannerModel extends BaseModel
 {
 
@@ -24,8 +26,13 @@ class BannerModel extends BaseModel
         return $result;
     }
 
-    public static function addBanner()
+    public static function addBanner($data)
     {
+        $banner = database()->insert(self::BANNER_TABLE,$data);
 
+        if(!$banner){
+            BaseException::SystemError();
+        }
+        return database()->id();
     }
 }

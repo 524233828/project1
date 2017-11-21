@@ -8,6 +8,8 @@
 
 namespace Model;
 
+use Exception\BaseException;
+
 class ArticleModel
 {
     const ARTICLE_TABLE = "db_article";
@@ -17,9 +19,14 @@ class ArticleModel
 
     }
 
-    public static function addArticle()
+    public static function addArticle($data)
     {
+        $article = database()->insert(self::ARTICLE_TABLE,$data);
 
+        if(!$article){
+            BaseException::SystemError();
+        }
+        return database()->id();
     }
 
     public static function listArticle($where = [])
