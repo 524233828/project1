@@ -184,4 +184,6 @@ class ClassLogic extends BaseLogic
 
         return ClassModel::addClass($data);
     }
+
+
 }

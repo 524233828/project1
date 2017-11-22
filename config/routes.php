@@ -20,6 +20,7 @@ route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
     route()->get("/login","UserController@login");
     route()->get("/class","UserController@listUserClass");
     route()->get("/chapter","UserController@getClassChapter");
+    route()->get("/article","UserController@getArticle");
 });
 
 route()->group(['prefix' => '/admin', 'middleware' => 'dispatch'],function(){

@@ -9,6 +9,7 @@
 namespace Controller;
 
 use FastD\Http\ServerRequest;
+use Logic\ArticleLogic;
 use Logic\ClassLogic;
 use Logic\UserLogic;
 
@@ -51,6 +52,7 @@ class UserController extends BaseController
      * @returnParam [].lesson[].title|int|课程标题
      * @returnParam [].lesson[].desc|string|课程描述
      * @returnParam [].lesson[].img_url|string|课程图片
+     * @returnParam [].lesson[].resource_id|string|课程图片
      * @returnParam [].lesson[].resource_type|int|资源类型，0-视频 1-文章
      * @returnParam [].lesson[].resource.media_time|int|视频长度，单位：秒， resource_type=0时存在
      * @returnParam [].lesson[].resource.media_url|int|视频地址，单位：秒， resource_type=0时存在
@@ -65,5 +67,22 @@ class UserController extends BaseController
         $class_id = $request->getParam("class_id");
 
         return $this->response(ClassLogic::getInstance()->getClassChapter($class_id));
+    }
+
+    /**
+     * @name 获取课程文章（购买后）
+     * @apiParam resource_id|int|课程ID|true
+     * @returnParam id|int|文章ID
+     * @returnParam title|string|文章标题
+     * @returnParam img_url|string|文章图片
+     * @returnParam content|string|文章内容
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function getArticle(ServerRequest $request)
+    {
+        $resource_id = $request->getParam("resource_id");
+
+        return $this->response(ArticleLogic::getInstance()->getArticle($resource_id));
     }
 }
