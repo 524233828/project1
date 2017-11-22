@@ -9,6 +9,7 @@
 namespace Controller;
 
 use FastD\Http\ServerRequest;
+use Logic\UploadLogic;
 use Service\Uploader;
 
 class CommonController extends BaseController
@@ -16,15 +17,12 @@ class CommonController extends BaseController
 
     /**
      * @name 上传文件
+     * @apiParam upload|file|文件|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function upload(ServerRequest $request)
+    public function uploadImage(ServerRequest $request)
     {
-        $result = Uploader::save("file");
-
-        if($result){
-            return $this->response([]);
-        }
+        return $this->response(["path"=>UploadLogic::getInstance()->uploadImage()]);
     }
 }

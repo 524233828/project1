@@ -13,4 +13,12 @@ class BaseException extends \Exception
             ErrorCode::ERR_SYSTEM
         );
     }
+
+    public static function UploadError()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::UPLOAD_FAIL),
+            ErrorCode::UPLOAD_FAIL
+        );
+    }
 }

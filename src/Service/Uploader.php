@@ -8,6 +8,7 @@
 
 namespace Service;
 
+use Exception\BaseException;
 use Upload\File;
 
 class Uploader
@@ -18,14 +19,14 @@ class Uploader
 
         $file = new File($file_form_name, $uploader);
 
-        $new_file_name = md5($file->getFileInfo());
+        $resource_id = md5($file->getFileInfo());
 
-        $file->setName($new_file_name);
+        $file->setName($resource_id);
 
-        try{
-            return $file->upload();
-        }catch (\Exception $e){
-            $file->getErrors();
+        if ($file->upload()) {
+            return $file;
+        }else{
+            BaseException::UploadError();
         }
     }
 }

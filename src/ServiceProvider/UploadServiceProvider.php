@@ -17,7 +17,7 @@ class UploadServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         // TODO: Implement register() method.
-        $dirctory = app()->get("config")->get('upload_dir');
+        $dirctory = app()->getPath().app()->get("config")->get('upload_dir');
         $container->add("uploader",new FileSystem($dirctory));
     }
 }

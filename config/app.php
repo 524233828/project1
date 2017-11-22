@@ -50,7 +50,8 @@ return [
         \ServiceProvider\EnvConfigServiceProvider::class,
         \FastD\ServiceProvider\DatabaseServiceProvider::class,
         \FastD\ServiceProvider\CacheServiceProvider::class,
-        \ServiceProvider\WechatServiceProvider::class
+        \ServiceProvider\WechatServiceProvider::class,
+        \ServiceProvider\UploadServiceProvider::class,
     ],
 
     /**

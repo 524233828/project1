@@ -24,5 +24,9 @@ route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
 });
 
 route()->group(['prefix' => '/admin', 'middleware' => 'dispatch'],function(){
-    route()->get("/login","AdminController@login");
+    route()->post("/login","AdminController@login");
+});
+
+route()->group(['prefix' => '/upload', 'middleware' => 'dispatch'],function(){
+    route()->post("/image","CommonController@uploadImage");
 });
