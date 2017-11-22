@@ -8,6 +8,8 @@
 
 namespace Model;
 
+use Exception\BaseException;
+
 class MediaModel extends BaseModel
 {
 
@@ -18,9 +20,15 @@ class MediaModel extends BaseModel
 
     }
 
-    public function addMedia()
+    public function addMedia($data)
     {
+        $data['create_time'] = time();
+        $result = database()->insert(self::MEDIA_TABLE,$data);
 
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
     }
 
     public static function listMedia($where = [])

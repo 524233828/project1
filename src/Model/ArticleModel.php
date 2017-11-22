@@ -14,13 +14,18 @@ class ArticleModel
 {
     const ARTICLE_TABLE = "db_article";
 
-    public static function getArticle()
+    public static function getArticle($id)
     {
+        $result = database()->get(self::ARTICLE_TABLE,"*",[
+            "id" => $id
+        ]);
 
+        return $result;
     }
 
     public static function addArticle($data)
     {
+        $data['create_time'] = time();
         $article = database()->insert(self::ARTICLE_TABLE,$data);
 
         if(!$article){
@@ -34,6 +39,18 @@ class ArticleModel
         $db = database();
 
         $result = $db->select(self::ARTICLE_TABLE,"*",
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function updateArticle($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->select(self::ARTICLE_TABLE,$data,
             $where
         );
 

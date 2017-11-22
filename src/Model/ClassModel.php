@@ -15,6 +15,8 @@
  */
 namespace Model;
 
+use Exception\BaseException;
+
 class ClassModel extends BaseModel
 {
     const CLASS_TABLE = "db_class";
@@ -132,5 +134,50 @@ class ClassModel extends BaseModel
         );
 
         return $result;
+    }
+
+    public static function addClass($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::CLASS_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function addChapter($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::CHAPTER_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function addLesson($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::LESSON_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function addTry($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::TRY_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+
     }
 }

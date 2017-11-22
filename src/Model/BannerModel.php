@@ -28,11 +28,25 @@ class BannerModel extends BaseModel
 
     public static function addBanner($data)
     {
+
+        $data['create_time'] = time();
         $banner = database()->insert(self::BANNER_TABLE,$data);
 
         if(!$banner){
             BaseException::SystemError();
         }
         return database()->id();
+    }
+
+    public static function updateBanner($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->select(self::BANNER_TABLE,$data,
+            $where
+        );
+
+        return $result;
     }
 }

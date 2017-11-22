@@ -19,8 +19,15 @@ class BannerLogic extends BaseLogic
         return $banner;
     }
 
-    public function addBanner()
+    public function addBanner($img_url,$url,$status = 1)
     {
+        $data = [
+            "img_url" => $img_url,
+            "url" => $url,
+            "status" => $status,
+        ];
+        $banner = BannerModel::addBanner($data);
 
+        return $banner;
     }
 }

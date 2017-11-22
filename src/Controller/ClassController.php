@@ -113,4 +113,34 @@ class ClassController extends BaseController
         return $this->response(ClassLogic::getInstance()->getClassChapter($class_id),true);
     }
 
+
+    /**
+     * @name 增加一个课程
+     * @apiParam title|string|课程标题|true
+     * @apiParam desc|string|课程描述|true
+     * @apiParam tag|string|课程标签|true
+     * @apiParam img_url|string|课程图片|true
+     * @apiParam price|float|课程价格|true
+     * @apiParam sold|int|课程卖出|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function addClass(ServerRequest $request)
+    {
+
+        $title = $request->getParam("title");
+        $desc = $request->getParam("desc");
+        $tag = $request->getParam("tag");
+        $img_url = $request->getParam("img_url");
+        $price = $request->getParam("price");
+        $sold = $request->getParam("sold");
+
+        $class = ClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold);
+        if($class)
+        {
+            return $this->response([]);
+        }
+
+    }
+
 }

@@ -25,6 +25,7 @@ class UserModel extends Model
 
     public static function addUser($data)
     {
+        $data['create_time'] = time();
         $user = database()->insert(self::USER_TABLE,$data);
 
         if(!$user){

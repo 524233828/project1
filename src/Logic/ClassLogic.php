@@ -170,4 +170,18 @@ class ClassLogic extends BaseLogic
 
         return $chapter;
     }
+
+    public function addClass($title,$desc,$tag,$img_url,$price,$sold)
+    {
+        $data = [
+            "title"     => $title,
+            "desc"      => $desc,
+            "tag"       => $tag,
+            "img_url"   => $img_url,
+            "price"     => $price,
+            "sold"      => $sold
+        ];
+
+        return ClassModel::addClass($data);
+    }
 }

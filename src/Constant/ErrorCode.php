@@ -30,22 +30,25 @@ class ErrorCode
      * 10xx用户系统错误
      */
     const USER_NOT_LOGIN = 1000; // 未登录
+    const USER_NOT_EXISTS = 1001; // 未登录
 
     /**
      * 11xx课程系统错误
      */
     const CLASS_NOT_FOUND = 1100; //课程不存在
-    const CLASS_NO_CHAPTER = 1101;
+    const CLASS_NO_CHAPTER = 1101;//课程没有章节
 
     /**
      * 12xx订单系统错误
      */
-    const ORDER_CREATE_FAIL = 1200;
+    const ORDER_CREATE_FAIL = 1200;//订单创建失败
 
     /**
-     * 13xx通用系统错误
+     * 99xx通用系统错误
      */
-    const UPLOAD_FAIL = 1300;
+    const UPLOAD_FAIL = 9900;//上传失败
+
+
 
 
 
@@ -61,6 +64,7 @@ class ErrorCode
         self::ERR_CHECK_SIGN        => ['签名错误', Response::HTTP_FORBIDDEN],
         self::ERR_NO_PARAMETERS     => ['参数缺失', Response::HTTP_BAD_REQUEST],
         self::USER_NOT_LOGIN        => ['未登录', Response::HTTP_FORBIDDEN],
+        self::USER_NOT_EXISTS        => ['用户名或密码错误', Response::HTTP_FORBIDDEN],
         self::CLASS_NOT_FOUND       => ['课程不存在', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_CHAPTER      => ['该课程没有章节', Response::HTTP_NOT_FOUND],
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],

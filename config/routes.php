@@ -19,4 +19,9 @@ route()->group("/order",function(){
 route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
     route()->get("/login","UserController@login");
     route()->get("/class","UserController@listUserClass");
+    route()->get("/chapter","UserController@getClassChapter");
+});
+
+route()->group(['prefix' => '/admin', 'middleware' => 'dispatch'],function(){
+    route()->get("/login","AdminController@login");
 });
