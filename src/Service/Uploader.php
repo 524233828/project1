@@ -19,14 +19,23 @@ class Uploader
 
         $file = new File($file_form_name, $uploader);
 
-        $resource_id = md5($file->getFileInfo());
+        $resource_id = md5_file($file->getFileInfo());
 
         $file->setName($resource_id);
 
-        if ($file->upload()) {
-            return $file;
-        }else{
-            BaseException::UploadError();
+        try
+        {
+            if ($file->upload()) {
+                return $file;
+            }else{
+                BaseException::UploadError();
+            }
+        }catch(\Exception $e)
+        {
+            if($e->getCode()==0)
+            {
+                return $file;
+            }
         }
     }
 }

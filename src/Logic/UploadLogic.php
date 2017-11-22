@@ -16,7 +16,7 @@ class UploadLogic extends BaseLogic
     {
         $file = Uploader::save($name);
 
-        $path = app()->get("config")->get("upload_dir").$file->getName().$file->getExtension();
+        $path = app()->get("config")->get("upload_dir")."/".$file->getName().".".$file->getExtension();
 
         return $path;
     }
