@@ -45,9 +45,9 @@ return [
      * Bootstrap service.
      */
     'services' => [
+        \ServiceProvider\EnvConfigServiceProvider::class,
         \FastD\ServiceProvider\RouteServiceProvider::class,
         \FastD\ServiceProvider\LoggerServiceProvider::class,
-        \ServiceProvider\EnvConfigServiceProvider::class,
         \FastD\ServiceProvider\DatabaseServiceProvider::class,
         \FastD\ServiceProvider\CacheServiceProvider::class,
         \ServiceProvider\WechatServiceProvider::class,
