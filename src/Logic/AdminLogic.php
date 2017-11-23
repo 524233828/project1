@@ -23,9 +23,9 @@ class AdminLogic extends BaseLogic
             UserException::UserNotFound();
         }
 
-        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['admin_id'] = $admin[0]['id'];
 
-        AdminModel::updateAdmin(["id"=>$admin['id']],["last_login_time"=>time()]);
+        AdminModel::updateAdmin(["id"=>$admin[0]['id']],["last_login_time"=>time()]);
 
         return true;
     }

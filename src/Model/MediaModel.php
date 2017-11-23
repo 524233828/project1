@@ -15,6 +15,8 @@ class MediaModel extends BaseModel
 
     const MEDIA_TABLE = "db_media";
 
+    const IMAGE_TABLE = "db_image";
+
     public function getMedia()
     {
 
@@ -38,6 +40,26 @@ class MediaModel extends BaseModel
         $result = $db->select(self::MEDIA_TABLE,"*",
             $where
         );
+
+        return $result;
+    }
+
+    public static function addImage($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::IMAGE_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function getImageByResourceId($resource_id)
+    {
+        $result = database()->get(self::IMAGE_TABLE,"*",[
+            "resource_id" => $resource_id
+        ]);
 
         return $result;
     }

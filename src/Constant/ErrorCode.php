@@ -47,10 +47,7 @@ class ErrorCode
      * 99xx通用系统错误
      */
     const UPLOAD_FAIL = 9900;//上传失败
-
-
-
-
+    const UNABLE_MIME_TYPE = 9901;//文件格式不支持
 
     /**
      * 错误代码与消息的对应数组
@@ -69,7 +66,7 @@ class ErrorCode
         self::CLASS_NO_CHAPTER      => ['该课程没有章节', Response::HTTP_NOT_FOUND],
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],
         self::UPLOAD_FAIL           => ['上传失败', Response::HTTP_BAD_GATEWAY],
-
+        self::UNABLE_MIME_TYPE      => ['文件格式不支持', Response::HTTP_FORBIDDEN],
     ];
 
     /**

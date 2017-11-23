@@ -14,11 +14,21 @@ class BaseException extends \Exception
         );
     }
 
-    public static function UploadError()
+    public static function UploadError(\Exception $e)
     {
-        throw new self(
-            ErrorCode::msg(ErrorCode::UPLOAD_FAIL),
-            ErrorCode::UPLOAD_FAIL
-        );
+        switch($e->getMessage()){
+            case "File validation failed":
+                throw new self(
+                    ErrorCode::msg(ErrorCode::UNABLE_MIME_TYPE),
+                    ErrorCode::UNABLE_MIME_TYPE
+                );
+                break;
+            default:
+                throw new self(
+                    ErrorCode::msg(ErrorCode::UPLOAD_FAIL),
+                    ErrorCode::UPLOAD_FAIL
+                );
+        }
+
     }
 }

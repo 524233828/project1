@@ -10,10 +10,11 @@ namespace Service;
 
 use Exception\BaseException;
 use Upload\File;
+use Upload\Validation\Mimetype;
 
 class Uploader
 {
-    public static function save($file_form_name)
+    public static function save($file_form_name,$mine_type = [])
     {
         $uploader = upload();
 
@@ -23,18 +24,22 @@ class Uploader
 
         $file->setName($resource_id);
 
+        if(count($mine_type)>0){
+            $file->addValidations(new Mimetype($mine_type));
+        }
+
         try
         {
             if ($file->upload()) {
                 return $file;
-            }else{
-                BaseException::UploadError();
             }
         }catch(\Exception $e)
         {
-            if($e->getCode()==0)
+            if($e->getMessage()=="File already exists")
             {
                 return $file;
+            }else{
+                BaseException::UploadError($e);
             }
         }
     }

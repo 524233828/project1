@@ -26,7 +26,7 @@ class AdminModel extends BaseModel
     {
         $db = database();
 
-        $result = $db->select(self::ADMIN_TABLE,$data,
+        $result = $db->update(self::ADMIN_TABLE,$data,
             $where
         );
 
