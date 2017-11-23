@@ -30,4 +30,20 @@ class BannerLogic extends BaseLogic
 
         return $banner;
     }
+
+    public function deleteBanner($banner_id)
+    {
+        return BannerModel::deleteBanner($banner_id);
+    }
+
+    public function updateBanner($banner_id,$img_url,$url,$status)
+    {
+        $data = [
+            "img_url" => $img_url,
+            "url" => $url,
+            "status" => $status,
+        ];
+        $where = ["id"=>$banner_id];
+        return BannerModel::updateBanner($where,$data);
+    }
 }

@@ -85,4 +85,17 @@ class UserController extends BaseController
 
         return $this->response(ArticleLogic::getInstance()->getArticle($resource_id));
     }
+
+    /**
+     * @name 获取用户列表
+     * @apiParam nickname|string|昵称搜索|false
+     * @returnParam
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function listUser(ServerRequest $request)
+    {
+        $nickname = $request->getParam("nickname",'');
+        return $this->response(UserLogic::getInstance()->listUser($nickname));
+    }
 }

@@ -30,6 +30,8 @@ route()->group(['prefix' => '/admin', 'middleware' => 'dispatch'],function(){
 //    route()->delete("/class/delete","ClassController@deleteClass");
 //    route()->put("/class/update","ClassController@updateClass");
     route()->post("/banner/add","BannerController@addBanner");
+    route()->put("/banner/update","BannerController@updateBanner");
+    route()->delete("/banner/delete","BannerController@deleteBanner");
 });
 
 route()->group(['prefix' => '/upload', 'middleware' => 'dispatch'],function(){

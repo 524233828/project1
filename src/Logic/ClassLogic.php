@@ -171,6 +171,16 @@ class ClassLogic extends BaseLogic
         return $chapter;
     }
 
+    /**
+     * 后台增加课程
+     * @param $title
+     * @param $desc
+     * @param $tag
+     * @param $img_url
+     * @param $price
+     * @param $sold
+     * @return int|string
+     */
     public function addClass($title,$desc,$tag,$img_url,$price,$sold)
     {
         $data = [
@@ -185,5 +195,25 @@ class ClassLogic extends BaseLogic
         return ClassModel::addClass($data);
     }
 
+    /**
+     * 后台获取单个课程
+     * @param $class_id
+     * @return bool|mixed
+     */
+    public function adminGetClass($class_id)
+    {
+        $class = ClassModel::getClass($class_id);
+
+        if(empty($class)){
+            ClassException::ClassNotFound();
+        }
+
+        return $class;
+    }
+
+    public function updateClass($where = [],$data = [])
+    {
+        $class = ClassModel::
+    }
 
 }

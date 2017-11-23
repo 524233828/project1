@@ -42,4 +42,14 @@ class UserModel extends Model
 
         return $user;
     }
+
+    public static function listUser($where = [])
+    {
+        return database()->select(self::USER_TABLE,"*",$where);
+    }
+
+    public static function countUser($where = [])
+    {
+        return database()->count(self::USER_TABLE,[],$where);
+    }
 }

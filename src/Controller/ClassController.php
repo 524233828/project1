@@ -143,4 +143,30 @@ class ClassController extends BaseController
 
     }
 
+    /**
+     * @name 后台获取问题详情
+     *
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function adminGetClass(ServerRequest $request)
+    {
+        $class_id = $request->getParam("class_id");
+
+        return $this->response(ClassLogic::getInstance()->adminGetClass($class_id),true);
+    }
+
+    public function updateClass(ServerRequest $request)
+    {
+        $class_id = $request->getParam("class_id");
+        $title = $request->getParam("title");
+        $desc = $request->getParam("desc");
+        $tag = $request->getParam("tag");
+        $img_url = $request->getParam("img_url");
+        $price = $request->getParam("price");
+        $sold = $request->getParam("sold");
+
+
+    }
+
 }

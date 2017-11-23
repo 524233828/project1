@@ -15,7 +15,7 @@ class AdminModel extends BaseModel
     {
         $db = database();
 
-        $result = $db->select(self::ADMIN_TABLE,"*",
+        $result = $db->get(self::ADMIN_TABLE,"*",
             $where
         );
 

@@ -109,6 +109,11 @@ class ClassModel extends BaseModel
         return $result;
     }
 
+    /**
+     * 获取课程章节列表
+     * @param $class_id
+     * @return array
+     */
     public static function getClassChapter($class_id)
     {
         $db = database();
@@ -125,6 +130,11 @@ class ClassModel extends BaseModel
         return $result;
     }
 
+    /**
+     * 获取章节的课时列表
+     * @param array $where
+     * @return array
+     */
     public static function listChapterLesson($where = [])
     {
         $db = database();
@@ -179,5 +189,17 @@ class ClassModel extends BaseModel
         }
         return database()->id();
 
+    }
+
+    public static function updateClass($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->update(self::CLASS_TABLE,$data,
+            $where
+        );
+
+        return $result;
     }
 }
