@@ -19,7 +19,7 @@ class ApiResponse extends JsonResponse
 
     public function __construct($msg, $code, $data, $status = 200, array $headers = [])
     {
-        $this->withAddedHeader("Access-Control-Allow-Origin", config()->get('front_url'));
+            $this->withAddedHeader("Access-Control-Allow-Origin", config()->get('front_url'));
 
         $result = [];
 

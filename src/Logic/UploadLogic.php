@@ -22,7 +22,7 @@ class UploadLogic extends BaseLogic
             "image/bmp"
         ]);
 
-        $path = app()->get("config")->get("upload_dir")."/".$file->getName().".".$file->getExtension();
+        $path = "http://".$_SERVER['SERVER_NAME'].app()->get("config")->get("upload_dir")."/".$file->getName().".".$file->getExtension();
 
         $data = [
             "resource_id" => $file->getName(),
@@ -41,7 +41,7 @@ class UploadLogic extends BaseLogic
     {
         $file = Uploader::save($name,["video/mpeg","video/mp4"]);
 
-        $path = app()->get("config")->get("upload_dir")."/".$file->getName().".".$file->getExtension();
+        $path = "http://".$_SERVER['SERVER_NAME'].app()->get("config")->get("upload_dir")."/".$file->getName().".".$file->getExtension();
 
         $data = [
             "resource_id" => $file->getName(),
