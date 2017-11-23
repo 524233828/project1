@@ -202,4 +202,19 @@ class ClassModel extends BaseModel
 
         return $result;
     }
+
+    public static function deleteClass($class_id)
+    {
+        $data['update_time'] = time();
+        $data['status'] = 0;
+        $where['id'] = $class_id;
+
+        $db = database();
+
+        $result = $db->update(self::CLASS_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
 }

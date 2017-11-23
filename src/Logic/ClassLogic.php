@@ -211,9 +211,23 @@ class ClassLogic extends BaseLogic
         return $class;
     }
 
-    public function updateClass($where = [],$data = [])
+    public function updateClass($class_id,$title,$desc,$tag,$img_url,$price,$sold)
     {
-        $class = ClassModel::
+        $data = [
+            "title"     => $title,
+            "desc"      => $desc,
+            "tag"       => $tag,
+            "img_url"   => $img_url,
+            "price"     => $price,
+            "sold"      => $sold
+        ];
+        $where = ["id"=>$class_id];
+        return ClassModel::updateClass($where,$data);
+    }
+
+    public function deleteClass()
+    {
+
     }
 
 }
