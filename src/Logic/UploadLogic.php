@@ -27,8 +27,8 @@ class UploadLogic extends BaseLogic
         $data = [
             "resource_id" => $file->getName(),
             "img_url" => $path,
-            "mime_type" => $file->getMimetype(),
-            "size" => $file->getSize(),
+            "mime_type" => $_FILES[$name]['type'],
+            "size" => $_FILES[$name]['size'],
         ];
         $resource = MediaModel::getImageByResourceId($data['resource_id']);
         if(!$resource){
@@ -46,8 +46,8 @@ class UploadLogic extends BaseLogic
         $data = [
             "resource_id" => $file->getName(),
             "media_url" => $path,
-            "mime_type" => $file->getMimetype(),
-            "size" => $file->getSize(),
+            "mime_type" => $_FILES[$name]['type'],
+            "size" => $_FILES[$name]['size'],
         ];
         $resource = MediaModel::getImageByResourceId($data['resource_id']);
         if(!$resource){
