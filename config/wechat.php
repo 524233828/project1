@@ -26,7 +26,7 @@ return [
     'log' => [
         'level'      => 'debug',
         'permission' => 0777,
-        'file'       => '/media/raid10/htdocs/dobee/runtime/logs/easywechat.log',
+        'file'       => '../runtime/logs/easywechat.log',
     ],
     /**
      * OAuth 配置
