@@ -56,4 +56,9 @@ class ArticleModel
 
         return $result;
     }
+
+    public static function deleteArticle()
+    {
+
+    }
 }

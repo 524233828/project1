@@ -32,7 +32,7 @@ class BannerController extends BaseController
      * @name 新增banner
      * @apiParam img_url|string|图片地址|true
      * @apiParam url|string|跳转地址|true
-     * @apiParam status|int|状态0-冻结 1-可用|false
+     * @apiParam status|int|状态0-冻结 1-可用，默认为1|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

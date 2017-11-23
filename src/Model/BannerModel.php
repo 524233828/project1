@@ -43,7 +43,21 @@ class BannerModel extends BaseModel
         $data['update_time'] = time();
         $db = database();
 
-        $result = $db->select(self::BANNER_TABLE,$data,
+        $result = $db->update(self::BANNER_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function deleteBanner($banner_id)
+    {
+        $data['update_time'] = time();
+        $data['status'] = 0;
+        $where["id"] = $banner_id;
+        $db = database();
+
+        $result = $db->update(self::BANNER_TABLE,$data,
             $where
         );
 

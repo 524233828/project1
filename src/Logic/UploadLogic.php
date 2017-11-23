@@ -51,7 +51,7 @@ class UploadLogic extends BaseLogic
         ];
         $resource = MediaModel::getImageByResourceId($data['resource_id']);
         if(!$resource){
-            $id = MediaModel::addImage($data);
+            $id = MediaModel::addMedia($data);
         }
         return $path;
     }

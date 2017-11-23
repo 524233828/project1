@@ -17,12 +17,12 @@ class MediaModel extends BaseModel
 
     const IMAGE_TABLE = "db_image";
 
-    public function getMedia()
+    public static function getMedia()
     {
 
     }
 
-    public function addMedia($data)
+    public static function addMedia($data)
     {
         $data['create_time'] = time();
         $result = database()->insert(self::MEDIA_TABLE,$data);
