@@ -49,7 +49,7 @@ class UploadLogic extends BaseLogic
             "mime_type" => $_FILES[$name]['type'],
             "size" => $_FILES[$name]['size'],
         ];
-        $resource = MediaModel::getImageByResourceId($data['resource_id']);
+        $resource = MediaModel::getVideoByResourceId($data['resource_id']);
         if(!$resource){
             $id = MediaModel::addMedia($data);
         }

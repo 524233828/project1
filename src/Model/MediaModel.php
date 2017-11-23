@@ -63,4 +63,13 @@ class MediaModel extends BaseModel
 
         return $result;
     }
+
+    public static function getVideoByResourceId($resource_id)
+    {
+        $result = database()->get(self::IMAGE_TABLE,"*",[
+            "resource_id" => $resource_id
+        ]);
+
+        return $result;
+    }
 }
