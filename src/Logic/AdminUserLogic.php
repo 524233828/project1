@@ -38,7 +38,8 @@ class AdminUserLogic extends BaseLogic
         $result_list = UserModel::listUser($where);
         $result['list'] = $result_list;
         $result['total_page'] = $total_page;
-        $result['current_page'] = $page;
+        $result['total_count'] = $count;
+        $result['row_num'] = $row;
 
         return $result;
     }
