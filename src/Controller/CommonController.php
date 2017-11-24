@@ -9,6 +9,7 @@
 namespace Controller;
 
 use FastD\Http\ServerRequest;
+use Logic\CommonLogic;
 use Logic\UploadLogic;
 use Service\Uploader;
 
@@ -16,24 +17,21 @@ class CommonController extends BaseController
 {
 
     /**
-     * @name 上传图片
-     * @apiParam upload|file|文件|true
-     * @param ServerRequest $request
-     * @return \Service\ApiResponse
+     * @name 登录回调
      */
-    public function uploadImage(ServerRequest $request)
+    public function login(ServerRequest $request)
     {
-        return $this->response(["path"=>UploadLogic::getInstance()->uploadImage()]);
+        CommonLogic::getInstance()->login();
     }
 
     /**
-     * @name 上传视频
-     * @apiParam upload|file|文件|true
-     * @param ServerRequest $request
+     * @name 支付回调
      * @return \Service\ApiResponse
      */
-    public function uploadVideo(ServerRequest $request)
+    public function notifyOrder()
     {
-        return $this->response(["path"=>UploadLogic::getInstance()->uploadVideo()]);
+        $payment = wechat()->payment;
+        $response = $payment->handleNotify("\Logic\CommonLogic::orderNotify");
+        return $response;
     }
 }

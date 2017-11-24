@@ -7,6 +7,7 @@
  */
 namespace Controller;
 
+use Exception\OrderException;
 use FastD\Http\Response;
 use FastD\Http\ServerRequest;
 use Logic\ClassLogic;
@@ -16,30 +17,7 @@ class ClassController extends BaseController
 {
 
     /**
-     * @name 首页获取课程列表
-     * @apiParam page|int|分页页数，默认为1|false
-     * @returnParam [].id|int|课程ID
-     * @returnParam [].sold|int|卖出数量
-     * @returnParam [].price|float|售价
-     * @returnParam [].img_url|string|图片地址
-     * @returnParam [].title|string|课程标题
-     * @returnParam [].tag|string|课程标签
-     * @returnParam [].desc|string|课程描述
-     * @returnParam current_page|int|当前页数
-     * @returnParam total_page|string|总页数
-     * @param ServerRequest $request
-     * @return Response;
-     */
-    public function listClass(ServerRequest $request)
-    {
-
-        $page = $request->getParam("page",1);
-        return $this->response(ClassLogic::getInstance()->listClass($page),true);
-
-    }
-
-    /**
-     * @name 问题详情课程特色页
+     * @name 课程详情课程特色页
      * @apiParam class_id|int|问题ID|true
      * @returnParam id|int|课程ID
      * @returnParam sold|int|卖出数量
@@ -114,99 +92,27 @@ class ClassController extends BaseController
         return $this->response(ClassLogic::getInstance()->getClassChapter($class_id),true);
     }
 
-
     /**
-     * @name 增加一个课程
-     * @apiParam title|string|课程标题|true
-     * @apiParam desc|string|课程描述|true
-     * @apiParam tag|string|课程标签|true
-     * @apiParam img_url|string|课程图片|true
-     * @apiParam price|float|课程价格|true
-     * @apiParam sold|int|课程卖出|true
+     * @name 购买课程
+     * @apiParam class_id|int|课程ID|true
+     * @returnParam jsapiConfig|json|微信js支付参数
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function addClass(ServerRequest $request)
+    public function createOrder(ServerRequest $request)
     {
+        $class_id = $request->getParam("class_id");
+        $channel = $request->getParam("channel");
 
-        $title = $request->getParam("title");
-        $desc = $request->getParam("desc");
-        $tag = $request->getParam("tag");
-        $img_url = $request->getParam("img_url");
-        $price = $request->getParam("price");
-        $sold = $request->getParam("sold");
-
-        $class = ClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold);
-        if($class)
-        {
-            return $this->response([]);
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id)){
+            OrderException::OrderCreateFail();
+        }else{
+            return $this->response(["jsapiConfig"=>$result]);
         }
-
     }
 
-    /**
-     * @name 后台获取问题详情
-     * @apiParam class_id|int|课程ID|true
-     * @returnParam id|int|课程ID
-     * @returnParam sold|int|卖出数量
-     * @returnParam img_url|string|图片地址
-     * @returnParam price|float|价格
-     * @returnParam title|string|标题
-     * @returnParam status|int|状态1-可用 0-不可用
-     * @param ServerRequest $request
-     * @return \Service\ApiResponse
-     */
-    public function adminGetClass(ServerRequest $request)
-    {
-        $class_id = $request->getParam("class_id");
 
-        return $this->response(ClassLogic::getInstance()->adminGetClass($class_id),true);
-    }
 
-    /**
-     * @name 更新一个课程
-     * @apiParam class_id|int|课程ID|true
-     * @apiParam title|string|课程标题|true
-     * @apiParam desc|string|课程描述|true
-     * @apiParam tag|string|课程标签|true
-     * @apiParam img_url|string|课程图片|true
-     * @apiParam price|float|课程价格|true
-     * @apiParam sold|int|课程卖出|true
-     * @param ServerRequest $request
-     * @return ApiResponse;
-     */
-    public function updateClass(ServerRequest $request)
-    {
-        $class_id = $request->getParam("class_id");
-        $title = $request->getParam("title");
-        $desc = $request->getParam("desc");
-        $tag = $request->getParam("tag");
-        $img_url = $request->getParam("img_url");
-        $price = $request->getParam("price");
-        $sold = $request->getParam("sold");
-
-        return $this->response(ClassLogic::getInstance()->updateClass(
-            $class_id,
-            $title,
-            $desc,
-            $tag,
-            $img_url,
-            $price,
-            $sold
-        ));
-    }
-
-    /**
-     * @name 冻结课程
-     * @apiParam class_id|int|课程ID|true
-     * @param ServerRequest $request
-     * @return \Service\ApiResponse
-     */
-    public function deleteClass(ServerRequest $request)
-    {
-        $class_id = $request->getParam("class_id");
-        return $this->response([ClassLogic::getInstance()->deleteClass($class_id)]);
-    }
 
     /*****************************章节**************************/
     /**
