@@ -63,4 +63,18 @@ class BannerModel extends BaseModel
 
         return $result;
     }
+
+    /**
+     * 根据banner ID获取课程
+     * @param $id
+     * @return bool|mixed
+     */
+    public static function getBanner($id)
+    {
+        $db = database();
+
+        $result = $db->get(self::BANNER_TABLE,"*",["id"=>$id]);
+
+        return $result;
+    }
 }

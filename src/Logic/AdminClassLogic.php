@@ -29,14 +29,15 @@ class AdminClassLogic extends BaseLogic
 
         $first_row = ($page-1)*$row;
 
-        $count = ClassModel::countClass([]);
+        $count = ClassModel::countClass();
 
         $total_page = floor($count/$row)+1;
 
         $where["ORDER"] = ["id"=>"DESC"];
         $where["LIMIT"] = [$first_row,$row];
 
-        $class = ClassModel::listClass([]);
+        $class_list = ClassModel::listClass();
+        $class['list'] = $class_list;
         $class['total_page'] = $total_page;
         $class['current_page'] = $page;
 

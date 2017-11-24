@@ -60,15 +60,15 @@ class AdminBannerLogic extends BaseLogic
      * @param $id
      * @return bool|mixed
      */
-    public function getClass($id)
+    public function getBanner($id)
     {
-        $class = BannerModel::getBanner($id);
+        $result = BannerModel::getBanner($id);
 
-        if(empty($class)){
+        if(empty($result)){
             BaseException::SystemError();
         }
 
-        return $class;
+        return $result;
     }
 
 

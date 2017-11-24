@@ -87,5 +87,24 @@ class AdminBannerController extends BaseController
         return $this->response([AdminBannerLogic::getInstance()->deleteBanner($banner_id)]);
     }
 
+    /**
+     * @name 后台banner详情
+     * @apiParam banner_id|int|bannerID|true
+     * @returnParam id|int|课程ID
+     * @returnParam sold|int|卖出数量
+     * @returnParam img_url|string|图片地址
+     * @returnParam price|float|价格
+     * @returnParam title|string|标题
+     * @returnParam status|int|状态1-可用 0-不可用
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function getBanner(ServerRequest $request)
+    {
+        $id = $request->getParam("banner_id");
+
+        return $this->response(AdminBannerLogic::getInstance()->getBanner($id));
+    }
+
 
 }

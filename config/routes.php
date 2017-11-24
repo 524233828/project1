@@ -80,15 +80,22 @@ route()->group("/admin",function(){
 
     //课程管理
     route()->get("/class/list","AdminClassController@listClass");
-    route()->post("/class/add","AdminClassController@addClass");
     route()->get("/class/get","AdminClassController@getClass");
+    route()->post("/class/add","AdminClassController@addClass");
     route()->post("/class/update","AdminClassController@updateClass");
     route()->post("/class/delete","AdminClassController@deleteClass");
 
+    //课程介绍管理
+    route()->get("/class_info/list","AdminBannerController@listBanner");
+    route()->get("/class_info/get","AdminBannerController@getBanner");
+    route()->post("/class_info/add","AdminBannerController@addBanner");
+    route()->post("/class_info/update","AdminBannerController@updateBanner");
+    route()->post("/class_info/delete","AdminBannerController@deleteBanner");
+
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");
+    route()->get("/banner/get","AdminBannerController@getBanner");
     route()->post("/banner/add","AdminBannerController@addBanner");
-//    route()->get("/banner/get","AdminBannerController@getClass");
     route()->post("/banner/update","AdminBannerController@updateBanner");
     route()->post("/banner/delete","AdminBannerController@deleteBanner");
 });
