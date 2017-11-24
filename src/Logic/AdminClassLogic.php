@@ -20,7 +20,7 @@ class AdminClassLogic extends BaseLogic
      * @param int $row
      * @return array
      */
-    public function listClass($page = 1,$row = 10)
+    public function listClass($page = 1,$row = 20)
     {
 
         $page = $page<1?1:$page;
