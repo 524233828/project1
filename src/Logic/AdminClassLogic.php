@@ -72,7 +72,7 @@ class AdminClassLogic extends BaseLogic
      * @param $class_id
      * @return bool|mixed
      */
-    public function adminGetClass($class_id)
+    public function getClass($class_id)
     {
         $class = ClassModel::getClass($class_id);
 

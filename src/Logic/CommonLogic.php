@@ -54,7 +54,7 @@ class CommonLogic extends BaseLogic
      * @param $data
      * @return array|string
      */
-    private function createOrder($data)
+    public function createOrder($data)
     {
         $order = new Order($data);
 

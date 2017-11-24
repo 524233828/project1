@@ -11,6 +11,7 @@ namespace Controller;
 use Exception\BaseException;
 use FastD\Http\ServerRequest;
 use Logic\AdminBannerLogic;
+use Model\BannerModel;
 
 class AdminBannerController extends BaseController
 {
@@ -85,4 +86,6 @@ class AdminBannerController extends BaseController
         $banner_id = $request->getParam("banner_id");
         return $this->response([AdminBannerLogic::getInstance()->deleteBanner($banner_id)]);
     }
+
+
 }

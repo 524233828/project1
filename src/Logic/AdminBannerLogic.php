@@ -8,7 +8,10 @@
 
 namespace Logic;
 
+use Exception\BaseException;
+use Exception\ClassException;
 use Model\BannerModel;
+use Model\ClassModel;
 
 class AdminBannerLogic extends BaseLogic
 {
@@ -50,6 +53,22 @@ class AdminBannerLogic extends BaseLogic
         ];
         $where = ["id"=>$banner_id];
         return BannerModel::updateBanner($where,$data);
+    }
+
+    /**
+     * 后台获取单个banner
+     * @param $id
+     * @return bool|mixed
+     */
+    public function getClass($id)
+    {
+        $class = BannerModel::getBanner($id);
+
+        if(empty($class)){
+            BaseException::SystemError();
+        }
+
+        return $class;
     }
 
 

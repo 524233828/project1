@@ -37,7 +37,8 @@ class IndexLogic extends BaseLogic
         $where["ORDER"] = ["id"=>"DESC"];
         $where["LIMIT"] = [$first_row,$row];
 
-        $class = ClassModel::listClass($where);
+        $class_list = ClassModel::listClass($where);
+        $class['list'] = $class_list;
         $class['total_page'] = $total_page;
         $class['current_page'] = $page;
 

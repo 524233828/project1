@@ -81,7 +81,7 @@ class AdminClassController extends BaseController
     {
         $class_id = $request->getParam("class_id");
 
-        return $this->response(AdminClassLogic::getInstance()->adminGetClass($class_id));
+        return $this->response(AdminClassLogic::getInstance()->getClass($class_id));
     }
 
     /**
