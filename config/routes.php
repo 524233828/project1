@@ -70,34 +70,27 @@ route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
 route()->group("/admin",function(){
 
     //公用接口
-    route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
-        route()->get("/login","AdminCommonController@login");
-        route()->post("/upload_image","CommonController@uploadImage");
-        route()->post("/upload_video","CommonController@uploadVideo");
-    });
+    route()->get("/common/login","AdminCommonController@login");
+    route()->post("/common/upload_image","AdminCommonController@uploadImage");
+    route()->post("/common/upload_video","AdminCommonController@uploadVideo");
+
 
     //用户管理
-    route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
-        route()->get("/list","AdminUserController@listUser");
-    });
+    route()->get("/user/list","AdminUserController@listUser");
 
     //课程管理
-    route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
-        route()->get("/list","AdminClassController@listClass");
-        route()->post("/add","AdminClassController@addClass");
-        route()->get("/get","AdminClassController@getClass");
-        route()->post("/update","AdminClassController@updateClass");
-        route()->post("/delete","AdminClassController@deleteClass");
-    });
+    route()->get("/class/list","AdminClassController@listClass");
+    route()->post("/class/add","AdminClassController@addClass");
+    route()->get("/class/get","AdminClassController@getClass");
+    route()->post("/class/update","AdminClassController@updateClass");
+    route()->post("/class/delete","AdminClassController@deleteClass");
 
     //轮播图管理
-    route()->group(['prefix' => '/banner', 'middleware' => 'dispatch'],function(){
-        route()->get("/list","AdminBannerController@listBanner");
-        route()->post("/add","AdminBannerController@addBanner");
-//        route()->get("/get","AdminBannerController@getClass");
-        route()->post("/update","AdminBannerController@updateBanner");
-        route()->post("/delete","AdminBannerController@deleteBanner");
-    });
+    route()->get("/banner/list","AdminBannerController@listBanner");
+    route()->post("/banner/add","AdminBannerController@addBanner");
+//    route()->get("/banner/get","AdminBannerController@getClass");
+    route()->post("/banner/update","AdminBannerController@updateBanner");
+    route()->post("/banner/delete","AdminBannerController@deleteBanner");
 });
 
 
