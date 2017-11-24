@@ -7,6 +7,7 @@
  */
 namespace Controller;
 
+use Exception\OrderException;
 use FastD\Http\Response;
 use FastD\Http\ServerRequest;
 use Logic\ClassLogic;
@@ -89,6 +90,25 @@ class ClassController extends BaseController
         $class_id = $request->getParam("class_id");
 
         return $this->response(ClassLogic::getInstance()->getClassChapter($class_id),true);
+    }
+
+    /**
+     * @name 购买课程
+     * @apiParam class_id|int|课程ID|true
+     * @returnParam jsapiConfig|json|微信js支付参数
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function createOrder(ServerRequest $request)
+    {
+        $class_id = $request->getParam("class_id");
+        $channel = $request->getParam("channel");
+
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id)){
+            OrderException::OrderCreateFail();
+        }else{
+            return $this->response(["jsapiConfig"=>$result]);
+        }
     }
 
 
