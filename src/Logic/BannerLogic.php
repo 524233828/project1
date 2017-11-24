@@ -12,12 +12,6 @@ use Model\BannerModel;
 
 class BannerLogic extends BaseLogic
 {
-    public function listBanner()
-    {
-        $banner = BannerModel::listBanner(["status"=>1]);
-
-        return $banner;
-    }
 
     public function addBanner($img_url,$url,$status = 1)
     {

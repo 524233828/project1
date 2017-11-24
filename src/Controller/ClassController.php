@@ -16,30 +16,7 @@ class ClassController extends BaseController
 {
 
     /**
-     * @name 首页获取课程列表
-     * @apiParam page|int|分页页数，默认为1|false
-     * @returnParam [].id|int|课程ID
-     * @returnParam [].sold|int|卖出数量
-     * @returnParam [].price|float|售价
-     * @returnParam [].img_url|string|图片地址
-     * @returnParam [].title|string|课程标题
-     * @returnParam [].tag|string|课程标签
-     * @returnParam [].desc|string|课程描述
-     * @returnParam current_page|int|当前页数
-     * @returnParam total_page|string|总页数
-     * @param ServerRequest $request
-     * @return Response;
-     */
-    public function listClass(ServerRequest $request)
-    {
-
-        $page = $request->getParam("page",1);
-        return $this->response(ClassLogic::getInstance()->listClass($page),true);
-
-    }
-
-    /**
-     * @name 问题详情课程特色页
+     * @name 课程详情课程特色页
      * @apiParam class_id|int|问题ID|true
      * @returnParam id|int|课程ID
      * @returnParam sold|int|卖出数量

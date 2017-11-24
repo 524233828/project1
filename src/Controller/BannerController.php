@@ -16,19 +16,6 @@ class BannerController extends BaseController
 {
 
     /**
-     * @name 获取banner
-     * @returnParam [].id|int|bannerID
-     * @returnParam [].img_url|string|图片url
-     * @returnParam [].url|string|跳转链接
-     * @return \Service\ApiResponse
-     */
-    public function listBanner()
-    {
-        return $this->response(BannerLogic::getInstance()->listBanner());
-    }
-
-
-    /**
      * @name 新增banner
      * @apiParam img_url|string|图片地址|true
      * @apiParam url|string|跳转地址|true

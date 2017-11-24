@@ -16,37 +16,10 @@ use Model\MediaModel;
 class ClassLogic extends BaseLogic
 {
     /**
-     * 获取课程列表
-     * @param int $page
-     * @param int $row
-     * @return array
+     * 获取课程特色
+     * @param $class_id
+     * @return bool|mixed
      */
-    public function listClass($page = 1,$row = 10)
-    {
-
-        $page = $page<1?1:$page;
-
-        $row = $row<1?1:$row;
-
-        $first_row = ($page-1)*$row;
-
-        $where = ["status"=>1];
-
-        $count = ClassModel::countClass($where);
-
-        $total_page = floor($count/$row)+1;
-
-        $where["ORDER"] = ["id"=>"DESC"];
-        $where["LIMIT"] = [$first_row,$row];
-
-        $class = ClassModel::listClass($where);
-        $class['total_page'] = $total_page;
-        $class['current_page'] = $page;
-
-        return $class;
-    }
-
-
     public function getClass($class_id)
     {
         $class = ClassModel::getClass($class_id);
@@ -60,6 +33,11 @@ class ClassLogic extends BaseLogic
         return $class;
     }
 
+    /**
+     * 获取课程试听
+     * @param $class_id
+     * @return array
+     */
     public function getClassTry($class_id)
     {
         $class = ClassModel::getClass($class_id);
@@ -104,6 +82,11 @@ class ClassLogic extends BaseLogic
         return $try;
     }
 
+    /**
+     * 获取课程章节
+     * @param $class_id
+     * @return array
+     */
     public function getClassChapter($class_id)
     {
         $class = ClassModel::getClass($class_id);

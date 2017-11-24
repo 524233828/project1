@@ -1,7 +1,6 @@
 <?php
 
 route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
-    route()->get("/list","ClassController@listClass");
     route()->get("/info","ClassController@getClass");
     route()->get("/try","ClassController@getClassTry");
     route()->get("/chapter","ClassController@getClassChapter");
@@ -37,3 +36,11 @@ route()->group(['prefix' => '/upload', 'middleware' => 'dispatch'],function(){
     route()->post("/image","CommonController@uploadImage");
     route()->post("/video","CommonController@uploadVideo");
 });
+
+
+route()->group(['prefix' => '/index', 'middleware' => 'dispatch'],function(){
+    route()->post("/class","IndexController@listClass");
+    route()->post("/banner","IndexController@listBanner");
+});
+
+
