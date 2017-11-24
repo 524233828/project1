@@ -35,7 +35,8 @@ class AdminUserLogic extends BaseLogic
         $where["ORDER"] = ["id"=>"DESC"];
         $where["LIMIT"] = [$first_row,$row];
 
-        $result = UserModel::listUser($where);
+        $result_list = UserModel::listUser($where);
+        $result['list'] = $result_list;
         $result['total_page'] = $total_page;
         $result['current_page'] = $page;
 
