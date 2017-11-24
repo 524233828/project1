@@ -52,9 +52,10 @@ class AdminClassLogic extends BaseLogic
      * @param $img_url
      * @param $price
      * @param $sold
+     * @param $status
      * @return int|string
      */
-    public function addClass($title,$desc,$tag,$img_url,$price,$sold)
+    public function addClass($title,$desc,$tag,$img_url,$price,$sold,$status = 1)
     {
         $data = [
             "title"     => $title,
@@ -62,7 +63,8 @@ class AdminClassLogic extends BaseLogic
             "tag"       => $tag,
             "img_url"   => $img_url,
             "price"     => $price,
-            "sold"      => $sold
+            "sold"      => $sold,
+            "status"    => $status,
         ];
 
         return ClassModel::addClass($data);
@@ -84,7 +86,7 @@ class AdminClassLogic extends BaseLogic
         return $class;
     }
 
-    public function updateClass($class_id,$title,$desc,$tag,$img_url,$price,$sold)
+    public function updateClass($class_id,$title,$desc,$tag,$img_url,$price,$sold,$status = 1)
     {
         $data = [
             "title"     => $title,
@@ -92,7 +94,8 @@ class AdminClassLogic extends BaseLogic
             "tag"       => $tag,
             "img_url"   => $img_url,
             "price"     => $price,
-            "sold"      => $sold
+            "sold"      => $sold,
+            "status"    => $status
         ];
         $where = ["id"=>$class_id];
         return ClassModel::updateClass($where,$data);

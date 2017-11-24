@@ -25,6 +25,7 @@ class ClassModel extends BaseModel
     const INTRODUCE_TABLE = "db_class_introduce";
     const TRY_TABLE = "db_class_try";
 
+    //课程class
     /**
      * 获取课程列表
      * @param array $where
@@ -67,85 +68,6 @@ class ClassModel extends BaseModel
         return $result;
     }
 
-    /**
-     * 根据课程ID获取简介列表
-     * @param $class_id
-     * @return array
-     */
-    public static function getClassIntroduce($class_id)
-    {
-        $db = database();
-
-        $where = [
-            "class_id" => $class_id,
-            "ORDER" => ["sort" => "DESC", "id" =>"ASC"]
-        ];
-
-        $result = $db->select(self::INTRODUCE_TABLE,"*",
-            $where
-        );
-
-        return $result;
-    }
-
-    /**
-     * 获取课程试听列表
-     * @param $class_id
-     * @return array
-     */
-    public static function getClassTry($class_id)
-    {
-        $db = database();
-
-        $where = [
-            "class_id" => $class_id,
-            "ORDER" => ["sort" => "DESC", "id" =>"ASC"]
-        ];
-
-        $result = $db->select(self::TRY_TABLE,"*",
-            $where
-        );
-
-        return $result;
-    }
-
-    /**
-     * 获取课程章节列表
-     * @param $class_id
-     * @return array
-     */
-    public static function getClassChapter($class_id)
-    {
-        $db = database();
-
-        $where = [
-            "class_id" => $class_id,
-            "ORDER" => ["chapter_no" => "ASC", "id" => "ASC"]
-        ];
-
-        $result = $db->select(self::CHAPTER_TABLE,"*",
-            $where
-        );
-
-        return $result;
-    }
-
-    /**
-     * 获取章节的课时列表
-     * @param array $where
-     * @return array
-     */
-    public static function listChapterLesson($where = [])
-    {
-        $db = database();
-
-        $result = $db->select(self::LESSON_TABLE,"*",
-            $where
-        );
-
-        return $result;
-    }
-
     public static function addClass($data)
     {
         $data['create_time'] = time();
@@ -155,40 +77,6 @@ class ClassModel extends BaseModel
             BaseException::SystemError();
         }
         return database()->id();
-    }
-
-    public static function addChapter($data)
-    {
-        $data['create_time'] = time();
-        $result = database()->insert(self::CHAPTER_TABLE,$data);
-
-        if(!$result){
-            BaseException::SystemError();
-        }
-        return database()->id();
-    }
-
-    public static function addLesson($data)
-    {
-        $data['create_time'] = time();
-        $result = database()->insert(self::LESSON_TABLE,$data);
-
-        if(!$result){
-            BaseException::SystemError();
-        }
-        return database()->id();
-    }
-
-    public static function addTry($data)
-    {
-        $data['create_time'] = time();
-        $result = database()->insert(self::TRY_TABLE,$data);
-
-        if(!$result){
-            BaseException::SystemError();
-        }
-        return database()->id();
-
     }
 
     public static function updateClass($where = [],$data = [])
@@ -217,4 +105,122 @@ class ClassModel extends BaseModel
 
         return $result;
     }
+
+    //简介
+    /**
+     * 根据课程ID获取简介列表
+     * @param $class_id
+     * @return array
+     */
+    public static function listClassIntroduce($class_id)
+    {
+        $db = database();
+
+        $where = [
+            "class_id" => $class_id,
+            "ORDER" => ["sort" => "DESC", "id" =>"ASC"]
+        ];
+
+        $result = $db->select(self::INTRODUCE_TABLE,"*",
+            $where
+        );
+
+        return $result;
+    }
+
+    //试听
+    /**
+     * 获取课程试听列表
+     * @param $class_id
+     * @return array
+     */
+    public static function listClassTry($class_id)
+    {
+        $db = database();
+
+        $where = [
+            "class_id" => $class_id,
+            "ORDER" => ["sort" => "DESC", "id" =>"ASC"]
+        ];
+
+        $result = $db->select(self::TRY_TABLE,"*",
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function addTry($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::TRY_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+
+    }
+
+    //章节
+    /**
+     * 获取课程章节列表
+     * @param $class_id
+     * @return array
+     */
+    public static function listClassChapter($class_id)
+    {
+        $db = database();
+
+        $where = [
+            "class_id" => $class_id,
+            "ORDER" => ["chapter_no" => "ASC", "id" => "ASC"]
+        ];
+
+        $result = $db->select(self::CHAPTER_TABLE,"*",
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function addChapter($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::CHAPTER_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    //课时
+    /**
+     * 获取章节的课时列表
+     * @param array $where
+     * @return array
+     */
+    public static function listChapterLesson($where = [])
+    {
+        $db = database();
+
+        $result = $db->select(self::LESSON_TABLE,"*",
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function addLesson($data)
+    {
+        $data['create_time'] = time();
+        $result = database()->insert(self::LESSON_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
 }

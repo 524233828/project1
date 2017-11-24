@@ -29,7 +29,7 @@ class MyClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $chapter = ClassModel::getClassChapter($class_id);
+        $chapter = ClassModel::listClassChapter($class_id);
 
         $chapter_ids = [];
         foreach ($chapter as $v)

@@ -44,6 +44,7 @@ class AdminClassController extends BaseController
      * @apiParam img_url|string|课程图片|true
      * @apiParam price|float|课程价格|true
      * @apiParam sold|int|课程卖出|true
+     * @apiParam status|int|课程卖出|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -56,8 +57,9 @@ class AdminClassController extends BaseController
         $img_url = $request->getParam("img_url");
         $price = $request->getParam("price");
         $sold = $request->getParam("sold");
+        $status = $request->getParam("status",1);
 
-        $class = AdminClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold);
+        $class = AdminClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold,$status);
         if($class)
         {
             return $this->response([]);
@@ -93,6 +95,7 @@ class AdminClassController extends BaseController
      * @apiParam img_url|string|课程图片|true
      * @apiParam price|float|课程价格|true
      * @apiParam sold|int|课程卖出|true
+     * @apiParam status|int|课程状态|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse;
      */
@@ -105,6 +108,7 @@ class AdminClassController extends BaseController
         $img_url = $request->getParam("img_url");
         $price = $request->getParam("price");
         $sold = $request->getParam("sold");
+        $status = $request->getParam("status",1);
 
         return $this->response(AdminClassLogic::getInstance()->updateClass(
             $class_id,
@@ -113,7 +117,8 @@ class AdminClassController extends BaseController
             $tag,
             $img_url,
             $price,
-            $sold
+            $sold,
+            $status
         ));
     }
 

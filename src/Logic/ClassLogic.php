@@ -30,7 +30,7 @@ class ClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $class['introduce'] = ClassModel::getClassIntroduce($class_id);
+        $class['introduce'] = ClassModel::listClassIntroduce($class_id);
 
         return $class;
     }
@@ -48,7 +48,7 @@ class ClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $try = ClassModel::getClassTry($class_id);
+        $try = ClassModel::listClassTry($class_id);
 
         $resource_id = [];
         foreach ($try as $v)
@@ -97,7 +97,7 @@ class ClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $chapter = ClassModel::getClassChapter($class_id);
+        $chapter = ClassModel::listClassChapter($class_id);
 
         $chapter_ids = [];
         foreach ($chapter as $v)
