@@ -26,11 +26,11 @@ route()->group(['prefix' => '/user', 'middleware' => 'dispatch'],function(){
 route()->group(['prefix' => '/admin', 'middleware' => 'dispatch'],function(){
     route()->post("/login","AdminController@login");
     route()->post("/class/add","ClassController@addClass");
-    route()->delete("/class/delete","ClassController@deleteClass");
-    route()->put("/class/update","ClassController@updateClass");
+    route()->post("/class/delete","ClassController@deleteClass");
+    route()->post("/class/update","ClassController@updateClass");
     route()->post("/banner/add","BannerController@addBanner");
-    route()->put("/banner/update","BannerController@updateBanner");
-    route()->delete("/banner/delete","BannerController@deleteBanner");
+    route()->post("/banner/update","BannerController@updateBanner");
+    route()->post("/banner/delete","BannerController@deleteBanner");
 });
 
 route()->group(['prefix' => '/upload', 'middleware' => 'dispatch'],function(){
