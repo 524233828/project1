@@ -98,8 +98,8 @@ class AdminClassLogic extends BaseLogic
         return ClassModel::updateClass($where,$data);
     }
 
-    public function deleteClass()
+    public function deleteClass($class_id)
     {
-
+        return ClassModel::deleteClass($class_id);
     }
 }
