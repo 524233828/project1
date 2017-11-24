@@ -9,7 +9,7 @@
 namespace Controller;
 
 use FastD\Http\ServerRequest;
-use Logic\UserLogic;
+use Logic\AdminUserLogic;
 
 class MeController extends BaseController
 {
@@ -21,6 +21,6 @@ class MeController extends BaseController
     public function getUser(ServerRequest $request)
     {
         $uid = $_SESSION['uid'];
-        return $this->response(UserLogic::getInstance()->getUser($uid));
+        return $this->response(AdminUserLogic::getInstance()->getUser($uid));
     }
 }

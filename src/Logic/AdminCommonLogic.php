@@ -11,7 +11,7 @@ namespace Logic;
 use Exception\UserException;
 use Model\AdminModel;
 
-class AdminLogic extends BaseLogic
+class AdminCommonLogic extends BaseLogic
 {
     public function login($name,$pass)
     {
