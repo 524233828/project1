@@ -9,38 +9,44 @@
 namespace Controller;
 
 
+use Exception\BaseException;
+use FastD\Http\ServerRequest;
 use Logic\AdminClassChapterLogic;
 
 class AdminClassChpaterController extends BaseController
 {
     /**
-     * @name 后台获取banner
-     * @returnParam [].id|int|bannerID
-     * @returnParam [].img_url|string|图片url
-     * @returnParam [].url|string|跳转链接
+     * @name 后台获取章节
+     * @apiParam class_id|int|课程ID|true
+     * @returnParam [].id|int|章节ID
+     * @returnParam [].title|string|标题
+     * @returnParam [].chapter_no|int|章节数
+     * @returnParam [].desc|string|章节描述
      * @return \Service\ApiResponse
      */
-    public function listChapter()
+    public function listChapter(ServerRequest $request)
     {
-
-        return $this->response(AdminClassChapterLogic::getInstance()->listChapter());
+        $class_id = $request->getParam("class_id");
+        return $this->response(AdminClassChapterLogic::getInstance()->listChapter($class_id));
     }
 
     /**
-     * @name 新增banner
-     * @apiParam img_url|string|图片地址|true
-     * @apiParam url|string|跳转地址|true
-     * @apiParam status|int|状态0-冻结 1-可用，默认为1|false
+     * @name 新增章节
+     * @apiParam title|string|章节标题|true
+     * @apiParam chapter_no|string|章节数|true
+     * @apiParam class_id|int|课程ID|true
+     * @apiParam desc|int|章节描述|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function addBanner(ServerRequest $request)
+    public function addChapter(ServerRequest $request)
     {
-        $img_url = $request->getParam("img_url");
-        $url = $request->getParam("url");
-        $status = $request->getParam("status",1);
-        $banner = AdminBannerLogic::getInstance()->addBanner($img_url,$url,$status);
-        if($banner)
+        $title = $request->getParam("title");
+        $chapter_no = $request->getParam("chapter_no");
+        $class_id = $request->getParam("class_id",1);
+        $desc = $request->getParam("desc",1);
+        $result = AdminClassChapterLogic::getInstance()->addChapter($title,$chapter_no,$class_id,$desc);
+        if($result)
         {
             return $this->response([]);
         }else{
@@ -51,20 +57,22 @@ class AdminClassChpaterController extends BaseController
 
     /**
      * @name 更新banner
-     * @apiParam banner_id|int|banner的ID|true
-     * @apiParam img_url|string|图片地址|true
-     * @apiParam url|string|跳转地址|true
-     * @apiParam status|int|状态0-冻结 1-可用，默认为1|false
+     * @apiParam id|int|banner的ID|true
+     * @apiParam title|string|章节标题|true
+     * @apiParam chapter_no|string|章节数|true
+     * @apiParam class_id|int|课程ID|true
+     * @apiParam desc|int|章节描述|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function updateBanner(ServerRequest $request)
+    public function updateChapter(ServerRequest $request)
     {
-        $banner_id = $request->getParam("banner_id");
-        $img_url = $request->getParam("img_url");
-        $url = $request->getParam("url");
-        $status = $request->getParam("status",1);
-        $result = AdminBannerLogic::getInstance()->updateBanner($banner_id,$img_url,$url,$status);
+        $id = $request->getParam("id");
+        $title = $request->getParam("title");
+        $chapter_no = $request->getParam("chapter_no");
+        $class_id = $request->getParam("class_id",1);
+        $desc = $request->getParam("desc",1);
+        $result = AdminClassChapterLogic::getInstance()->updateChapter($id,$title,$chapter_no,$class_id,$desc);
         if($result)
         {
             return $this->response([]);
@@ -74,33 +82,14 @@ class AdminClassChpaterController extends BaseController
     }
 
     /**
-     * @name 冻结banner
-     * @apiParam banner_id|int|banner的ID|true
+     * @name 删除章节
+     * @apiParam id|int|章节ID|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function deleteBanner(ServerRequest $request)
+    public function deleteChapter(ServerRequest $request)
     {
-        $banner_id = $request->getParam("banner_id");
-        return $this->response([AdminBannerLogic::getInstance()->deleteBanner($banner_id)]);
-    }
-
-    /**
-     * @name 后台banner详情
-     * @apiParam banner_id|int|bannerID|true
-     * @returnParam id|int|课程ID
-     * @returnParam sold|int|卖出数量
-     * @returnParam img_url|string|图片地址
-     * @returnParam price|float|价格
-     * @returnParam title|string|标题
-     * @returnParam status|int|状态1-可用 0-不可用
-     * @param ServerRequest $request
-     * @return \Service\ApiResponse
-     */
-    public function getBanner(ServerRequest $request)
-    {
-        $id = $request->getParam("banner_id");
-
-        return $this->response(AdminBannerLogic::getInstance()->getBanner($id));
+        $id = $request->getParam("id");
+        return $this->response([AdminClassChapterLogic::getInstance()->deleteChapter($id)]);
     }
 }

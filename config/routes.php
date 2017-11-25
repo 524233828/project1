@@ -99,6 +99,13 @@ route()->group("/admin",function(){
 //    route()->post("/try/update","AdminClassTryController@updateBanner");
     route()->post("/try/delete","AdminClassTryController@deleteIntroduce");
 
+    //课程章节管理
+    route()->get("/chapter/list","AdminClassChpaterController@listChapter");
+//    route()->get("/chapter/get","AdminClassChpaterController@getBanner");
+    route()->post("/chapter/add","AdminClassChpaterController@addChapter");
+    route()->post("/chapter/update","AdminClassChpaterController@updateChapter");
+    route()->post("/chapter/delete","AdminClassChpaterController@deleteChapter");
+
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");
     route()->get("/banner/get","AdminBannerController@getBanner");
