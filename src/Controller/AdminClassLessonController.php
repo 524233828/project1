@@ -66,7 +66,7 @@ class AdminClassLessonController extends BaseController
 
         $resource_data = $request->getParam("resource_data");
 
-        $result = AdminClassTryLogic::getInstance()->addLesson($chapter_id,$resource_type,$title,$desc,$img_url,$lesson_no,$resource_data);
+        $result = AdminClassLessonLogic::getInstance()->addLesson($chapter_id,$resource_type,$title,$desc,$img_url,$lesson_no,$resource_data);
         if($result)
         {
             return $this->response([]);
