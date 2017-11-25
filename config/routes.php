@@ -86,11 +86,18 @@ route()->group("/admin",function(){
     route()->post("/class/delete","AdminClassController@deleteClass");
 
     //课程介绍管理
-    route()->get("/class_info/list","AdminBannerController@listBanner");
-    route()->get("/class_info/get","AdminBannerController@getBanner");
-    route()->post("/class_info/add","AdminBannerController@addBanner");
-    route()->post("/class_info/update","AdminBannerController@updateBanner");
-    route()->post("/class_info/delete","AdminBannerController@deleteBanner");
+    route()->get("/intro/list","AdminClassIntroduceController@listIntroduce");
+//    route()->get("/intro/get","AdminClassIntroduceController@getBanner");
+    route()->post("/intro/add","AdminClassIntroduceController@addIntroduce");
+    route()->post("/intro/update","AdminClassIntroduceController@updateIntroduce");
+    route()->post("/intro/delete","AdminClassIntroduceController@deleteIntroduce");
+
+    //课程试听管理
+    route()->get("/try/list","AdminClassTryController@listIntroduce");
+//    route()->get("/try/get","AdminClassTryController@getBanner");
+    route()->post("/try/add","AdminClassTryController@addIntroduce");
+//    route()->post("/try/update","AdminClassTryController@updateBanner");
+    route()->post("/try/delete","AdminClassTryController@deleteIntroduce");
 
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");

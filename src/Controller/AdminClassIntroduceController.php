@@ -71,7 +71,7 @@ class AdminClassIntroduceController extends BaseController
      * @param ServerRequest $request
      * @return \Service\ApiResponse;
      */
-    public function updateClass(ServerRequest $request)
+    public function updateIntroduce(ServerRequest $request)
     {
         $list = $request->getParam("list");
 
