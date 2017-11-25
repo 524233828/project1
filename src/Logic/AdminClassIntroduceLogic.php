@@ -39,11 +39,19 @@ class AdminClassIntroduceLogic extends BaseLogic
         database()->query("start transaction");
         foreach ($list as $v)
         {
-            $where = ["id"=>$v['id']];
-            if(!ClassModel::updateClassIntroduce($where,$v))
-            {
-                database()->query("rollback");
-                BaseException::SystemError();
+            if(isset($v['id'])&&!empty($v['id'])){
+                $where = ["id"=>$v['id']];
+                if(!ClassModel::updateClassIntroduce($where,$v))
+                {
+                    database()->query("rollback");
+                    BaseException::SystemError();
+                }
+            }else{
+                if(!ClassModel::addClassIntroduce($v))
+                {
+                    database()->query("rollback");
+                    BaseException::SystemError();
+                }
             }
         }
 

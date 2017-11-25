@@ -29,4 +29,34 @@ class AdminClassChapterLogic extends BaseLogic
 
         return $result;
     }
+
+    public function addChapter($title,$chapter_no,$class_id,$desc)
+    {
+        $data = [
+            "class_id" => $class_id,
+            "chapter_no" => $chapter_no,
+            "title" => $title,
+            "desc" => $desc,
+        ];
+        $banner = ClassModel::addChapter($data);
+
+        return $banner;
+    }
+
+    public function deleteChapter($id)
+    {
+        return ClassModel::deleteChapter($id);
+    }
+
+    public function updateChapter($id,$title,$chapter_no,$class_id,$desc)
+    {
+        $data = [
+            "class_id" => $class_id,
+            "chapter_no" => $chapter_no,
+            "title" => $title,
+            "desc" => $desc,
+        ];
+        $where = ["id"=>$id];
+        return ClassModel::updateChapter($where,$data);
+    }
 }
