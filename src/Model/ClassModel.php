@@ -311,7 +311,7 @@ class ClassModel extends BaseModel
 
         $db = database();
 
-        $result = $db->delete(self::TRY_TABLE, $where);
+        $result = $db->delete(self::CHAPTER_TABLE, $where);
 
         return $result;
     }
@@ -355,4 +355,14 @@ class ClassModel extends BaseModel
         return database()->id();
     }
 
+    public static function deleteLesson($id)
+    {
+        $where['id'] = $id;
+
+        $db = database();
+
+        $result = $db->delete(self::LESSON_TABLE, $where);
+
+        return $result;
+    }
 }

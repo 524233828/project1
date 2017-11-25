@@ -19,16 +19,22 @@ class AdminClassTryController extends BaseController
      * @name 后台获取课程试听列表
      * @apiParam class_id|int|课程ID|true
      * @returnParam [].id|int|课程ID
-     * @returnParam [].sold|int|卖出数量
-     * @returnParam [].price|float|售价
-     * @returnParam [].img_url|string|图片地址
-     * @returnParam [].title|string|课程标题
-     * @returnParam [].tag|string|课程标签
-     * @returnParam [].desc|string|课程描述
+     * @returnParam [].resource_type|int|资源类型，0-视频 1-文章
+     * @returnParam [].sort|int|试听列表排序 大的在前
+     * @returnParam [].title|int|试听列表排序 大的在前
+     * @returnParam [].desc|int|试听列表排序 大的在前
+     * @returnParam [].img_url|int|试听列表排序 大的在前
+     * @returnParam [].resource.id|int|资源ID
+     * @returnParam [].resource.media_url|string|视频地址， resource_type=0时存在
+     * @returnParam [].resource.media_time|int|视频长度， resource_type=0时存在
+     * @returnParam [].resource.size|int|视频大小，单位：byte， resource_type=0时存在
+     * @returnParam [].resource.title|string|文章标题，resource_type=1时存在
+     * @returnParam [].resource.img_url|string|文章图片地址，resource_type=1时存在
+     * @returnParam [].resource.content|string|文章内容，resource_type=1时存在
      * @param ServerRequest $request
      * @return ApiResponse;
      */
-    public function listIntroduce(ServerRequest $request)
+    public function listTry(ServerRequest $request)
     {
         $class_id = $request->getParam("class_id");
         return $this->response(AdminClassTryLogic::getInstance()->listTry($class_id));
@@ -49,7 +55,7 @@ class AdminClassTryController extends BaseController
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function addIntroduce(ServerRequest $request)
+    public function addTry(ServerRequest $request)
     {
 
         $class_id = $request->getParam("class_id");
@@ -75,7 +81,7 @@ class AdminClassTryController extends BaseController
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function deleteIntroduce(ServerRequest $request)
+    public function deleteTry(ServerRequest $request)
     {
         $id = $request->getParam("id");
         return $this->response([AdminClassTryLogic::getInstance()->deleteTry($id)]);

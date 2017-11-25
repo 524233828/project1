@@ -13,7 +13,7 @@ use Exception\BaseException;
 use FastD\Http\ServerRequest;
 use Logic\AdminClassChapterLogic;
 
-class AdminClassChpaterController extends BaseController
+class AdminClassChapterController extends BaseController
 {
     /**
      * @name 后台获取章节
@@ -56,7 +56,7 @@ class AdminClassChpaterController extends BaseController
     }
 
     /**
-     * @name 更新banner
+     * @name 更新章节
      * @apiParam id|int|banner的ID|true
      * @apiParam title|string|章节标题|true
      * @apiParam chapter_no|string|章节数|true

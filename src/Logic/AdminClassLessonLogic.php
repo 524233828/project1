@@ -14,19 +14,19 @@ use Model\ArticleModel;
 use Model\ClassModel;
 use Model\MediaModel;
 
-class AdminClassTryLogic extends BaseLogic
+class AdminClassLessonLogic extends BaseLogic
 {
     /**
      * 后台获取课程试听列表
-     * @param int $class_id
+     * @param int $chapter_id
      * @param int $page
      * @param int $row
      * @return array
      */
-    public function listTry($class_id,$page = 1,$row = 20)
+    public function listLesson($chapter_id,$page = 1,$row = 20)
     {
 
-        $result_list = ClassModel::listClassTry($class_id);
+        $result_list = ClassModel::listChapterLesson($chapter_id);
 
         $resource_id = [];
         foreach ($result_list as $v)
@@ -66,23 +66,23 @@ class AdminClassTryLogic extends BaseLogic
     }
 
     /**
-     * @param $class_id
+     * @param $chapter_id
      * @param $resource_type
      * @param $title
      * @param $desc
      * @param $img_url
      * @param array $resource_data
-     * @param int $sort
+     * @param int $lesson_no
      * @return int|string
      */
-    public function addTry($class_id,$resource_type,$title,$desc,$img_url,$resource_data = [],$sort = 0)
+    public function addLesson($chapter_id,$resource_type,$title,$desc,$img_url,$lesson_no,$resource_data = [] )
     {
         $data = [
-            "class_id"  => $class_id,
+            "chapter_id"  => $chapter_id,
             "resource_type" => $resource_type,
             "title"     => $title,
             "desc"      => $desc,
-            "sort"       => $sort,
+            "lesson_no"       => $lesson_no,
             "img_url"   => $img_url,
         ];
 
@@ -95,7 +95,7 @@ class AdminClassTryLogic extends BaseLogic
             $data['resource_id'] = ArticleModel::addArticle($resource_data);
         }
 
-        if($result = ClassModel::addTry($data))
+        if($result = ClassModel::addLesson($data))
         {
             database()->query("commit");
             return $result;
@@ -105,8 +105,8 @@ class AdminClassTryLogic extends BaseLogic
         }
     }
 
-    public function deleteTry($id)
+    public function deleteLesson($id)
     {
-        return ClassModel::deleteTry($id);
+        return ClassModel::deleteLesson($id);
     }
 }

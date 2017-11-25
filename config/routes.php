@@ -93,18 +93,25 @@ route()->group("/admin",function(){
     route()->post("/intro/delete","AdminClassIntroduceController@deleteIntroduce");
 
     //课程试听管理
-    route()->get("/try/list","AdminClassTryController@listIntroduce");
+    route()->get("/try/list","AdminClassTryController@listTry");
 //    route()->get("/try/get","AdminClassTryController@getBanner");
-    route()->post("/try/add","AdminClassTryController@addIntroduce");
+    route()->post("/try/add","AdminClassTryController@addTry");
 //    route()->post("/try/update","AdminClassTryController@updateBanner");
-    route()->post("/try/delete","AdminClassTryController@deleteIntroduce");
+    route()->post("/try/delete","AdminClassTryController@deleteTry");
 
     //课程章节管理
-    route()->get("/chapter/list","AdminClassChpaterController@listChapter");
-//    route()->get("/chapter/get","AdminClassChpaterController@getBanner");
-    route()->post("/chapter/add","AdminClassChpaterController@addChapter");
-    route()->post("/chapter/update","AdminClassChpaterController@updateChapter");
-    route()->post("/chapter/delete","AdminClassChpaterController@deleteChapter");
+    route()->get("/chapter/list","AdminClassChapterController@listChapter");
+//    route()->get("/chapter/get","AdminClassChapterController@getBanner");
+    route()->post("/chapter/add","AdminClassChapterController@addChapter");
+    route()->post("/chapter/update","AdminClassChapterController@updateChapter");
+    route()->post("/chapter/delete","AdminClassChapterController@deleteChapter");
+
+    //章节课时管理
+    route()->get("/lesson/list","AdminClassLessonController@listLesson");
+//    route()->get("/lesson/get","AdminClassLessonController@getBanner");
+    route()->post("/lesson/add","AdminClassLessonController@addLesson");
+//    route()->post("/lesson/update","AdminClassLessonController@updateLesson");
+    route()->post("/lesson/delete","AdminClassLessonController@deleteLesson");
 
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");
