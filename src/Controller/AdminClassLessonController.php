@@ -47,10 +47,10 @@ class AdminClassLessonController extends BaseController
      * @apiParam resource_type|int|类型|true
      * @apiParam lesson_no|string|第几课|true
      * @apiParam img_url|string|课的图片|true
-     * @apiParam resource_data[].resource_id|int|视频资源ID|false
-     * @apiParam resource_data[].title|int|文章标题|false
-     * @apiParam resource_data[].img_url|int|文章图片|false
-     * @apiParam resource_data[].content|int|文章内容|false
+     * @apiParam resource_data.resource_id|int|视频资源ID|false
+     * @apiParam resource_data.title|int|文章标题|false
+     * @apiParam resource_data.img_url|int|文章图片|false
+     * @apiParam resource_data.content|int|文章内容|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -65,6 +65,7 @@ class AdminClassLessonController extends BaseController
         $lesson_no = $request->getParam("lesson_no");
 
         $resource_data = $request->getParam("resource_data");
+//        var_dump($resource_data);exit;
 
         $result = AdminClassLessonLogic::getInstance()->addLesson($chapter_id,$resource_type,$title,$desc,$img_url,$lesson_no,$resource_data);
         if($result)
