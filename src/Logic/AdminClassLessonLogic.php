@@ -26,7 +26,8 @@ class AdminClassLessonLogic extends BaseLogic
     public function listLesson($chapter_id,$page = 1,$row = 20)
     {
 
-        $result_list = ClassModel::listChapterLesson($chapter_id);
+        $where['chapter_id'] = $chapter_id;
+        $result_list = ClassModel::listChapterLesson($where);
 
         $resource_id = [];
         foreach ($result_list as $v)
