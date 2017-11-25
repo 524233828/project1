@@ -114,7 +114,7 @@ route()->group("/admin",function(){
     route()->post("/lesson/delete","AdminClassLessonController@deleteLesson");
 
     //订单列表
-    route()->get("/order/list","AdminOrderController@listOrder");
+    route()->post("/order/list","AdminOrderController@listOrder");
 
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");

@@ -38,9 +38,19 @@ class OrderModel extends BaseModel
             self::ORDER_TABLE."(o)",
             [
                 "[>]db_user(u)" => ["o.user_id" => "id"],
-                "[>]db_class(c)" => ["o.order_id" => "c.id"]
+                "[>]db_user_class(uc)" => ["o.order_id" => "order_id"],
+                "[>]db_class(c)" => ["uc.class_id" => "id"],
+                "[>]db_channel(cc)" =>["o.channel_id"=>"id"]
             ],
-            "*",
+            [
+                "o.order_id",
+                "u.id(user_id)",
+                "u.nickname",
+                "c.id(class_id)",
+                "c.title",
+                "cc.channel_name",
+                "o.pay_time"
+            ],
             $where
         );
 

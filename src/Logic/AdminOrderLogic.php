@@ -24,7 +24,7 @@ class AdminOrderLogic extends BaseLogic
 
         if(!empty($value)&&!empty($key))
         {
-            $where["o.{$key}[~]"] = "%{$value}%";
+            $where["{$key}[~]"] = "%{$value}%";
         }
 
         $count = OrderModel::countOrder($where);
@@ -32,7 +32,7 @@ class AdminOrderLogic extends BaseLogic
         $total_page = floor($count/$row)+1;
 
         $where["ORDER"] = ["o.pay_time"=>"DESC"];
-//        $where["LIMIT"] = [$first_row,$row];
+        $where["LIMIT"] = [$first_row,$row];
 
         $result_list = OrderModel::listOrder($where);
         $result['list'] = $result_list;
