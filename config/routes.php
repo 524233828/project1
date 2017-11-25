@@ -70,7 +70,7 @@ route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
 route()->group("/admin",function(){
 
     //公用接口
-    route()->get("/common/login","AdminCommonController@login");
+    route()->post("/common/login","AdminCommonController@login");
     route()->post("/common/upload_image","AdminCommonController@uploadImage");
     route()->post("/common/upload_video","AdminCommonController@uploadVideo");
 

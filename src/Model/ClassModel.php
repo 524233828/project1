@@ -128,6 +128,54 @@ class ClassModel extends BaseModel
         return $result;
     }
 
+    /**
+     * 获取课程简介数量
+     * @param array $where
+     * @return bool|int
+     */
+    public static function countClassIntroduce($class_id,$where = [])
+    {
+        $where['class_id'] = $class_id;
+        $db = database();
+
+        return $db->count(self::CLASS_TABLE,"*",$where);
+    }
+
+    public static function addClassIntroduce($data)
+    {
+        $result = database()->insert(self::INTRODUCE_TABLE,$data);
+
+        if(!$result){
+            BaseException::SystemError();
+        }
+        return database()->id();
+    }
+
+    public static function updateClassIntroduce($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->update(self::INTRODUCE_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function deleteClassIntroduce($id)
+    {
+        $where['id'] = $id;
+
+        $db = database();
+
+        $result = $db->delete(self::INTRODUCE_TABLE,
+            $where
+        );
+
+        return $result;
+    }
+
     //试听
     /**
      * 获取课程试听列表
@@ -150,6 +198,32 @@ class ClassModel extends BaseModel
         return $result;
     }
 
+    /**
+     * 获取试听数量
+     * @param array $where
+     * @return bool|int
+     */
+    public static function countTry($where = [])
+    {
+        $db = database();
+
+        return $db->count(self::TRY_TABLE,"*",$where);
+    }
+
+    /**
+     * 根据课程ID获取课程
+     * @param $id
+     * @return bool|mixed
+     */
+    public static function getTry($id)
+    {
+        $db = database();
+
+        $result = $db->get(self::TRY_TABLE,"*",["id"=>$id]);
+
+        return $result;
+    }
+
     public static function addTry($data)
     {
         $data['create_time'] = time();
@@ -160,6 +234,29 @@ class ClassModel extends BaseModel
         }
         return database()->id();
 
+    }
+
+    public static function updateTry($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->update(self::TRY_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function deleteTry($id)
+    {
+        $where['id'] = $id;
+
+        $db = database();
+
+        $result = $db->delete(self::TRY_TABLE, $where);
+
+        return $result;
     }
 
     //章节
@@ -180,6 +277,41 @@ class ClassModel extends BaseModel
         $result = $db->select(self::CHAPTER_TABLE,"*",
             $where
         );
+
+        return $result;
+    }
+
+    /**
+     * 获取试听数量
+     * @param array $where
+     * @return bool|int
+     */
+    public static function countChapter($where = [])
+    {
+        $db = database();
+
+        return $db->count(self::CHAPTER_TABLE,"*",$where);
+    }
+
+    public static function updateChapter($where = [],$data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->update(self::CHAPTER_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function deleteChapter($id)
+    {
+        $where['id'] = $id;
+
+        $db = database();
+
+        $result = $db->delete(self::TRY_TABLE, $where);
 
         return $result;
     }

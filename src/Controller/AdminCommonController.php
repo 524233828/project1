@@ -48,6 +48,7 @@ class AdminCommonController extends BaseController
      */
     public function uploadVideo(ServerRequest $request)
     {
-        return $this->response(["path"=>UploadLogic::getInstance()->uploadVideo()]);
+        list($path,$resource_id) = UploadLogic::getInstance()->uploadVideo();
+        return $this->response(["path"=>$path,"resource_id"=>$resource_id]);
     }
 }
