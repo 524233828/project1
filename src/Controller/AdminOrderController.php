@@ -26,7 +26,7 @@ class AdminOrderController extends BaseController
     public function listOrder(ServerRequest $request)
     {
         $key = $request->getParam("key",'');
-        $value = $request->getParam("nickname",'');
+        $value = $request->getParam("value",'');
         return $this->response(AdminOrderLogic::getInstance()->listOrder($key,$value));
     }
 }
