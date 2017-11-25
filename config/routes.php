@@ -113,6 +113,9 @@ route()->group("/admin",function(){
 //    route()->post("/lesson/update","AdminClassLessonController@updateLesson");
     route()->post("/lesson/delete","AdminClassLessonController@deleteLesson");
 
+    //订单列表
+    route()->get("/order/list","AdminOrderController@listOrder");
+
     //轮播图管理
     route()->get("/banner/list","AdminBannerController@listBanner");
     route()->get("/banner/get","AdminBannerController@getBanner");

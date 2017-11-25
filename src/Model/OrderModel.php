@@ -30,14 +30,31 @@ class OrderModel extends BaseModel
 
     }
 
-    public static function listOrder()
+    public static function listOrder($where = [])
     {
+        $db = database();
 
+        $result = $db->select(
+            self::ORDER_TABLE."(o)",
+            [
+                "[>]db_user(u)" => ["o.user_id" => "u.id"],
+                "[>]db_class(c)" => ["o.order_id" => "c.id"]
+            ],
+            "*",
+            $where
+        );
+
+        return $result;
     }
 
     public static function getOrderId()
     {
         return microtime(true)*10000;
+    }
+
+    public static function countOrder($where = [])
+    {
+        return database()->count(self::ORDER_TABLE."(o)",[],$where);
     }
 
 }
