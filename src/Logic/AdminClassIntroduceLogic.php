@@ -36,26 +36,25 @@ class AdminClassIntroduceLogic extends BaseLogic
     public function updateIntroduce($list)
     {
         //开启事务
-        database()->query("start transaction");
+        database()->pdo->beginTransaction();
         foreach ($list as $v)
         {
             if(isset($v['id'])&&!empty($v['id'])){
                 $where = ["id"=>$v['id']];
                 if(!ClassModel::updateClassIntroduce($where,$v))
                 {
-                    database()->query("rollback");
+                    database()->pdo->rollBack();
                     BaseException::SystemError();
                 }
             }else{
                 if(!ClassModel::addClassIntroduce($v))
                 {
-                    database()->query("rollback");
+                    database()->pdo->rollBack();
                     BaseException::SystemError();
                 }
             }
         }
-
-        database()->query("commit");
+        database()->pdo->commit();
         return true;
     }
 

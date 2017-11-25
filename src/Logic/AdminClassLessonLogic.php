@@ -87,11 +87,22 @@ class AdminClassLessonLogic extends BaseLogic
             "img_url"   => $img_url,
         ];
 
+        $count = ClassModel::countLesson(["chapter_id" => $chapter_id,"lesson_no" => $lesson_no,]);
+
+        if($count>0){
+            BaseException::SystemError();
+        }
+
         //开启事务
         database()->pdo->beginTransaction();
         if($resource_type ==0)
         {
-            $data['resource_id'] = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            $result = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            if($result){
+                $data['resource_id'] = $result["id"];
+            }else{
+                BaseException::SystemError();
+            }
         }else{
             $rdata['title'] = $resource_data['title'];
             $rdata['img_url'] = $resource_data['img_url'];

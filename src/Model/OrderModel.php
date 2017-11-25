@@ -37,7 +37,7 @@ class OrderModel extends BaseModel
         $result = $db->select(
             self::ORDER_TABLE."(o)",
             [
-                "[>]db_user(u)" => ["o.user_id" => "u.id"],
+                "[>]db_user(u)" => ["o.user_id" => "id"],
                 "[>]db_class(c)" => ["o.order_id" => "c.id"]
             ],
             "*",

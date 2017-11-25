@@ -72,4 +72,13 @@ class MediaModel extends BaseModel
 
         return $result;
     }
+
+    public static function getVideo($id)
+    {
+        $result = database()->get(self::MEDIA_TABLE,"*",[
+            "id" => $id
+        ]);
+
+        return $result;
+    }
 }

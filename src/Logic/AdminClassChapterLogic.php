@@ -9,6 +9,7 @@
 namespace Logic;
 
 
+use Exception\BaseException;
 use Model\ClassModel;
 
 class AdminClassChapterLogic extends BaseLogic
@@ -38,6 +39,13 @@ class AdminClassChapterLogic extends BaseLogic
             "title" => $title,
             "desc" => $desc,
         ];
+
+        $count = ClassModel::countChapter(["class_id"=>$class_id,"chapter_no"=>$chapter_no]);
+
+        if($count>0){
+            BaseException::SystemError();
+        }
+
         $banner = ClassModel::addChapter($data);
 
         return $banner;
@@ -57,6 +65,11 @@ class AdminClassChapterLogic extends BaseLogic
             "desc" => $desc,
         ];
         $where = ["id"=>$id];
+        $count = ClassModel::countChapter(["class_id"=>$class_id,"chapter_no"=>$chapter_no]);
+
+        if($count>0){
+            BaseException::SystemError();
+        }
         return ClassModel::updateChapter($where,$data);
     }
 }

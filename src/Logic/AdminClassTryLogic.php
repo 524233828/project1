@@ -87,20 +87,29 @@ class AdminClassTryLogic extends BaseLogic
         ];
 
         //开启事务
-        database()->query("start transaction");
+        database()->pdo->beginTransaction();
         if($resource_type ==0)
         {
-            $data['resource_id'] = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            $result = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            if($result){
+                $data['resource_id'] = $result["id"];
+            }else{
+                BaseException::SystemError();
+            }
+
         }else{
-            $data['resource_id'] = ArticleModel::addArticle($resource_data);
+            $rdata['title'] = $resource_data['title'];
+            $rdata['img_url'] = $resource_data['img_url'];
+            $rdata['content'] = $resource_data['content'];
+            $data['resource_id'] = ArticleModel::addArticle($rdata);
         }
 
         if($result = ClassModel::addTry($data))
         {
-            database()->query("commit");
+            database()->pdo->commit();
             return $result;
         }else{
-            database()->query("rollback");
+            database()->pdo->rollBack();
             BaseException::SystemError();
         }
     }

@@ -365,4 +365,11 @@ class ClassModel extends BaseModel
 
         return $result;
     }
+
+    public static function countLesson($where = [])
+    {
+        $db = database();
+
+        return $db->count(self::LESSON_TABLE,"*",$where);
+    }
 }

@@ -48,10 +48,10 @@ class AdminClassTryController extends BaseController
      * @apiParam title|string|试听标题|true
      * @apiParam desc|string|试听内容|true
      * @apiParam sort|float|试听排序|true
-     * @apiParam resource_data[].resource_id|int|视频资源ID|false
-     * @apiParam resource_data[].title|int|文章标题|false
-     * @apiParam resource_data[].img_url|int|文章图片|false
-     * @apiParam resource_data[].content|int|文章内容|false
+     * @apiParam resource_data.resource_id|int|视频资源ID|false
+     * @apiParam resource_data.title|int|文章标题|false
+     * @apiParam resource_data.img_url|int|文章图片|false
+     * @apiParam resource_data.content|int|文章内容|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

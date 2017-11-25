@@ -74,6 +74,7 @@ class AdminClassIntroduceController extends BaseController
     public function updateIntroduce(ServerRequest $request)
     {
         $list = $request->getParam("list");
+//        var_dump($list);exit;
 
         return $this->response(AdminClassIntroduceLogic::getInstance()->updateIntroduce($list));
     }
