@@ -11,6 +11,7 @@ namespace Logic;
 
 use Exception\ClassException;
 use Model\ArticleModel;
+use Model\BuyModel;
 use Model\ClassModel;
 use Model\MediaModel;
 
@@ -86,5 +87,10 @@ class MyClassLogic extends BaseLogic
         }
 
         return $chapter;
+    }
+
+    public function updateLearnPercent($user_id,$class_id,$percent)
+    {
+        return BuyModel::updateLearnPercent($user_id,$class_id,$percent);
     }
 }

@@ -40,17 +40,16 @@ class AdminClassLessonController extends BaseController
 
     /**
      * @name 新增章节的课
-     * @apiParam id|int|课的ID|true
      * @apiParam chapter_id|int|章节ID|true
      * @apiParam title|string|标题|true
      * @apiParam desc|string|描述|true
      * @apiParam resource_type|int|类型|true
-     * @apiParam lesson_no|string|第几课|true
+     * @apiParam lesson_no|int|第几课|true
      * @apiParam img_url|string|课的图片|true
-     * @apiParam resource_data.resource_id|int|视频资源ID|false
-     * @apiParam resource_data.title|int|文章标题|false
-     * @apiParam resource_data.img_url|int|文章图片|false
-     * @apiParam resource_data.content|int|文章内容|false
+     * @apiParam resource_data.resource_id|string|视频资源ID|false
+     * @apiParam resource_data.title|string|文章标题|false
+     * @apiParam resource_data.img_url|string|文章图片|false
+     * @apiParam resource_data.content|string|文章内容|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

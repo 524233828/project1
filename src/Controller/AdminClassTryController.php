@@ -44,14 +44,14 @@ class AdminClassTryController extends BaseController
      * @name 新增课程试听
      * @apiParam class_id|int|课程ID|true
      * @apiParam img_url|string|试听图片|true
-     * @apiParam resource_type|string|试听类型 0-视频 1-文章|true
+     * @apiParam resource_type|int|试听类型 0-视频 1-文章|true
      * @apiParam title|string|试听标题|true
      * @apiParam desc|string|试听内容|true
-     * @apiParam sort|float|试听排序|true
-     * @apiParam resource_data.resource_id|int|视频资源ID|false
-     * @apiParam resource_data.title|int|文章标题|false
-     * @apiParam resource_data.img_url|int|文章图片|false
-     * @apiParam resource_data.content|int|文章内容|false
+     * @apiParam sort|int|试听排序|true
+     * @apiParam resource_data.resource_id|string|视频资源ID|false
+     * @apiParam resource_data.title|string|文章标题|false
+     * @apiParam resource_data.img_url|string|文章图片|false
+     * @apiParam resource_data.content|string|文章内容|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

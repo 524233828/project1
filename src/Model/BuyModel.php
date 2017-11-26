@@ -18,6 +18,7 @@ class BuyModel extends BaseModel
 
     public static function addUserClass($data)
     {
+        $data['create_time'] = time();
         $buy = database()->insert(self::BUY_CLASS_TABLE,$data);
 
         if(!$buy){
@@ -36,5 +37,21 @@ class BuyModel extends BaseModel
             );
 
         return $class;
+    }
+
+    public static function updateLearnPercent($user_id,$class_id,$percent)
+    {
+        $where = [
+            "user_id" => $user_id,
+            "class_id" => $class_id,
+
+        ];
+
+        $data = [
+            "learn_percent" => $percent,
+            "update_time" => time()
+        ];
+
+        return database()->update(self::BUY_CLASS_TABLE,$data,$where);
     }
 }

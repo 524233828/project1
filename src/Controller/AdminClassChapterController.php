@@ -35,7 +35,7 @@ class AdminClassChapterController extends BaseController
      * @apiParam title|string|章节标题|true
      * @apiParam chapter_no|string|章节数|true
      * @apiParam class_id|int|课程ID|true
-     * @apiParam desc|int|章节描述|true
+     * @apiParam desc|string|章节描述|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -57,11 +57,11 @@ class AdminClassChapterController extends BaseController
 
     /**
      * @name 更新章节
-     * @apiParam id|int|banner的ID|true
+     * @apiParam id|int|章节ID|true
      * @apiParam title|string|章节标题|true
-     * @apiParam chapter_no|string|章节数|true
+     * @apiParam chapter_no|int|章节数|true
      * @apiParam class_id|int|课程ID|true
-     * @apiParam desc|int|章节描述|true
+     * @apiParam desc|string|章节描述|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

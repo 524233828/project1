@@ -67,4 +67,33 @@ class OrderModel extends BaseModel
         return database()->count(self::ORDER_TABLE."(o)",[],$where);
     }
 
+    public static function incomeStaticSum()
+    {
+        return database()->sum(self::ORDER_TABLE,"settlement_total_fee",["status[>]"=>0]);
+    }
+
+    public static function dailyIncome($start_time,$end_time)
+    {
+        if($start_time>$end_time)
+        {
+            return [];
+        }
+
+        $sql = <<<SQL
+SELECT 
+  FROM_UNIXTIME(pay_time,'%Y-%m-%d') as pay_date,
+  sum(settlement_total_fee) as income
+FROM db_order 
+WHERE 
+  `status`>0 
+AND
+  pay_time>=$start_time
+AND
+  pay_time<$end_time
+GROUP BY pay_date
+SQL;
+        return database()->query($sql)->fetchAll();
+
+    }
+
 }

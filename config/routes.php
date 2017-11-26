@@ -122,6 +122,9 @@ route()->group("/admin",function(){
     route()->post("/banner/add","AdminBannerController@addBanner");
     route()->post("/banner/update","AdminBannerController@updateBanner");
     route()->post("/banner/delete","AdminBannerController@deleteBanner");
+
+    //收入统计
+    route()->get("/income/static","AdminIncomeStaticController@incomeStatic");
 });
 
 

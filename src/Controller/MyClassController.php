@@ -42,4 +42,19 @@ class MyClassController extends BaseController
 
         return $this->response(MyClassLogic::getInstance()->getClassChapter($class_id));
     }
+
+    /**
+     * @apiParam class_id|int|课程ID|true
+     * @apiParam percent|int|学习百分比|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function updateLearnPercent(ServerRequest $request)
+    {
+        $class_id = $request->getParam("class_id");
+        $percent = $request->getParam("percent");
+        $user_id = $_SESSION['uid'];
+
+        return $this->response(MyClassLogic::getInstance()->updateLearnPercent($user_id,$class_id,$percent));
+    }
 }
