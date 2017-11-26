@@ -32,7 +32,10 @@ class AdminClassLessonLogic extends BaseLogic
 
         if(count($result_list)<1)
         {
-            ClassException::NoLessonInChapter();
+            $result['list'] = [];
+
+            return $result;
+//            ClassException::NoLessonInChapter();
         }
 
         $resource_id = [];

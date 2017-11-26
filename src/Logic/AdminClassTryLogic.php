@@ -30,7 +30,10 @@ class AdminClassTryLogic extends BaseLogic
         $result_list = ClassModel::listClassTry($class_id);
 
         if(count($result_list)<1){
-            ClassException::NoTryInClass();
+//            ClassException::NoTryInClass();
+            $result['list'] = [];
+
+            return $result;
         }
         $resource_id = [];
         foreach ($result_list as $v)

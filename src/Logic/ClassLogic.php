@@ -50,6 +50,10 @@ class ClassLogic extends BaseLogic
 
         $try = ClassModel::listClassTry($class_id);
 
+        if(count($try)<1){
+            ClassException::NoTryInClass();
+        }
+
         $resource_id = [];
         foreach ($try as $v)
         {
@@ -113,6 +117,11 @@ class ClassLogic extends BaseLogic
             "chapter_id"=>$chapter_ids,
             "ORDER" => ["lesson_no" => "ASC", "id" => "ASC"],
         ]);
+
+        if(count($lesson)<1)
+        {
+            ClassException::NoLessonInChapter();
+        }
 
         $lesson_index = [];
         $resource_id = [];
@@ -180,7 +189,7 @@ class ClassLogic extends BaseLogic
 
         //数据库记录订单
         //开启事务
-        database()->query("start transaction");
+        database()->pdo->beginTransaction();
 
         $order_date = [
             "order_id" => $attributes['out_trade_no'],
@@ -200,10 +209,10 @@ class ClassLogic extends BaseLogic
         $buy_id = BuyModel::addUserClass($user_class_data);
         if($order_id&&$buy_id)
         {
-            database()->query("commit");
+            database()->pdo->commit();
             return $config;
         }else{
-            database()->query("rollback");
+            database()->pdo->rollBack();
             return false;
         }
     }
