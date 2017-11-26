@@ -104,7 +104,7 @@ route()->group("/admin",function(){
     route()->get("/chapter/list","AdminClassChapterController@listChapter");
 //    route()->get("/chapter/get","AdminClassChapterController@getBanner");
     route()->post("/chapter/add","AdminClassChapterController@addChapter");
-    route()->post("/chapter/update","AdminClassChapterController@updateChapter");
+    route()->post("/chapter/update","AdminClassChapterController@updateChapter")->withMiddleware("filter");
     route()->post("/chapter/delete","AdminClassChapterController@deleteChapter");
 
     //章节课时管理

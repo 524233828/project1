@@ -39,4 +39,20 @@ class BaseException extends \Exception
             ErrorCode::VIDEO_NOT_FOUND
         );
     }
+
+    public static function ParamsError()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::ERR_INVALID_PARAMETER),
+            ErrorCode::ERR_INVALID_PARAMETER
+        );
+    }
+
+    public static function ParamsMissing()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::ERR_NO_PARAMETERS),
+            ErrorCode::ERR_NO_PARAMETERS
+        );
+    }
 }

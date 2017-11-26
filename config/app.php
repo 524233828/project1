@@ -84,5 +84,7 @@ return [
         'login' => new Middleware\LoginCheck(),
         // 分发
         'dispatch' => new Middleware\Dispatch(),
+        //入参过滤
+        'filter' => new Middleware\IncomeFilter(),
     ],
 ];
