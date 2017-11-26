@@ -10,6 +10,7 @@ namespace Logic;
 
 
 use Exception\BaseException;
+use Exception\ClassException;
 use Model\ArticleModel;
 use Model\ClassModel;
 use Model\MediaModel;
@@ -28,6 +29,11 @@ class AdminClassLessonLogic extends BaseLogic
 
         $where['chapter_id'] = $chapter_id;
         $result_list = ClassModel::listChapterLesson($where);
+
+        if(count($result_list)<1)
+        {
+            ClassException::NoLessonInChapter();
+        }
 
         $resource_id = [];
         foreach ($result_list as $v)
@@ -90,7 +96,7 @@ class AdminClassLessonLogic extends BaseLogic
         $count = ClassModel::countLesson(["chapter_id" => $chapter_id,"lesson_no" => $lesson_no,]);
 
         if($count>0){
-            BaseException::SystemError();
+            ClassException::LessonDuplicate();
         }
 
         //开启事务
@@ -101,7 +107,7 @@ class AdminClassLessonLogic extends BaseLogic
             if($result){
                 $data['resource_id'] = $result["id"];
             }else{
-                BaseException::SystemError();
+                BaseException::VideoNotFound();
             }
         }else{
             $rdata['title'] = $resource_data['title'];

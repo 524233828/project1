@@ -31,4 +31,12 @@ class BaseException extends \Exception
         }
 
     }
+
+    public static function VideoNotFound()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::VIDEO_NOT_FOUND),
+            ErrorCode::VIDEO_NOT_FOUND
+        );
+    }
 }

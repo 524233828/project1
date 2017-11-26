@@ -10,6 +10,7 @@ namespace Logic;
 
 
 use Exception\BaseException;
+use Exception\ClassException;
 use Model\ArticleModel;
 use Model\ClassModel;
 use Model\MediaModel;
@@ -28,6 +29,9 @@ class AdminClassTryLogic extends BaseLogic
 
         $result_list = ClassModel::listClassTry($class_id);
 
+        if(count($result_list)<1){
+            ClassException::NoTryInClass();
+        }
         $resource_id = [];
         foreach ($result_list as $v)
         {
@@ -94,7 +98,7 @@ class AdminClassTryLogic extends BaseLogic
             if($result){
                 $data['resource_id'] = $result["id"];
             }else{
-                BaseException::SystemError();
+                BaseException::VideoNotFound();
             }
 
         }else{

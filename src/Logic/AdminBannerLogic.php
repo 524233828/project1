@@ -8,6 +8,7 @@
 
 namespace Logic;
 
+use Exception\BannerException;
 use Exception\BaseException;
 use Exception\ClassException;
 use Model\BannerModel;
@@ -65,7 +66,7 @@ class AdminBannerLogic extends BaseLogic
         $result = BannerModel::getBanner($id);
 
         if(empty($result)){
-            BaseException::SystemError();
+            BannerException::BannerNotFound();
         }
 
         return $result;

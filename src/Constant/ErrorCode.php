@@ -37,6 +37,10 @@ class ErrorCode
      */
     const CLASS_NOT_FOUND = 1100; //课程不存在
     const CLASS_NO_CHAPTER = 1101;//课程没有章节
+    const CHAPTER_DUPLICATE = 1102;//课程章节重复
+    const LESSON_DUPLICATE = 1103;//章节的课时重复
+    const CHAPTER_NO_LESSON = 1104;//章节没有课时
+    const CLASS_NO_TRY = 1105;//课程没有试听列表
 
     /**
      * 12xx订单系统错误
@@ -44,10 +48,16 @@ class ErrorCode
     const ORDER_CREATE_FAIL = 1200;//订单创建失败
 
     /**
+     * 13xxbanner系统错误
+     */
+    const BANNER_NOT_FOUND = 1300;
+
+    /**
      * 99xx通用系统错误
      */
     const UPLOAD_FAIL = 9900;//上传失败
     const UNABLE_MIME_TYPE = 9901;//文件格式不支持
+    const VIDEO_NOT_FOUND = 9902;//文件格式不支持
 
     /**
      * 错误代码与消息的对应数组
@@ -60,13 +70,29 @@ class ErrorCode
         self::ERR_INVALID_PARAMETER => ['请求参数错误', Response::HTTP_BAD_REQUEST],
         self::ERR_CHECK_SIGN        => ['签名错误', Response::HTTP_FORBIDDEN],
         self::ERR_NO_PARAMETERS     => ['参数缺失', Response::HTTP_BAD_REQUEST],
+
+        //用户系统错误
         self::USER_NOT_LOGIN        => ['未登录', Response::HTTP_FORBIDDEN],
         self::USER_NOT_EXISTS       => ['用户名或密码错误', Response::HTTP_FORBIDDEN],
+
+        //课程系统错误
         self::CLASS_NOT_FOUND       => ['课程不存在', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_CHAPTER      => ['该课程没有章节', Response::HTTP_NOT_FOUND],
+        self::CHAPTER_DUPLICATE      => ['课程章节不能重复', Response::HTTP_BAD_GATEWAY],
+        self::LESSON_DUPLICATE      => ['章节课时不能重复', Response::HTTP_BAD_GATEWAY],
+        self::CHAPTER_NO_LESSON      => ['该章节没有课时', Response::HTTP_NOT_FOUND],
+        self::CLASS_NO_TRY          =>  ['该章节没有试听', Response::HTTP_NOT_FOUND],
+
+        //订单系统错误
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],
+
+        //banner系统错误
+        self::BANNER_NOT_FOUND      => ['banner不存在', Response::HTTP_NOT_FOUND],
+
+        //其他错误
         self::UPLOAD_FAIL           => ['上传失败', Response::HTTP_BAD_GATEWAY],
         self::UNABLE_MIME_TYPE      => ['文件格式不支持', Response::HTTP_FORBIDDEN],
+        self::VIDEO_NOT_FOUND      =>  ['视频资源不存在', Response::HTTP_NOT_FOUND],
     ];
 
     /**

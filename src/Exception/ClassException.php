@@ -27,4 +27,36 @@ class ClassException extends BaseException
             ErrorCode::CLASS_NO_CHAPTER
         );
     }
+
+    public static function ChapterDuplicate()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::CHAPTER_DUPLICATE),
+            ErrorCode::CHAPTER_DUPLICATE
+        );
+    }
+
+    public static function LessonDuplicate()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::LESSON_DUPLICATE),
+            ErrorCode::LESSON_DUPLICATE
+        );
+    }
+
+    public static function NoLessonInChapter()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::CHAPTER_NO_LESSON),
+            ErrorCode::CHAPTER_NO_LESSON
+        );
+    }
+
+    public static function NoTryInClass()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::CLASS_NO_TRY),
+            ErrorCode::CLASS_NO_TRY
+        );
+    }
 }
