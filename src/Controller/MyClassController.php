@@ -44,6 +44,7 @@ class MyClassController extends BaseController
     }
 
     /**
+     * @name 更新学习百分比
      * @apiParam class_id|int|课程ID|true
      * @apiParam percent|int|学习百分比|true
      * @param ServerRequest $request
