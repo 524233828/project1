@@ -58,6 +58,7 @@ route()->group(['prefix' => '/my_class_list', 'middleware' => 'dispatch'],functi
 //我的课程详情
 route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
     route()->get("/info","MyClassController@getClassChapter");
+    route()->post("/info","MyClassController@updateLearnPercent");
 });
 
 //公用接口
