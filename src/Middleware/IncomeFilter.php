@@ -36,9 +36,9 @@ class IncomeFilter extends Middleware
     }
 
     /**
-     * 根据当前方法的注释进行参数过滤
      * @param $data
      * @return bool
+     * @throws \Exception
      */
     private function requestFilter($data)
     {
@@ -69,7 +69,6 @@ class IncomeFilter extends Middleware
     }
 
     /**
-     * 参数过滤处理方法
      * @param $data
      * @param $param
      * @param $type
@@ -120,6 +119,11 @@ class IncomeFilter extends Middleware
         }
     }
 
+    /**
+     * @param $data
+     * @param $type
+     * @return bool|int
+     */
     private function typeCheck($data,$type)
     {
         switch ($type)
@@ -141,11 +145,19 @@ class IncomeFilter extends Middleware
         }
     }
 
+    /**
+     * @param $data
+     * @return int
+     */
     private function intValidate($data)
     {
         return preg_match("/^\d{1,}$/",$data);
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     private function stringValidate($data)
     {
         if(empty($data))
@@ -156,11 +168,20 @@ class IncomeFilter extends Middleware
         return !preg_match("/(\\|\"){1,}/",$data);
     }
 
+    /**
+     * @param $data
+     * @return int
+     */
     private function floatValidate($data)
     {
         return preg_match("/^\d{1,}\.{1}\d{0,2}/",$data);
     }
 
+    /**
+     * @param $callbackController
+     * @param $callbackMethod
+     * @return array
+     */
     private function _genDoc($callbackController,$callbackMethod)
     {
         $data = [];
