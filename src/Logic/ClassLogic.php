@@ -45,13 +45,15 @@ class ClassLogic extends BaseLogic
         $class = ClassModel::getClass($class_id);
 
         if(empty($class)){
-            ClassException::ClassNotFound();
+            return [];
+//            ClassException::ClassNotFound();
         }
 
         $try = ClassModel::listClassTry($class_id);
 
         if(count($try)<1){
-            ClassException::NoTryInClass();
+            return [];
+//            ClassException::NoTryInClass();
         }
 
         $resource_id = [];
@@ -98,7 +100,8 @@ class ClassLogic extends BaseLogic
         $class = ClassModel::getClass($class_id);
 
         if(empty($class)){
-            ClassException::ClassNotFound();
+//            ClassException::ClassNotFound();
+            return [];
         }
 
         $chapter = ClassModel::listClassChapter($class_id);
@@ -111,7 +114,8 @@ class ClassLogic extends BaseLogic
 
         if(count($chapter_ids)<1)
         {
-            ClassException::NoChapterInClass();
+//            ClassException::NoChapterInClass();
+            return [];
         }
         $lesson = ClassModel::listChapterLesson([
             "chapter_id"=>$chapter_ids,
@@ -120,7 +124,8 @@ class ClassLogic extends BaseLogic
 
         if(count($lesson)<1)
         {
-            ClassException::NoLessonInChapter();
+//            ClassException::NoLessonInChapter();
+            return [];
         }
 
         $lesson_index = [];
