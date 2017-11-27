@@ -37,7 +37,7 @@ class UploadLogic extends BaseLogic
         return $path;
     }
 
-    public function uploadVideo($name = "file")
+    public function uploadVideo($name = "file",$time = 0)
     {
         $file = Uploader::save($name,["video/mpeg","video/mp4"]);
 
@@ -48,6 +48,7 @@ class UploadLogic extends BaseLogic
             "media_url" => $path,
             "mime_type" => $_FILES[$name]['type'],
             "size" => $_FILES[$name]['size'],
+            "media_time" => $time
         ];
         $resource = MediaModel::getVideoByResourceId($data['resource_id']);
         if(!$resource){
