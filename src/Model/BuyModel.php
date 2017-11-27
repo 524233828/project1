@@ -32,7 +32,7 @@ class BuyModel extends BaseModel
         $class = database()->select(
             self::BUY_CLASS_TABLE."(b)",
             ["[>]db_class(c)"=>["b.class_id"=>"id"]],
-            ["c.img_url","c.title","c.desc","c.tag","c.id"],
+            ["c.img_url","c.title","c.desc","c.tag","c.id","b.learn_percent"],
             ["b.user_id"=>$user_id,"b.status"=>1]
             );
 
