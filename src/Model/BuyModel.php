@@ -63,6 +63,6 @@ class BuyModel extends BaseModel
 
         ];
 
-        return database()->get(self::BUY_CLASS_TABLE,["percent"],$where);
+        return database()->get(self::BUY_CLASS_TABLE,["learn_percent"],$where);
     }
 }
