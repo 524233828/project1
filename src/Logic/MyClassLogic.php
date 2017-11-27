@@ -88,7 +88,9 @@ class MyClassLogic extends BaseLogic
             $chapter[$k]["lesson"]=isset($lesson_index[$v['id']])?$lesson_index[$v['id']]:[];
         }
 
-        return $chapter;
+        $response = $class;
+        $response['chapter'] = $chapter;
+        return $response;
     }
 
     public function updateLearnPercent($user_id,$class_id,$percent)
