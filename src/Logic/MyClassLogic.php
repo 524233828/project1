@@ -30,7 +30,7 @@ class MyClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $class['learn_percent'] = BuyModel::getLearnPercent(1,$class_id)["learn_percent"];
+        $class['learn_percent'] = BuyModel::getLearnPercent($_SESSION['uid'],$class_id)["learn_percent"];
 
         $chapter = ClassModel::listClassChapter($class_id);
 
