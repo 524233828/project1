@@ -27,9 +27,10 @@ class CommonLogic extends BaseLogic
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
         $log->addDebug("用户对象：".serialize($user));
+
         $wechat_user = $user->toArray();
         $log->addDebug("授权对象：".json_encode($wechat_user));
-        $scope = $wechat_user['original']['scope'];
+        $scope = $user['token']['scope'];
         $openid = $wechat_user['id'];
         if($scope=="snsapi_userinfo")
         {
