@@ -36,7 +36,7 @@ class LoginCheck extends Middleware
                 ErrorCode::msg(ErrorCode::USER_NOT_LOGIN),
                 ErrorCode::USER_NOT_LOGIN,
                 ["url"=>$oauth->redirect()->getTargetUrl()],
-                ErrorCode::status(ErrorCode::USER_NOT_LOGIN)
+                200
             );
         }
 
