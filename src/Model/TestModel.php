@@ -115,6 +115,16 @@ class TestModel extends BaseModel
         return $result;
     }
 
+    public static function getMaxAskNo($test_id)
+    {
+        $db = database();
+
+        $where = ["test_id" => $test_id];
+
+        return $db->max(self::ASK_TABLE,"ask_no",$where);
+
+    }
+
     public static function listOption($where = [])
     {
         $db = database();

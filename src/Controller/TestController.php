@@ -51,7 +51,7 @@ class TestController extends BaseController
     /**
      * @name 随机获取一个答案
      * @apiParam test_id|int|测试ID|true
-     * @returnParam [].img_url|int|图片地址
+     * @returnParam img_url|int|图片地址
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */

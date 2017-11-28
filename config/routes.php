@@ -28,7 +28,7 @@
 
 //首页
 route()->group(['prefix' => '/index', 'middleware' => 'dispatch'],function(){
-    route()->get("/class","IndexController@listClass");
+    route()->get("/class","IndexController@listClass")->withMiddleware("login");
     route()->get("/banner","IndexController@listBanner");
 });
 
