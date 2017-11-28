@@ -52,6 +52,7 @@ return [
         \FastD\ServiceProvider\CacheServiceProvider::class,
         \ServiceProvider\WechatServiceProvider::class,
         \ServiceProvider\UploadServiceProvider::class,
+        \ServiceProvider\SessionServiceProvider::class,
     ],
 
     /**
