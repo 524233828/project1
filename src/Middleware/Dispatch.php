@@ -17,7 +17,7 @@ class Dispatch extends Middleware
 
         ini_set('session.gc_maxlifetime',   config()->get("session_expire"));
         ini_set('session.cookie_lifetime',  config()->get("session_expire"));
-        session_start();
+//        session_start();
         try {
             $response = $next($request);
         } catch (\Exception $e) {
