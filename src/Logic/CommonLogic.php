@@ -49,7 +49,7 @@ class CommonLogic extends BaseLogic
                 "unionid" => isset($userInfo['unionid'])?$userInfo['unionid']:"",
                 "remark" => "",
                 "groupid" => "",
-                "channel_id" => $_SESSION['channel']?:1,
+                "channel_id" => isset($_SESSION['channel'])?$_SESSION['channel']:1,
             ];
         }else{
             $userService = wechat()->user;
@@ -68,7 +68,7 @@ class CommonLogic extends BaseLogic
                 "unionid" => $userInfo->unionid?:"",
                 "remark" => $userInfo->remark?:"",
                 "groupid" => $userInfo->groupid?:"",
-                "channel_id" => $_SESSION['channel']?:1,
+                "channel_id" => isset($_SESSION['channel'])?$_SESSION['channel']:1,
             ];
         }
         $log->addDebug("用户信息：".json_encode($data));
