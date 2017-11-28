@@ -28,9 +28,18 @@ class CommonLogic extends BaseLogic
         $user = $oauth->user();
         $log->addDebug("用户对象：".serialize($user));
         $wechat_user = $user->toArray();
-        $log->addDebug("用户信息：".json_encode($wechat_user));
+        $log->addDebug("授权对象：".json_encode($wechat_user));
+        $scope = $wechat_user['original']['scope'];
+        $openid = $wechat_user['id'];
+        if($scope=="snsapi_userinfo")
+        {
+            $userInfo = $wechat_user;
+        }else{
+            $userService = wechat()->user;
+            $userInfo = $userService->get($openid);
+        }
+        $log->addDebug("用户信息：".json_encode($userInfo));
         $_SESSION['wechat_user'] = $wechat_user;
-        $openid = $wechat_user['openid'];
         $my_user = UserModel::getUserByOpenId($openid);
 
         if(!$my_user)
