@@ -53,6 +53,11 @@ class ErrorCode
     const BANNER_NOT_FOUND = 1300;
 
     /**
+     * 14xx测试系统错误
+     */
+    const TEST_NOT_FOUND = 1400;
+
+    /**
      * 99xx通用系统错误
      */
     const UPLOAD_FAIL = 9900;//上传失败
@@ -89,6 +94,8 @@ class ErrorCode
         //banner系统错误
         self::BANNER_NOT_FOUND      => ['banner不存在', Response::HTTP_NOT_FOUND],
 
+        //测试系统错误
+        self::TEST_NOT_FOUND        => ['测试不存在', Response::HTTP_NOT_FOUND],
         //其他错误
         self::UPLOAD_FAIL           => ['上传失败', Response::HTTP_BAD_GATEWAY],
         self::UNABLE_MIME_TYPE      => ['文件格式不支持', Response::HTTP_FORBIDDEN],

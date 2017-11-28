@@ -28,6 +28,7 @@ class BaseException extends \Exception
                     ErrorCode::msg(ErrorCode::UPLOAD_FAIL),
                     ErrorCode::UPLOAD_FAIL
                 );
+                break;
         }
 
     }

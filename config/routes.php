@@ -61,6 +61,13 @@ route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
     route()->post("/learn_percent","MyClassController@updateLearnPercent");
 });
 
+//测试页面
+route()->group(['prefix' => '/test', 'middleware' => 'dispatch'],function(){
+    route()->get("/get","TestController@getTest");
+    route()->get("/get_ask","TestController@getAsk");
+    route()->get("/get_answer","TestController@randAnswer");
+});
+
 //公用接口
 route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
     route()->get("/login","CommonController@login");

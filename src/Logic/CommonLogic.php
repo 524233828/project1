@@ -11,16 +11,24 @@ namespace Logic;
 use EasyWeChat\Payment\Order;
 use Exception\OrderException;
 use Model\UserModel;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class CommonLogic extends BaseLogic
 {
     public function login()
     {
+        $log = new Logger('login');
+        $log_path = app()->getPath()."/runtime";
+        $log->pushHandler(new StreamHandler($log_path.'/login.log',Logger::DEBUG));
+        $log->addDebug("开始授权获取用户信息");
         $oauth = wechat()->oauth;
 
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
+        $log->addDebug("用户对象：".serialize($user));
         $wechat_user = $user->toArray();
+        $log->addDebug("用户信息：".json_encode($wechat_user));
         $_SESSION['wechat_user'] = $wechat_user;
         $openid = $wechat_user['openid'];
         $my_user = UserModel::getUserByOpenId($openid);
@@ -46,6 +54,12 @@ class CommonLogic extends BaseLogic
      */
     public static function orderNotify($notify,$successful)
     {
+        $log = new Logger('orderNotify');
+        $log_path = app()->getPath()."/runtime";
+        $log->pushHandler(new StreamHandler($log_path.'/orderNotify.log',Logger::DEBUG));
+        $log->addDebug("开始支付回调");
+        $log->addDebug("支付回调对象：".serialize($notify));
+        $log->addDebug("回调结果：".$successful);
         return true;
     }
 
