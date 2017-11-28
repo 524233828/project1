@@ -5,6 +5,7 @@
  * Date: 2017/11/28
  * Time: 23:26
  */
+namespace Service;
 
 class SessionService
 {

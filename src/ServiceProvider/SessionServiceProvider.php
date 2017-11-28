@@ -11,12 +11,13 @@ namespace ServiceProvider;
 
 use FastD\Container\Container;
 use FastD\Container\ServiceProviderInterface;
+use Service\SessionService;
 
 class SessionServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
         // TODO: Implement register() method.
-        $container->add("session",new \SessionService());
+        $container->add("session",new SessionService());
     }
 }
