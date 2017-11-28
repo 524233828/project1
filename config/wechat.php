@@ -35,7 +35,7 @@ return [
      */
     'oauth' => [
         'scopes'   => ['snsapi_base'],
-        'callback' => '/user/login',
+        'callback' => '/common/login',
     ],
     /**
      * 微信支付
