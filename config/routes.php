@@ -28,7 +28,7 @@
 
 //首页
 route()->group(['prefix' => '/index', 'middleware' => 'dispatch'],function(){
-    route()->get("/class","IndexController@listClass")->withMiddleware("login");
+    route()->get("/class","IndexController@listClass");
     route()->get("/banner","IndexController@listBanner");
 });
 
@@ -47,18 +47,18 @@ route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
 
 //个人中心首页
 route()->group(['prefix' => '/me', 'middleware' => 'dispatch'],function(){
-    route()->get("/info","MeController@getUser");
+    route()->get("/info","MeController@getUser")->withMiddleware("login");
 });
 
 //我的课程列表
 route()->group(['prefix' => '/my_class_list', 'middleware' => 'dispatch'],function(){
-    route()->get("/list","MyClassListController@listUserClass");
+    route()->get("/list","MyClassListController@listUserClass")->withMiddleware("login");
 });
 
 //我的课程详情
 route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
-    route()->get("/info","MyClassController@getClassChapter");
-    route()->post("/learn_percent","MyClassController@updateLearnPercent");
+    route()->get("/info","MyClassController@getClassChapter")->withMiddleware("login");
+    route()->post("/learn_percent","MyClassController@updateLearnPercent")->withMiddleware("login");
 });
 
 //测试页面
