@@ -33,11 +33,28 @@ class CommonLogic extends BaseLogic
         $openid = $wechat_user['id'];
         if($scope=="snsapi_userinfo")
         {
-            $userInfo = $wechat_user;
+            $userInfo = $wechat_user['original'];
+            $data = [
+                "openid" => $userInfo['openid'],
+                "subscribe" => 1,
+                "nickname" => $userInfo['nickname'],
+                "sex" => $userInfo['sex'],
+                "language" => $userInfo['language'],
+                "city" => $userInfo['city'],
+                "country" => $userInfo['country'],
+                "province" => $userInfo['province'],
+                "headimgurl"=> $userInfo['headimgurl'],
+                "subscribe_time" => time(),
+                "unionid" => $userInfo->unionid?:"",
+                "remark" => "",
+                "groupid" => "",
+                "channel_id" => $_SESSION['channel']?:1,
+            ];
         }else{
             $userService = wechat()->user;
             $userInfo = $userService->get($openid);
             $data = [
+                "openid" => $userInfo->openid,
                 "subscribe" => $userInfo->subscribe,
                 "nickname" => $userInfo->nickname?:"微信用户".time(),
                 "sex" => $userInfo->sex?:0,
@@ -47,14 +64,15 @@ class CommonLogic extends BaseLogic
                 "province" => $userInfo->province?:"未知",
                 "headimgurl"=> $userInfo->headimgurl?:"http://www.ym8800.com/static/img/preson.f518f1a.png",
                 "subscribe_time" => $userInfo->subscribe_time?:time(),
+                "unionid" => $userInfo->unionid?:"",
                 "remark" => $userInfo->remark?:"",
                 "groupid" => $userInfo->groupid?:"",
-                "channel_id" => $_SESSION['channel'],
+                "channel_id" => $_SESSION['channel']?:1,
             ];
         }
-        $log->addDebug("用户信息：".json_encode($userInfo));
-        $_SESSION['wechat_user'] = $wechat_user;
-        $my_user = UserModel::getUserByOpenId($openid);
+        $log->addDebug("用户信息：".json_encode($data));
+        $_SESSION['userInfo'] = $data;
+        $my_user = UserModel::getUserByOpenId($data['openid']);
 
         if(!$my_user)
         {
