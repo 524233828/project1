@@ -37,6 +37,20 @@ class CommonLogic extends BaseLogic
         }else{
             $userService = wechat()->user;
             $userInfo = $userService->get($openid);
+            $data = [
+                "subscribe" => $userInfo->subscribe,
+                "nickname" => $userInfo->nickname?:"微信用户".time(),
+                "sex" => $userInfo->sex?:0,
+                "language" => $userInfo->language?:"未知",
+                "city" => $userInfo->city?:"未知",
+                "country" => $userInfo->coutry?:"未知",
+                "province" => $userInfo->province?:"未知",
+                "headimgurl"=> $userInfo->headimgurl?:"http://www.ym8800.com/static/img/preson.f518f1a.png",
+                "subscribe_time" => $userInfo->subscribe_time?:time(),
+                "remark" => $userInfo->remark?:"",
+                "groupid" => $userInfo->groupid?:"",
+                "channel_id" => $_SESSION['channel'],
+            ];
         }
         $log->addDebug("用户信息：".json_encode($userInfo));
         $_SESSION['wechat_user'] = $wechat_user;
