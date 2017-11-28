@@ -46,7 +46,7 @@ class CommonLogic extends BaseLogic
                 "province" => $userInfo['province'],
                 "headimgurl"=> $userInfo['headimgurl'],
                 "subscribe_time" => time(),
-                "unionid" => $userInfo['unionid']?:"",
+                "unionid" => isset($userInfo['unionid'])?$userInfo['unionid']:"",
                 "remark" => "",
                 "groupid" => "",
                 "channel_id" => $_SESSION['channel']?:1,
