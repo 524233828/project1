@@ -77,7 +77,7 @@ class CommonLogic extends BaseLogic
 
         if(!$my_user)
         {
-            $my_user['id'] = UserModel::addUser($wechat_user);
+            $my_user['id'] = UserModel::addUser($data);
         }
 
         $_SESSION["uid"] = $my_user['id'];
