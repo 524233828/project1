@@ -14,9 +14,10 @@ class Dispatch extends Middleware
     public function handle(ServerRequestInterface $request, DelegateInterface $next)
     {
         //开启session会话
-        session_start();
+
         ini_set('session.gc_maxlifetime',   config()->get("session_expire"));
         ini_set('session.cookie_lifetime',  config()->get("session_expire"));
+        session_start();
         try {
             $response = $next($request);
         } catch (\Exception $e) {
