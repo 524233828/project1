@@ -87,5 +87,6 @@ return [
         'dispatch' => new Middleware\Dispatch(),
         //入参过滤
         'filter' => new Middleware\IncomeFilter(),
+        //后台登录校验
     ],
 ];
