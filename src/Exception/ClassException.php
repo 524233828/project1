@@ -59,4 +59,12 @@ class ClassException extends BaseException
             ErrorCode::CLASS_NO_TRY
         );
     }
+
+    public static function ClassExpire()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::CLASS_EXPIRE),
+            ErrorCode::CLASS_EXPIRE
+        );
+    }
 }

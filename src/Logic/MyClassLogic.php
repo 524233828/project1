@@ -30,7 +30,20 @@ class MyClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
-        $class['learn_percent'] = BuyModel::getLearnPercent($_SESSION['uid'],$class_id)["learn_percent"];
+        $user_class = BuyModel::getUserClass($_SESSION['uid'],$class_id);
+
+        $buy_time = $user_class['update_time'];
+
+        if($class['expire_month']!==0)
+        {
+            $expire_time = strtotime(date("Y-m-d H:i:s",$buy_time)." +{$class['expire_month']} month");
+            if($expire_time<time())
+            {
+                ClassException::ClassExpire();
+            }
+        }
+
+        $class['learn_percent'] = $user_class["learn_percent"];
 
         $chapter = ClassModel::listClassChapter($class_id);
 

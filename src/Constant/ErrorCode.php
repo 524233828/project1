@@ -41,6 +41,7 @@ class ErrorCode
     const LESSON_DUPLICATE = 1103;//章节的课时重复
     const CHAPTER_NO_LESSON = 1104;//章节没有课时
     const CLASS_NO_TRY = 1105;//课程没有试听列表
+    const CLASS_EXPIRE = 1106;//课程已过期
 
     /**
      * 12xx订单系统错误
@@ -87,6 +88,7 @@ class ErrorCode
         self::LESSON_DUPLICATE      => ['章节课时不能重复', Response::HTTP_BAD_GATEWAY],
         self::CHAPTER_NO_LESSON      => ['该章节没有课时', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_TRY          =>  ['该章节没有试听', Response::HTTP_NOT_FOUND],
+        self::CLASS_EXPIRE          =>  ['您购买的课程已过期，请重新购买', Response::HTTP_FORBIDDEN],
 
         //订单系统错误
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],

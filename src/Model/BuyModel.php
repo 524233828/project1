@@ -55,14 +55,14 @@ class BuyModel extends BaseModel
         return database()->update(self::BUY_CLASS_TABLE,$data,$where);
     }
 
-    public static function getLearnPercent($user_id,$class_id)
+
+    public static function getUserClass($user_id,$class_id)
     {
         $where = [
             "user_id" => $user_id,
             "class_id" => $class_id,
-
         ];
 
-        return database()->get(self::BUY_CLASS_TABLE,["learn_percent"],$where);
+        return database()->get(self::BUY_CLASS_TABLE,"*s",$where);
     }
 }

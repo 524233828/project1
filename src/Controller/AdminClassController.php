@@ -25,6 +25,7 @@ class AdminClassController extends BaseController
      * @returnParam list[].title|string|课程标题
      * @returnParam list[].tag|string|课程标签
      * @returnParam list[].desc|string|课程描述
+     * @returnParam list[].expire_month|int|过期时间，单位：月
      * @returnParam current_page|int|当前页数
      * @returnParam total_page|string|总页数
      * @param ServerRequest $request
@@ -45,6 +46,7 @@ class AdminClassController extends BaseController
      * @apiParam price|float|课程价格|true
      * @apiParam sold|int|课程卖出|true
      * @apiParam status|int|课程卖出|true
+     * @apiParam expire_month|int|课程过期时间，单位：月，0为不过期|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -58,8 +60,9 @@ class AdminClassController extends BaseController
         $price = $request->getParam("price");
         $sold = $request->getParam("sold");
         $status = $request->getParam("status",1);
+        $expire_month = $request->getParam("expire_month",0);
 
-        $class = AdminClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold,$status);
+        $class = AdminClassLogic::getInstance()->addClass($title,$desc,$tag,$img_url,$price,$sold,$status,$expire_month);
         if($class)
         {
             return $this->response([]);
@@ -96,6 +99,7 @@ class AdminClassController extends BaseController
      * @apiParam price|float|课程价格|true
      * @apiParam sold|int|课程卖出|true
      * @apiParam status|int|课程状态|true
+     * @apiParam expire_month|int|课程过期时间，单位：月，0为不过期|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse;
      */
@@ -109,6 +113,7 @@ class AdminClassController extends BaseController
         $price = $request->getParam("price");
         $sold = $request->getParam("sold");
         $status = $request->getParam("status",1);
+        $expire_month = $request->getParam("expire_month",0);
 
         return $this->response(AdminClassLogic::getInstance()->updateClass(
             $class_id,
@@ -118,7 +123,8 @@ class AdminClassController extends BaseController
             $img_url,
             $price,
             $sold,
-            $status
+            $status,
+            $expire_month
         ));
     }
 
