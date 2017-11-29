@@ -34,6 +34,7 @@ class MyClassLogic extends BaseLogic
 
         $buy_time = $user_class['update_time'];
 
+        //判断购买是否过期
         if($class['expire_month']!==0)
         {
             $expire_time = strtotime(date("Y-m-d H:i:s",$buy_time)." +{$class['expire_month']} month");
@@ -43,6 +44,7 @@ class MyClassLogic extends BaseLogic
             }
         }
 
+        //输出用户学习进度
         $class['learn_percent'] = $user_class["learn_percent"];
 
         $chapter = ClassModel::listClassChapter($class_id);
