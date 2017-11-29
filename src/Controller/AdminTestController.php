@@ -161,7 +161,7 @@ class AdminTestController extends BaseController
         $test_id = $request->getParam("test_id");
         $img_url = $request->getParam("img_url");
         $desc = $request->getParam("desc");
-        $options = $request->getParam("options");
+        $options = $request->getParam("option");
         $ask_no = $request->getParam("ask_no",0);
         return $this->response(AdminTestLogic::getInstance()->updateAsk($id,$test_id,$img_url,$desc,$options,$ask_no));
     }
