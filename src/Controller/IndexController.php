@@ -24,6 +24,7 @@ class IndexController extends BaseController
      * @returnParam list[].title|string|课程标题
      * @returnParam list[].tag|string|课程标签
      * @returnParam list[].desc|string|课程描述
+     * @returnParam list[].expire_month|int|课程有效期
      * @returnParam current_page|int|当前页数
      * @returnParam total_page|string|总页数
      * @param ServerRequest $request
