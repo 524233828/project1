@@ -63,9 +63,9 @@ route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
 
 //测试页面
 route()->group(['prefix' => '/test', 'middleware' => 'dispatch'],function(){
-    route()->get("/get","TestController@getTest");
-    route()->get("/get_ask","TestController@getAsk");
-    route()->get("/get_answer","TestController@randAnswer");
+    route()->get("/get","TestController@getTest")->withMiddleware("login");
+    route()->get("/get_ask","TestController@getAsk")->withMiddleware("login");
+    route()->get("/get_answer","TestController@randAnswer")->withMiddleware("login");
 });
 
 //公用接口
