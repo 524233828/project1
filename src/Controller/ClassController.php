@@ -25,7 +25,7 @@ class ClassController extends BaseController
      * @returnParam price|float|价格
      * @returnParam title|string|标题
      * @returnParam status|int|状态1-可用 0-不可用
-     * @returnParam expire_time|int|课程时长
+     * @returnParam expire_month|int|课程时长
      * @returnParam introduce[].img_url|string|介绍图片地址
      * @returnParam introduce[].title|string|介绍标题
      * @returnParam introduce[].content|string|介绍内容
