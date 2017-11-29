@@ -151,7 +151,7 @@ class AdminTestController extends BaseController
      * @apiParam desc|string|问题描述|true
      * @apiParam option[].desc|string|选项描述|true
      * @apiParam option[].ask_id|int|问题ID|true
-     * @apiParam option[].id|string|描述ID 传的时候更新，不传的时候自动新增|false
+     * @apiParam option[].id|int|描述ID 传的时候更新，不传的时候自动新增|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -169,6 +169,9 @@ class AdminTestController extends BaseController
     /**
      * @name 后台获取问题的答案
      * @apiParam test_id|int|测试ID|true
+     * @returnParam id|int|答案ID
+     * @returnParam test_id|int|测试ID
+     * @returnParam img_url|string|图片地址
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -179,7 +182,14 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->listAnswer($test_id));
     }
 
-    public function addAnswer(ServerRequest $request,$test_id,$img_url)
+    /**
+     * @name 后台增加答案
+     * @apiParam test_id|int|测试ID|true
+     * @apiParam img_url|string|图片地址|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function addAnswer(ServerRequest $request)
     {
         $img_url = $request->getParam("img_url");
         $test_id = $request->getParam("test_id");
@@ -187,12 +197,26 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->addAnswer($test_id,$img_url));
     }
 
+    /**
+     * @name 后台删除答案
+     * @apiParam id|int|答案ID|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function deleteAnswer(ServerRequest $request)
     {
         $id = $request->getParam("id");
         return $this->response(AdminTestLogic::getInstance()->deleteAnswer($id));
     }
 
+    /**
+     * @name 后台更新答案
+     * @apiParam id|int|答案ID|true
+     * @apiParam test_id|int|测试ID|true
+     * @apiParam img_url|string|图片地址|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function updateAnswer(ServerRequest $request)
     {
         $img_url = $request->getParam("img_url");

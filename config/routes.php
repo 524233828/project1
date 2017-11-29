@@ -151,6 +151,9 @@ route()->group("/admin",function(){
     route()->post("/test_answer/add","AdminTestController@addAnswer");
     route()->post("/test_answer/delete","AdminTestController@deleteAnswer");
     route()->post("/test_answer/update","AdminTestController@updateAnswer");
+
+    //参加测试的用户列表
+    route()->get("/user_test/list","AdminUserTestController@listUserTest");
 });
 
 

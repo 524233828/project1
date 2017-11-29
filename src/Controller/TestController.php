@@ -35,9 +35,9 @@ class TestController extends BaseController
     /**
      * @name 获取测试的问题
      * @apiParam test_id|int|测试ID|true
-     * @returnParam [].img_url|int|图片地址
-     * @returnParam [].desc|int|问题描述
-     * @returnParam [].option[].desc|int|选项描述
+     * @returnParam [].img_url|string|图片地址
+     * @returnParam [].desc|string|问题描述
+     * @returnParam [].option[].desc|string|选项描述
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -51,13 +51,15 @@ class TestController extends BaseController
     /**
      * @name 随机获取一个答案
      * @apiParam test_id|int|测试ID|true
-     * @returnParam img_url|int|图片地址
+     * @returnParam img_url|string|图片地址
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
     public function randAnswer(ServerRequest $request)
     {
         $test_id = $request->getParam("test_id");
-        return $this->response(TestLogic::getInstance()->randAnswer($test_id));
+        $user_id = $_SESSION['uid'];
+        $channel_id = $request->getParam("channel_id",1);
+        return $this->response(TestLogic::getInstance()->randAnswer($user_id,$test_id,$channel_id));
     }
 }

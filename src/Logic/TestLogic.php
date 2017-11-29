@@ -10,6 +10,7 @@ namespace Logic;
 
 
 use Exception\TestException;
+use Model\AttendTestModel;
 use Model\TestModel;
 
 class TestLogic extends BaseLogic
@@ -55,11 +56,14 @@ class TestLogic extends BaseLogic
         return array_values($ask_index);
     }
 
-    public function randAnswer($test_id)
+    public function randAnswer($user_id, $test_id,$channel_id = 1)
     {
         $where = ["test_id"=>$test_id];
         $answer = TestModel::listAnswer($where);
 //        var_dump($answer);exit;
+
+        //记录用户参加了测试
+        AttendTestModel::addAttend($user_id,$test_id,$channel_id);
         if(!$answer)
         {
             return [];
