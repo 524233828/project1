@@ -9,6 +9,7 @@
 namespace Controller;
 
 
+use FastD\Http\ServerRequest;
 use Logic\AdminUserTestLogic;
 
 class AdminUserTestController extends BaseController
@@ -16,6 +17,7 @@ class AdminUserTestController extends BaseController
 
     /**
      * @name 后台获取参加测试的用户列表
+     * @apiParam page|int|页数|false
      * @returnParam [].id|int|记录ID
      * @returnParam [].user_id|int|用户ID
      * @returnParam [].nickname|string|用户名
@@ -23,10 +25,12 @@ class AdminUserTestController extends BaseController
      * @returnParam [].title|string|测试名
      * @returnParam [].channel_name|string|渠道号
      * @returnParam [].create_time|int|测试时间戳
+     * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
-    public function listUserTest()
+    public function listUserTest(ServerRequest $request)
     {
-        return $this->response(AdminUserTestLogic::getInstance()->listUserTest());
+        $page = $request->getParam("page",1);
+        return $this->response(AdminUserTestLogic::getInstance()->listUserTest($page));
     }
 }

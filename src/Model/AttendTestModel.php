@@ -33,7 +33,7 @@ class AttendTestModel extends BaseModel
         }
     }
 
-    public static function listAttend()
+    public static function listAttend($where = [])
     {
         $db = database();
 
@@ -52,8 +52,13 @@ class AttendTestModel extends BaseModel
                 "t.title",
                 "c.channel_name",
                 "ut.create_time"
-            ]);
+            ],$where);
 
         return $result;
+    }
+
+    public static function countUserTest($where = [])
+    {
+        return database()->count(self::ATTEND_TABLE,"*",$where);
     }
 }
