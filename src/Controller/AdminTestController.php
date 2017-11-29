@@ -94,8 +94,10 @@ class AdminTestController extends BaseController
      * @returnParam [].img_url|string|问题图片地址
      * @returnParam [].test_id|int|测试ID
      * @returnParam [].ask_no|int|问题号
-     * @returnParam [].desc|int|问题描述
-     * @returnParam [].option[].desc|int|选项描述
+     * @returnParam [].desc|string|问题描述
+     * @returnParam [].option[].id|int|选项ID
+     * @returnParam [].option[].ask_id|int|问题ID
+     * @returnParam [].option[].desc|string|选项描述
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -107,24 +109,53 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->listAsk($test_id));
     }
 
+    /**
+     * @name 后台增加问题
+     * @apiParam img_url|string|问题图片地址|true
+     * @apiParam test_id|int|测试ID|true
+     * @apiParam ask_no|int|问题号|true
+     * @apiParam desc|string|问题描述|true
+     * @apiParam option[].desc|string|选项描述|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function addAsk(ServerRequest $request)
     {
         $test_id = $request->getParam("test_id");
         $img_url = $request->getParam("img_url");
         $desc = $request->getParam("desc");
-        $options = $request->getParam("options");
+        $options = $request->getParam("option");
         $ask_no = $request->getParam("ask_no",0);
 
         return $this->response(AdminTestLogic::getInstance()->addAsk($test_id,$img_url,$desc,$options,$ask_no));
     }
 
+    /**
+     * @name 后台删除问题
+     * @apiParam id|int|问题ID|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function deleteAsk(ServerRequest $request)
     {
         $id = $request->getParam("id");
         return $this->response(AdminTestLogic::getInstance()->deleteAsk($id));
     }
 
-    public function updateAsk(ServerRequest $request,$id,$test_id,$img_url,$desc,$options,$ask_no = 0)
+    /**
+     * @name 后台更新问题
+     * @apiParam id|int|测试ID|true
+     * @apiParam img_url|string|问题图片地址|true
+     * @apiParam test_id|int|测试ID|true
+     * @apiParam ask_no|int|问题号|true
+     * @apiParam desc|string|问题描述|true
+     * @apiParam option[].desc|string|选项描述|true
+     * @apiParam option[].ask_id|int|问题ID|true
+     * @apiParam option[].id|string|描述ID 传的时候更新，不传的时候自动新增|false
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function updateAsk(ServerRequest $request)
     {
         $id = $request->getParam("id");
         $test_id = $request->getParam("test_id");
@@ -135,6 +166,12 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->updateAsk($id,$test_id,$img_url,$desc,$options,$ask_no));
     }
 
+    /**
+     * @name 后台获取问题的答案
+     * @apiParam test_id|int|测试ID|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function listAnswer(ServerRequest $request)
     {
         $test_id = $request->getParam("test_id");

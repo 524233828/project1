@@ -50,7 +50,7 @@ class AdminTestLogic extends BaseLogic
             "desc" => $desc,
         ];
         $where = ["id"=>$id];
-        return TestModel::updateTest($where,$data);
+        return TestModel::updateTest($data,$where);
     }
 
     public function listAsk($test_id)
@@ -100,11 +100,20 @@ class AdminTestLogic extends BaseLogic
         }
 
         database()->pdo->beginTransaction();
+
+        $ask_id = TestModel::addAsk($data);
+        if(!$ask_id)
+        {
+            database()->pdo->rollBack();
+            BaseException::SystemError();
+        }
+
+        foreach ($options as $k => $option)
+        {
+            $options[$k]['ask_id'] = $ask_id;
+        }
         $result1 = TestModel::addOption($options);
-
-        $result = TestModel::addAsk($data);
-
-        if($result&&$result1)
+        if($result1)
         {
             database()->pdo->commit();
             return true;
