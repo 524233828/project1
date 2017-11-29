@@ -59,7 +59,29 @@ class AdminTestLogic extends BaseLogic
         $where = ["test_id" => $test_id];
         $result = TestModel::listAsk($where);
 
-        return $result;
+        if(!$result){
+            return [];
+        }
+
+        $ask_ids = [];
+        $ask_index = [];
+        foreach ($result as $v)
+        {
+            $ask_ids[] = $v['id'];
+            $ask_index[$v['id']] = $v;
+        }
+
+        $option_where = ["ask_id"=>$ask_ids];
+
+        $options = TestModel::listOption($option_where);
+
+        foreach ($options as $option)
+        {
+            $ask_index[$option['ask_id']]['option'][] = $option;
+        }
+
+        return array_values($ask_index);
+
     }
 
     public function addAsk($test_id,$img_url,$desc,$options,$ask_no = 0)

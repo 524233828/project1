@@ -15,11 +15,32 @@ use Logic\AdminTestLogic;
 
 class AdminTestController extends BaseController
 {
+    /**
+     * @name 后台获取测试列表
+     * @returnParam [].id|int|测试ID
+     * @returnParam [].title|string|测试标题
+     * @returnParam [].star|int|星星数
+     * @returnParam [].img_url|string|图片地址
+     * @returnParam [].test_num|int|测试人数
+     * @returnParam [].desc|string|描述
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function listTest(ServerRequest $request)
     {
         return $this->response(AdminTestLogic::getInstance()->listTest());
     }
 
+    /**
+     * @name 后台新增测试
+     * @apiParam img_url|string|图片地址|true
+     * @apiParam title|string|标题|true
+     * @apiParam star|int|星星数|true
+     * @apiParam test_num|int|测试人数|true
+     * @apiParam desc|string|描述|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function addTest(ServerRequest $request)
     {
         $img_url = $request->getParam("img_url");
@@ -31,12 +52,29 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->addTest($title,$star,$img_url,$test_num,$desc));
     }
 
+    /**
+     * @name 后台删除测试
+     * @apiParam id|int|测试ID|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function deleteTest(ServerRequest $request)
     {
         $id = $request->getParam("id");
         return $this->response(AdminTestLogic::getInstance()->deleteTest($id));
     }
 
+    /**
+     * @name 后台更新测试
+     * @apiParam id|int|测试ID|true
+     * @apiParam img_url|string|图片地址|true
+     * @apiParam title|string|标题|true
+     * @apiParam star|int|星星数|true
+     * @apiParam test_num|int|测试人数|true
+     * @apiParam desc|string|描述|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function updateTest(ServerRequest $request)
     {
         $id = $request->getParam("id");
@@ -49,6 +87,18 @@ class AdminTestController extends BaseController
         return $this->response(AdminTestLogic::getInstance()->updateTest($id,$title,$star,$img_url,$test_num,$desc));
     }
 
+    /**
+     * @name 获取测试的问题
+     * @apiParam test_id|int|测试ID|true
+     * @returnParam [].id|int|测试问题ID
+     * @returnParam [].img_url|string|问题图片地址
+     * @returnParam [].test_id|int|测试ID
+     * @returnParam [].ask_no|int|问题号
+     * @returnParam [].desc|int|问题描述
+     * @returnParam [].option[].desc|int|选项描述
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
     public function listAsk(ServerRequest $request)
     {
 
