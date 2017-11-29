@@ -142,7 +142,7 @@ class AdminTestLogic extends BaseLogic
         database()->pdo->beginTransaction();
         foreach ($options as $option)
         {
-            if(isset($option['id'])&&!empty($option)){
+            if(isset($option['id'])&&!empty($option['id'])){
                 $result1 = TestModel::updateOption($option,["id"=>$option['id']]);
             }else{
                 $result1 = TestModel::addOption($option);
