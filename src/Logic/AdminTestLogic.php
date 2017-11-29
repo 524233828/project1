@@ -154,7 +154,7 @@ class AdminTestLogic extends BaseLogic
             }
         }
         $where = ["id"=>$id];
-        $result = TestModel::updateAsk($where,$data);
+        $result = TestModel::updateAsk($data,$where);
         if($result){
             database()->pdo->commit();
             return true;
@@ -195,7 +195,7 @@ class AdminTestLogic extends BaseLogic
             "test_id" => $test_id
         ];
         $where = ["id"=>$id];
-        return TestModel::updateAnswer($where,$data);
+        return TestModel::updateAnswer($data,$where);
     }
 
 
