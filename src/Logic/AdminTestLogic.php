@@ -9,9 +9,10 @@
 namespace Logic;
 
 
+use Exception\BaseException;
 use Model\TestModel;
 
-class AdminTestLogic
+class AdminTestLogic extends BaseLogic
 {
     public function listTest()
     {
@@ -61,7 +62,7 @@ class AdminTestLogic
         return $result;
     }
 
-    public function addAsk($test_id,$img_url,$desc,$ask_no = 0)
+    public function addAsk($test_id,$img_url,$desc,$options,$ask_no = 0)
     {
         $data = [
             "img_url" => $img_url,
@@ -76,9 +77,19 @@ class AdminTestLogic
             $data['ask_no'] = $ask_no;
         }
 
+        database()->pdo->beginTransaction();
+        $result1 = TestModel::addOption($options);
+
         $result = TestModel::addAsk($data);
 
-        return $result;
+        if($result&&$result1)
+        {
+            database()->pdo->commit();
+            return true;
+        }else{
+            database()->pdo->rollBack();
+            BaseException::SystemError();
+        }
     }
 
     public function deleteAsk($id)
@@ -86,7 +97,7 @@ class AdminTestLogic
         return TestModel::deleteAsk($id);
     }
 
-    public function updateAsk($id,$test_id,$img_url,$desc,$ask_no = 0)
+    public function updateAsk($id,$test_id,$img_url,$desc,$options,$ask_no = 0)
     {
         $data = [
             "img_url" => $img_url,
@@ -97,8 +108,29 @@ class AdminTestLogic
         {
             $data['ask_no'] = $ask_no;
         }
+        database()->pdo->beginTransaction();
+        foreach ($options as $option)
+        {
+            if(isset($option['id'])&&!empty($option)){
+                $result1 = TestModel::updateOption($option,["id"=>$option['id']]);
+            }else{
+                $result1 = TestModel::addOption($option);
+            }
+            if(!$result1)
+            {
+                database()->pdo->rollBack();
+                BaseException::SystemError();
+            }
+        }
         $where = ["id"=>$id];
-        return TestModel::updateAsk($where,$data);
+        $result = TestModel::updateAsk($where,$data);
+        if($result){
+            database()->pdo->commit();
+            return true;
+        }else{
+            database()->pdo->rollBack();
+            BaseException::SystemError();
+        }
     }
 
     public function listAnswer($test_id)

@@ -133,6 +133,24 @@ route()->group("/admin",function(){
 
     //收入统计
     route()->get("/income/static","AdminIncomeStaticController@incomeStatic");
+
+    //测试首页
+    route()->get("/test/list","AdminTestController@listTest");
+    route()->post("/test/add","AdminTestController@addTest");
+    route()->post("/test/delete","AdminTestController@deleteTest");
+    route()->post("/test/update","AdminTestController@updateTest");
+
+    //测试的问题
+    route()->get("/test_ask/list","AdminTestController@listAsk");
+    route()->post("/test_ask/add","AdminTestController@addAsk");
+    route()->post("/test_ask/delete","AdminTestController@deleteAsk");
+    route()->post("/test_ask/update","AdminTestController@updateAsk");
+
+    //测试的回答
+    route()->get("/test_answer/list","AdminTestController@listAnswer");
+    route()->post("/test_answer/add","AdminTestController@addAnswer");
+    route()->post("/test_answer/delete","AdminTestController@deleteAnswer");
+    route()->post("/test_answer/update","AdminTestController@updateAnswer");
 });
 
 
