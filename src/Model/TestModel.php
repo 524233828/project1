@@ -112,7 +112,11 @@ class TestModel extends BaseModel
             $where
         );
 
-        return $result;
+        if($result===false){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static function getMaxAskNo($test_id)
