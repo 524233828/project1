@@ -166,7 +166,11 @@ class TestModel extends BaseModel
             $where
         );
 
-        return $result;
+        if($result===false){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static function listAnswer($where = [])
