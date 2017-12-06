@@ -19,7 +19,7 @@ class CommonLogic extends BaseLogic
     public function login()
     {
         $log = new Logger('login');
-        $log_path = app()->getPath()."/runtime";
+        $log_path = app()->getPath()."/runtime/logs";
         $log->pushHandler(new StreamHandler($log_path.'/login.log',Logger::DEBUG));
         $log->addDebug("开始授权获取用户信息");
         $oauth = wechat()->oauth;
@@ -97,7 +97,7 @@ class CommonLogic extends BaseLogic
     public static function orderNotify($notify,$successful)
     {
         $log = new Logger('orderNotify');
-        $log_path = app()->getPath()."/runtime";
+        $log_path = app()->getPath()."/runtime/logs";
         $log->pushHandler(new StreamHandler($log_path.'/orderNotify.log',Logger::DEBUG));
         $log->addDebug("开始支付回调");
         $log->addDebug("支付回调对象：".serialize($notify));
