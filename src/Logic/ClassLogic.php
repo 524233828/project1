@@ -186,7 +186,7 @@ class ClassLogic extends BaseLogic
             'detail'           => '夜猫足球-'.$class['title'],
             'out_trade_no'     => OrderModel::getOrderId(),
             'total_fee'        => floor($class['price']*100), // 单位：分
-            'openid'           => $_SESSION['wechat_user']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+            'openid'           => $_SESSION['userInfo']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
         //生成支付参数
