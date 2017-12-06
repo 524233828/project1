@@ -112,11 +112,19 @@ class CommonLogic extends BaseLogic
      */
     public function createOrder($data)
     {
+        $log = new Logger('createOrder');
+        $log_path = app()->getPath()."/runtime/logs";
+        $log->pushHandler(new StreamHandler($log_path.'/createOrder.log',Logger::DEBUG));
+        $log->addDebug("开始微信统一下单");
+        $log->addDebug("统一下单参数：".json_encode($data));
+
         $order = new Order($data);
 
         $payment = wechat()->payment;
 
         $result = $payment->prepare($order);
+        $log->addDebug("统一下单结果：".$result->return_code);
+        $log->addDebug("统一下单结果2：".$result->result_code);
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $prepayId = $result->prepay_id;
 
