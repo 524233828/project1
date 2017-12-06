@@ -42,7 +42,7 @@ return [
      */
     'payment' => [
         'merchant_id'        => '1493544892',
-        'key'                => 'yaoyuan123*',
+        'key'                => 'yaoyuan123',
 //        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
 //        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
         'notify_url'         => 'http://www.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
