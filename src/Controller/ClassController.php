@@ -96,7 +96,12 @@ class ClassController extends BaseController
     /**
      * @name 购买课程
      * @apiParam class_id|int|课程ID|true
-     * @returnParam jsapiConfig|json|微信js支付参数
+     * @returnParam jsapiConfig.appId|string|公众号appId
+     * @returnParam jsapiConfig.nonceStr|string|随机字符串
+     * @returnParam jsapiConfig.package|string|微信支付package
+     * @returnParam jsapiConfig.paySign|string|签名
+     * @returnParam jsapiConfig.signType|string|签名类型
+     * @returnParam jsapiConfig.timeStamp|string|时间戳
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
