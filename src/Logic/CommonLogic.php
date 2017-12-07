@@ -90,7 +90,7 @@ class CommonLogic extends BaseLogic
 
     /**
      * 支付回调
-     * @param $notify
+     * @param \EasyWeChat\Support\Collection $notify
      * @param $successful
      * @return bool
      */
@@ -102,6 +102,9 @@ class CommonLogic extends BaseLogic
         $log->addDebug("开始支付回调");
         $log->addDebug("支付回调对象：".serialize($notify));
         $log->addDebug("回调结果：".$successful);
+        $notify = $notify->toArray();
+        $log->addDebug("回调数组：".json_encode($notify));
+
         return true;
     }
 

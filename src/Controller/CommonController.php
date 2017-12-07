@@ -32,6 +32,6 @@ class CommonController extends BaseController
     {
         $payment = wechat()->payment;
         $response = $payment->handleNotify("\Logic\CommonLogic::orderNotify");
-        return $response;
+        $response->send();
     }
 }
