@@ -90,7 +90,7 @@ class ErrorCode
         self::CHAPTER_NO_LESSON      => ['该章节没有课时', Response::HTTP_NOT_FOUND],
         self::CLASS_NO_TRY          =>  ['该章节没有试听', Response::HTTP_NOT_FOUND],
         self::CLASS_EXPIRE          =>  ['您购买的课程已过期，请重新购买', Response::HTTP_FORBIDDEN],
-        self::CLASS_HAS_BOUGHT      =>  ['您已购买此课程', Response::HTTP_FORBIDDEN],
+        self::CLASS_HAS_BOUGHT      =>  ['您已购买此课程', Response::HTTP_OK],
 
         //订单系统错误
         self::ORDER_CREATE_FAIL     => ['生成订单失败', Response::HTTP_BAD_GATEWAY],

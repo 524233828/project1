@@ -180,7 +180,7 @@ class ClassLogic extends BaseLogic
         }
 
         $class_list = BuyModel::getUserClass($_SESSION['uid'],$class_id);
-        if(count($class_list)>0)
+        if($class_list)
         {
             ClassException::ClassHasBought();
         }
