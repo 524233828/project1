@@ -74,6 +74,7 @@ class BuyModel extends BaseModel
         ];
 
         $data['status'] = 1;
+        $data['update_time'] = time();
 
         return database()->update(self::BUY_CLASS_TABLE,$data,$where);
     }
