@@ -109,6 +109,7 @@ class CommonLogic extends BaseLogic
         $notify = $notify->toArray();
         $order_id = $notify['out_trade_no'];
         $order = OrderModel::getOrderById($order_id);
+        $log->addDebug("取得订单：".json_encode($order));
         if(!$order)
         {
             return 'Order not exist.';
@@ -131,7 +132,11 @@ class CommonLogic extends BaseLogic
             ];
 
             database()->pdo->beginTransaction();
-            if(OrderModel::updateOrder($order_data,["order_id"=>$order_id])&&BuyModel::buySuccess($order_id)){
+            $order_result = OrderModel::updateOrder($order_data,["order_id"=>$order_id]);
+            $buy_result = BuyModel::buySuccess($order_id);
+            $log->addDebug("order_result：".$order_result);
+            $log->addDebug("buy_result：".$buy_result);
+            if($order_result&&$buy_result){
                 database()->pdo->commit();
             }else{
                 database()->pdo->rollBack();
