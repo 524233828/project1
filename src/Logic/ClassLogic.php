@@ -179,6 +179,12 @@ class ClassLogic extends BaseLogic
             ClassException::ClassNotFound();
         }
 
+        $class_list = BuyModel::getUserClass($_SESSION['uid'],$class_id);
+        if(count($class_list)>0)
+        {
+            ClassException::ClassHasBought();
+        }
+
         //微信统一下单
         $attributes = [
             'trade_type'       => 'JSAPI',

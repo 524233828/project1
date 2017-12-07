@@ -61,8 +61,9 @@ class BuyModel extends BaseModel
         $where = [
             "user_id" => $user_id,
             "class_id" => $class_id,
+            "status" => 1,
         ];
 
-        return database()->get(self::BUY_CLASS_TABLE,"*s",$where);
+        return database()->get(self::BUY_CLASS_TABLE,"*",$where);
     }
 }

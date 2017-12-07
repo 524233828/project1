@@ -67,4 +67,12 @@ class ClassException extends BaseException
             ErrorCode::CLASS_EXPIRE
         );
     }
+
+    public static function ClassHasBought()
+    {
+        throw new self(
+            ErrorCode::msg(ErrorCode::CLASS_HAS_BOUGHT),
+            ErrorCode::CLASS_HAS_BOUGHT
+        );
+    }
 }
