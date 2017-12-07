@@ -27,7 +27,7 @@ class OrderModel extends BaseModel
 
     public static function updateOrder($data = [],$where = [])
     {
-        $data['update_time'] = time();
+        $data['pay_time'] = time();
         $db = database();
 
         $result = $db->update(self::ORDER_TABLE,$data,
