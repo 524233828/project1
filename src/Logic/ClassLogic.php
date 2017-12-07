@@ -208,7 +208,7 @@ class ClassLogic extends BaseLogic
             "create_time" => time(),
             "point" => 1,
             "user_id" => $_SESSION['uid'],
-            "channel" => $channel
+            "channel_id" => $channel
         ];
 
         $user_class_data = [
