@@ -107,6 +107,7 @@ class AdminClassLessonLogic extends BaseLogic
         if($resource_type ==0)
         {
             $result = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            MediaModel::updateVideoMediaTime($resource_data['resource_id'],$resource_data['media_time']);
             if($result){
                 $data['resource_id'] = $result["id"];
             }else{

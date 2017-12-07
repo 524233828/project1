@@ -34,4 +34,22 @@ class CommonController extends BaseController
         $response = $payment->handleNotify("\Logic\CommonLogic::orderNotify");
         $response->send();
     }
+
+    /**
+     * @name 微信jssdk
+     * @apiParam url|string|调用地址|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function wechatJssdk(ServerRequest $request)
+    {
+        $url = $request->getParam("url");
+        return $this->response(CommonLogic::getInstance()->getJssdk($url,[
+            "onMenuShareTimeline",
+            "onMenuShareAppMessage",
+            "onMenuShareQQ",
+            "onMenuShareWeibo",
+            "onMenuShareQZone",
+        ]));
+    }
 }

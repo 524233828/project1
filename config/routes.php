@@ -72,6 +72,7 @@ route()->group(['prefix' => '/test', 'middleware' => 'dispatch'],function(){
 route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
     route()->get("/login","CommonController@login");
     route()->post("/order_notify","CommonController@notifyOrder");
+    route()->post("/jssdk","CommonController@wechatJssdk");
 });
 
 //后台

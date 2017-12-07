@@ -178,4 +178,15 @@ class CommonLogic extends BaseLogic
             OrderException::OrderCreateFail();
         }
     }
+
+    public function getJssdk($url,array $APIs)
+    {
+        $js = wechat()->js;
+
+        $js->setUrl($url);
+
+        $config = $js->config($APIs);
+
+        return $config;
+    }
 }

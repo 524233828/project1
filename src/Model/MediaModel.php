@@ -81,4 +81,12 @@ class MediaModel extends BaseModel
 
         return $result;
     }
+
+    public static function updateVideoMediaTime($resource_id,$media_time)
+    {
+        $where = ["resource_id"=>$resource_id];
+        $data = ["media_time"=>$media_time];
+
+        return database()->update($data,$where);
+    }
 }
