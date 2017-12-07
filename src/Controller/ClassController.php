@@ -113,6 +113,8 @@ class ClassController extends BaseController
         if(!$result = ClassLogic::getInstance()->buyClass($class_id)){
             OrderException::OrderCreateFail();
         }else{
+            $result['timeStamp'] = $result['timestamp'];
+            unset($result['timestamp']);
             return $this->response(["jsapiConfig"=>json_encode($result)]);
         }
     }
