@@ -113,7 +113,7 @@ class ClassController extends BaseController
         if(!$result = ClassLogic::getInstance()->buyClass($class_id)){
             OrderException::OrderCreateFail();
         }else{
-            return $this->response(["jsapiConfig"=>$result]);
+            return $this->response(["jsapiConfig"=>json_encode($result)]);
         }
     }
 
