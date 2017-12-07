@@ -25,9 +25,25 @@ class OrderModel extends BaseModel
         return database()->id();
     }
 
-    public static function updateOrder()
+    public static function updateOrder($data = [],$where = [])
     {
+        $data['update_time'] = time();
+        $db = database();
 
+        $result = $db->update(self::ORDER_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
+
+    public static function getOrderById($order_id)
+    {
+        $where = [
+            "order_id" => $order_id,
+        ];
+
+        return database()->get(self::ORDER_TABLE,"*",$where);
     }
 
     public static function listOrder($where = [])

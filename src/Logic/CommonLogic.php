@@ -10,6 +10,8 @@ namespace Logic;
 
 use EasyWeChat\Payment\Order;
 use Exception\OrderException;
+use Model\BuyModel;
+use Model\OrderModel;
 use Model\UserModel;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -102,7 +104,42 @@ class CommonLogic extends BaseLogic
         $log->addDebug("开始支付回调");
         $log->addDebug("支付回调对象：".serialize($notify));
         $log->addDebug("回调结果：".$successful);
-        $notify = $notify->toArray();
+        $json = '{"appid":"wx85ba94e795ed698e","bank_type":"CFT","cash_fee":"1","fee_type":"CNY","is_subscribe":"Y","mch_id":"1493544892","nonce_str":"5a28b176d48ef","openid":"ogI3N053qFInk5ygBo8DtuTyIfFY","out_trade_no":"15126163108678","result_code":"SUCCESS","return_code":"SUCCESS","sign":"ED2102B4731E138DA271268C1A6C0857","time_end":"20171207111157","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000014201712079614286793"}';
+        $notify = json_decode($json);
+//        $notify = $notify->toArray();
+        $order_id = $notify['out_trade_no'];
+        $order = OrderModel::getOrderById($order_id);
+        if(!$order)
+        {
+            return 'Order not exist.';
+        }
+
+        if($order['status']!==0)
+        {
+            return true;
+        }
+
+        if($successful){
+            $order_data = [
+                "settlement_total_fee" => $notify['total_fee']/100,
+                "fee_type" => $notify['fee_type'],
+                "coupon_fee" => isset($notify['coupon_fee'])?$notify['coupon_fee']/100:0,
+                "transaction_id" => $notify['transaction_id'],
+                "bank_type" => $notify['bank_type'],
+                "pay_time" => strtotime($notify['time_end']),
+                "status" => 1
+            ];
+
+            database()->pdo->beginTransaction();
+            if(OrderModel::updateOrder($order_data,["order_id"=>$order_id])&&BuyModel::buySuccess($order_id)){
+                database()->pdo->commit();
+                echo "成功";
+            }else{
+                database()->pdo->rollBack();
+                echo "失败";
+            }
+        }
+
         $log->addDebug("回调数组：".json_encode($notify));
 
         return true;

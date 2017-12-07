@@ -170,7 +170,7 @@ class ClassLogic extends BaseLogic
         return $chapter;
     }
 
-    public function buyClass($class_id)
+    public function buyClass($class_id,$channel = 1)
     {
         $class = ClassModel::getClass($class_id);
 
@@ -206,7 +206,9 @@ class ClassLogic extends BaseLogic
             "order_id" => $attributes['out_trade_no'],
             "total_fee" => $class['price'],
             "create_time" => time(),
-            "point" => 1
+            "point" => 1,
+            "user_id" => $_SESSION['uid'],
+            "channel" => $channel
         ];
 
         $user_class_data = [

@@ -108,9 +108,9 @@ class ClassController extends BaseController
     public function createOrder(ServerRequest $request)
     {
         $class_id = $request->getParam("class_id");
-        $channel = $request->getParam("channel");
+        $channel = $request->getParam("channel",1);
 
-        if(!$result = ClassLogic::getInstance()->buyClass($class_id)){
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id,$channel)){
             OrderException::OrderCreateFail();
         }else{
             $result['timeStamp'] = $result['timestamp'];

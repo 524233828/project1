@@ -66,4 +66,15 @@ class BuyModel extends BaseModel
 
         return database()->get(self::BUY_CLASS_TABLE,"*",$where);
     }
+
+    public static function buySuccess($order_id)
+    {
+        $where = [
+            "order_id" => $order_id
+        ];
+
+        $data['status'] = 1;
+
+        return database()->update(self::BUY_CLASS_TABLE,$data,$where);
+    }
 }
