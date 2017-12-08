@@ -42,30 +42,30 @@ route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
     route()->get("/info","ClassController@getClass");
     route()->get("/try","ClassController@getClassTry");
     route()->get("/chapter","ClassController@getClassChapter");
-    route()->post("/buyClass","ClassController@createOrder")->withMiddleware("login");
+    route()->post("/buyClass","ClassController@createOrder")->withAddMiddleware("login");
 });
 
 //个人中心首页
 route()->group(['prefix' => '/me', 'middleware' => 'dispatch'],function(){
-    route()->get("/info","MeController@getUser")->withMiddleware("login");
+    route()->get("/info","MeController@getUser")->withAddMiddleware("login");
 });
 
 //我的课程列表
 route()->group(['prefix' => '/my_class_list', 'middleware' => 'dispatch'],function(){
-    route()->get("/list","MyClassListController@listUserClass")->withMiddleware("login");
+    route()->get("/list","MyClassListController@listUserClass")->withAddMiddleware("login");
 });
 
 //我的课程详情
 route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
     route()->get("/info","MyClassController@getClassChapter")->withMiddleware("login");
-    route()->post("/learn_percent","MyClassController@updateLearnPercent")->withMiddleware("login");
+    route()->post("/learn_percent","MyClassController@updateLearnPercent")->withAddMiddleware("login");
 });
 
 //测试页面
 route()->group(['prefix' => '/test', 'middleware' => 'dispatch'],function(){
-    route()->get("/get","TestController@getTest")->withMiddleware("login");
-    route()->get("/get_ask","TestController@getAsk")->withMiddleware("login");
-    route()->get("/get_answer","TestController@randAnswer")->withMiddleware("login");
+    route()->get("/get","TestController@getTest")->withAddMiddleware("login");
+    route()->get("/get_ask","TestController@getAsk")->withAddMiddleware("login");
+    route()->get("/get_answer","TestController@randAnswer")->withAddMiddleware("login");
 });
 
 //公用接口
@@ -112,7 +112,7 @@ route()->group("/admin",function(){
     route()->get("/chapter/list","AdminClassChapterController@listChapter");
 //    route()->get("/chapter/get","AdminClassChapterController@getBanner");
     route()->post("/chapter/add","AdminClassChapterController@addChapter");
-    route()->post("/chapter/update","AdminClassChapterController@updateChapter")->withMiddleware("filter");
+    route()->post("/chapter/update","AdminClassChapterController@updateChapter")->withAddMiddleware("filter");
     route()->post("/chapter/delete","AdminClassChapterController@deleteChapter");
 
     //章节课时管理
