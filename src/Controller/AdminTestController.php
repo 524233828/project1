@@ -224,4 +224,16 @@ class AdminTestController extends BaseController
         $id = $request->getParam("id");
         return $this->response(AdminTestLogic::getInstance()->updateAnswer($id,$test_id,$img_url));
     }
+
+    /**
+     * @name 后台删除问题选项
+     * @apiParam id|int|选项ID|true
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function deleteOption(ServerRequest $request)
+    {
+        $id = $request->getParam("id");
+        return $this->response(AdminTestLogic::getInstance()->deleteOption($id));
+    }
 }

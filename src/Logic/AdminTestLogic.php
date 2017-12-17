@@ -198,5 +198,9 @@ class AdminTestLogic extends BaseLogic
         return TestModel::updateAnswer($data,$where);
     }
 
+    public function deleteOption($id)
+    {
+        return TestModel::deleteOption($id);
+    }
 
 }

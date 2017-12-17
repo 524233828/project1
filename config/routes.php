@@ -146,6 +146,7 @@ route()->group("/admin",function(){
     route()->post("/test_ask/add","AdminTestController@addAsk");
     route()->post("/test_ask/delete","AdminTestController@deleteAsk");
     route()->post("/test_ask/update","AdminTestController@updateAsk");
+    route()->post("/test_option/delete","AdminTestController@deleteOption");
 
     //测试的回答
     route()->get("/test_answer/list","AdminTestController@listAnswer");
