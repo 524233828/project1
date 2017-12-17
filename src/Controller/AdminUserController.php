@@ -26,6 +26,7 @@ class AdminUserController extends BaseController
     public function listUser(ServerRequest $request)
     {
         $nickname = $request->getParam("nickname",'');
-        return $this->response(AdminUserLogic::getInstance()->listUser($nickname));
+        $page = $request->getParam("page",1);
+        return $this->response(AdminUserLogic::getInstance()->listUser($nickname,$page,20));
     }
 }

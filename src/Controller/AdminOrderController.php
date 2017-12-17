@@ -33,6 +33,7 @@ class AdminOrderController extends BaseController
     {
         $key = $request->getParam("key",'');
         $value = $request->getParam("value",'');
-        return $this->response(AdminOrderLogic::getInstance()->listOrder($key,$value));
+        $page = $request->getParam("page",1);
+        return $this->response(AdminOrderLogic::getInstance()->listOrder($key,$value,$page,20));
     }
 }
