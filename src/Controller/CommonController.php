@@ -20,10 +20,11 @@ class CommonController extends BaseController
      * @name 登录回调
      * @apiParam code|string|微信登录code|true
      * @apiParam state|string|开发者自定义参数|false
+     * @return \Service\ApiResponse
      */
     public function login(ServerRequest $request)
     {
-        $this->response(CommonLogic::getInstance()->login());
+        return $this->response(CommonLogic::getInstance()->login());
     }
 
     /**
