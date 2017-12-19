@@ -26,16 +26,16 @@ class LoginCheck extends Middleware
         if (isset($_SESSION['uid'])&&!empty($_SESSION['uid'])) {
             $response = $next($request);
         } else {
-            $wechat = \wechat();
+//            $wechat = \wechat();
 
-            $_SESSION['redirect_url'] = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"/";
+//            $_SESSION['redirect_url'] = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"/";
 
-            $oauth = $wechat->oauth;
+//            $oauth = $wechat->oauth;
 
             $response =  new ApiResponse(
                 ErrorCode::msg(ErrorCode::USER_NOT_LOGIN),
                 ErrorCode::USER_NOT_LOGIN,
-                ["url"=>$oauth->redirect()->getTargetUrl()],
+                [],
                 200
             );
         }
