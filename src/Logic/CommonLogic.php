@@ -10,6 +10,7 @@ namespace Logic;
 
 use EasyWeChat\Payment\Order;
 use Exception\OrderException;
+use Exception\UserException;
 use Model\BuyModel;
 use Model\OrderModel;
 use Model\UserModel;
@@ -81,13 +82,16 @@ class CommonLogic extends BaseLogic
         {
             $my_user['id'] = UserModel::addUser($data);
         }
-
         $_SESSION["uid"] = $my_user['id'];
+        if($my_user['id']){
+            return [];
+        }else{
+            UserException::LoginFail();
+        }
 
-
-        $targetUrl = empty($_SESSION['redirect_url']) ? '/' : $_SESSION['redirect_url'];
-        header('location:'. $targetUrl); // 跳转到原来的页面
-        exit;
+//        $targetUrl = empty($_SESSION['redirect_url']) ? '/' : $_SESSION['redirect_url'];
+//        header('location:'. $targetUrl); // 跳转到原来的页面
+//        exit;
     }
 
     /**

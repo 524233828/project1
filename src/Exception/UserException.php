@@ -16,4 +16,9 @@ class UserException extends BaseException
     {
         throw new self(ErrorCode::msg(ErrorCode::USER_NOT_EXISTS),ErrorCode::USER_NOT_EXISTS);
     }
+
+    public static function LoginFail()
+    {
+        throw new self(ErrorCode::msg(ErrorCode::LOGIN_FAIL),ErrorCode::LOGIN_FAIL);
+    }
 }

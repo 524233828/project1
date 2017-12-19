@@ -30,7 +30,8 @@ class ErrorCode
      * 10xx用户系统错误
      */
     const USER_NOT_LOGIN = 1000; // 未登录
-    const USER_NOT_EXISTS = 1001; // 未登录
+    const USER_NOT_EXISTS = 1001; // 用户不存在
+    const LOGIN_FAIL = 1002; //登录失败
 
     /**
      * 11xx课程系统错误
@@ -81,6 +82,7 @@ class ErrorCode
         //用户系统错误
         self::USER_NOT_LOGIN        => ['未登录', Response::HTTP_FORBIDDEN],
         self::USER_NOT_EXISTS       => ['用户名或密码错误', Response::HTTP_FORBIDDEN],
+        self::LOGIN_FAIL            => ['登录失败', Response::HTTP_BAD_GATEWAY],
 
         //课程系统错误
         self::CLASS_NOT_FOUND       => ['课程不存在', Response::HTTP_NOT_FOUND],
