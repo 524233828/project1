@@ -41,6 +41,7 @@ class IndexController extends BaseController
      * @returnParam [].id|int|bannerID
      * @returnParam [].img_url|string|图片url
      * @returnParam [].url|string|跳转链接
+     * @returnParam [].sort|int|排序，小的在前
      * @return \Service\ApiResponse
      */
     public function listBanner()

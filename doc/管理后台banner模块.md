@@ -16,6 +16,7 @@
 | [].id | int | bannerID |
 | [].img_url | string | 图片url |
 | [].url | string | 跳转链接 |
+| [].sort | int | 排序 |
 
 ## 后台banner详情
 
@@ -55,6 +56,7 @@
 | img_url | string | 图片地址 | true |
 | url | string | 跳转地址 | false |
 | status | int | 状态0-冻结 1-可用，默认为1 | false |
+| sort | int | 状态0-冻结 1-可用，默认为1 | false |
 
 
 ### 响应参数
@@ -75,6 +77,7 @@
 | img_url | string | 图片地址 | true |
 | url | string | 跳转地址 | false |
 | status | int | 状态0-冻结 1-可用，默认为1 | false |
+| sort | int | 排序小的在前 | false |
 
 
 ### 响应参数

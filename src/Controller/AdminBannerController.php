@@ -21,6 +21,7 @@ class AdminBannerController extends BaseController
      * @returnParam [].id|int|bannerID
      * @returnParam [].img_url|string|图片url
      * @returnParam [].url|string|跳转链接
+     * @returnParam [].sort|int|排序
      * @return \Service\ApiResponse
      */
     public function listBanner()
@@ -33,6 +34,7 @@ class AdminBannerController extends BaseController
      * @apiParam img_url|string|图片地址|true
      * @apiParam url|string|跳转地址|false
      * @apiParam status|int|状态0-冻结 1-可用，默认为1|false
+     * @apiParam sort|int|状态0-冻结 1-可用，默认为1|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -41,7 +43,8 @@ class AdminBannerController extends BaseController
         $img_url = $request->getParam("img_url");
         $url = $request->getParam("url","");
         $status = $request->getParam("status",1);
-        $banner = AdminBannerLogic::getInstance()->addBanner($img_url,$url,$status);
+        $sort = $request->getParam("sort",0);
+        $banner = AdminBannerLogic::getInstance()->addBanner($img_url,$url,$status,$sort);
         if($banner)
         {
             return $this->response([]);
@@ -57,6 +60,7 @@ class AdminBannerController extends BaseController
      * @apiParam img_url|string|图片地址|true
      * @apiParam url|string|跳转地址|false
      * @apiParam status|int|状态0-冻结 1-可用，默认为1|false
+     * @apiParam sort|int|排序小的在前|false
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -66,7 +70,8 @@ class AdminBannerController extends BaseController
         $img_url = $request->getParam("img_url");
         $url = $request->getParam("url","");
         $status = $request->getParam("status",1);
-        $result = AdminBannerLogic::getInstance()->updateBanner($banner_id,$img_url,$url,$status);
+        $sort = $request->getParam("sort",0);
+        $result = AdminBannerLogic::getInstance()->updateBanner($banner_id,$img_url,$url,$status,$sort);
         if($result)
         {
             return $this->response([]);
