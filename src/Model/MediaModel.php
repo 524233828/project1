@@ -87,6 +87,6 @@ class MediaModel extends BaseModel
         $where = ["resource_id"=>$resource_id];
         $data = ["media_time"=>$media_time];
 
-        return database()->update($data,$where);
+        return database()->update(self::MEDIA_TABLE,$data,$where);
     }
 }
