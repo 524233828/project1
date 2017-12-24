@@ -96,7 +96,7 @@ class OrderModel extends BaseModel
 
         $sql = <<<SQL
 SELECT 
-  FROM_UNIXTIME(pay_time,'%Y-%m-%d') as pay_date,
+  FROM_UNIXTIME(pay_time,'%Y-%m') as pay_date,
   sum(settlement_total_fee) as income
 FROM db_order 
 WHERE 

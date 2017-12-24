@@ -20,9 +20,9 @@ class AdminIncomeStaticLogic extends BaseLogic
         $result['sum'] = OrderModel::incomeStaticSum();
 
         $now = time();
-        $week_ago = time() - 604800;
+        $year_ago = time() - 31536000;
 
-        $result['list'] = OrderModel::dailyIncome($week_ago,$now);
+        $result['list'] = OrderModel::dailyIncome($year_ago,$now);
 
         return $result;
     }
