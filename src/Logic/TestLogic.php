@@ -44,7 +44,7 @@ class TestLogic extends BaseLogic
             $ask_index[$v['id']] = $v;
         }
 
-        $option_where = ["ask_id"=>$ask_ids];
+        $option_where = ["ask_id"=>$ask_ids, "ORDER" => ["sort"]];
 
         $options = TestModel::listOption($option_where);
 

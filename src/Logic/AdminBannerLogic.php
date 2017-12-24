@@ -28,12 +28,13 @@ class AdminBannerLogic extends BaseLogic
         return $banner;
     }
 
-    public function addBanner($img_url,$url,$status = 1)
+    public function addBanner($img_url, $url, $status = 1, $sort = 0)
     {
         $data = [
             "img_url" => $img_url,
             "url" => $url,
             "status" => $status,
+            "sort" => $sort,
         ];
         $banner = BannerModel::addBanner($data);
 
@@ -45,12 +46,13 @@ class AdminBannerLogic extends BaseLogic
         return BannerModel::deleteBanner($banner_id);
     }
 
-    public function updateBanner($banner_id,$img_url,$url,$status)
+    public function updateBanner($banner_id,$img_url,$url,$status,$sort)
     {
         $data = [
             "img_url" => $img_url,
             "url" => $url,
             "status" => $status,
+            "sort" => $sort
         ];
         $where = ["id"=>$banner_id];
         return BannerModel::updateBanner($where,$data);

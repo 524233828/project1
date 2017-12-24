@@ -51,7 +51,10 @@ class IndexLogic extends BaseLogic
      */
     public function listBanner()
     {
-        $banner = BannerModel::listBanner(["status"=>1]);
+        $banner = BannerModel::listBanner([
+            "status"=>1,
+            "ORDER" => ["sort"]
+        ]);
 
         return $banner;
     }

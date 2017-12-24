@@ -116,6 +116,7 @@ class AdminTestController extends BaseController
      * @apiParam ask_no|int|问题号|true
      * @apiParam desc|string|问题描述|true
      * @apiParam option[].desc|string|选项描述|true
+     * @apiParam option[].sort|int|选项排序，小的在前，默认0|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
@@ -152,6 +153,7 @@ class AdminTestController extends BaseController
      * @apiParam option[].desc|string|选项描述|true
      * @apiParam option[].ask_id|int|问题ID|true
      * @apiParam option[].id|int|描述ID 传的时候更新，不传的时候自动新增|false
+     * @apiParam option[].sort|int|选项排序，小的在前，默认0|true
      * @param ServerRequest $request
      * @return \Service\ApiResponse
      */
