@@ -135,7 +135,7 @@ class AdminTestLogic extends BaseLogic
             "test_id" => $test_id,
             "desc" => $desc,
         ];
-        if(!$ask_no)
+        if($ask_no)
         {
             $data['ask_no'] = $ask_no;
         }
