@@ -21,9 +21,10 @@ class CommonLogic extends BaseLogic
 {
     public function login()
     {
-        $log = new Logger('login');
-        $log_path = app()->getPath()."/runtime/logs";
-        $log->pushHandler(new StreamHandler($log_path.'/login.log',Logger::DEBUG));
+//        $log = new Logger('login');
+//        $log_path = app()->getPath()."/runtime/logs";
+//        $log->pushHandler(new StreamHandler($log_path.'/login.log',Logger::DEBUG));
+        $log = log("login");
         $log->addDebug("开始授权获取用户信息");
         $oauth = wechat()->oauth;
 
