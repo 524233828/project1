@@ -30,7 +30,7 @@ function upload()
     return app()->get("uploader");
 }
 
-function log($filename = "debug", $level = \Monolog\Logger::DEBUG)
+function myLog($filename = "debug", $level = \Monolog\Logger::DEBUG)
 {
     $log = new \Monolog\Logger($filename);
     $log_path = app()->getPath()."/runtime/logs/";
