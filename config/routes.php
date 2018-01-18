@@ -163,6 +163,13 @@ route()->group("/admin",function(){
     route()->get("/user_test/list","AdminUserTestController@listUserTest");
 });
 
+//微信客服消息接口
+
+route()->group("/wechat",function(){
+    route()->get("/customer","WechatController@wxapp");
+    route()->post("/customer","WechatController@wxapp");
+    route()->put("/customer","WechatController@wxapp");
+});
 
 
 
