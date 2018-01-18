@@ -223,13 +223,12 @@ class CommonLogic extends BaseLogic
             UserException::LoginFail();
         }
         $result = $wechat->login($code);
-
+        $log->addDebug("login_result:".json_encode($result));
         if(!isset($result['openid']))
         {
             UserException::LoginFail();
         }
 
-        $log->addDebug("login_result:".json_encode($result));
         /**
          * @var SessionService;
          */
@@ -247,19 +246,22 @@ class CommonLogic extends BaseLogic
             $log->addDebug("用户信息：".json_encode($data));
             $_SESSION['userInfo'] = $data;
             $my_user = UserModel::getUserByOpenId($data['openid']);
-
+            $log->addDebug("数据库的用户信息：".json_encode($my_user));
             if(!$my_user)
             {
                 $my_user['id'] = UserModel::addUser($data);
             }
+            $log->addDebug("入库结果：".$my_user['id']);
             $_SESSION["uid"] = $my_user['id'];
             if($my_user['id']){
-                return [];
+                return ["session_id" => $result['3rd_session']];
             }else{
                 UserException::LoginFail();
             }
         }else{
             $_SESSION['uid'] = $user['id'];
         }
+
+        return ["session_id" => $result['3rd_session']];
     }
 }
