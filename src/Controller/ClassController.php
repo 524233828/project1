@@ -96,6 +96,8 @@ class ClassController extends BaseController
     /**
      * @name 购买课程
      * @apiParam class_id|int|课程ID|true
+     * @apiParam channel|int|渠道ID|true
+     * @apiParam paysource|int|支付来源|true
      * @returnParam jsapiConfig.appId|string|公众号appId
      * @returnParam jsapiConfig.nonceStr|string|随机字符串
      * @returnParam jsapiConfig.package|string|微信支付package
@@ -109,8 +111,9 @@ class ClassController extends BaseController
     {
         $class_id = $request->getParam("class_id");
         $channel = $request->getParam("channel",1);
+        $paysource = $request->getParam("paysource",0);
 
-        if(!$result = ClassLogic::getInstance()->buyClass($class_id,$channel)){
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id, $channel, $paysource)){
             OrderException::OrderCreateFail();
         }else{
             $result['timeStamp'] = $result['timestamp'];

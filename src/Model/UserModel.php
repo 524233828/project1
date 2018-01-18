@@ -52,4 +52,13 @@ class UserModel extends Model
     {
         return database()->count(self::USER_TABLE,[],$where);
     }
+
+    public static function getUserByUnionId($unionid)
+    {
+        $user = database()->get(self::USER_TABLE,"*",[
+            "unionid" => $unionid
+        ]);
+
+        return $user;
+    }
 }

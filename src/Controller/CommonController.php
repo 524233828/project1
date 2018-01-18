@@ -55,4 +55,11 @@ class CommonController extends BaseController
             "onMenuShareQZone",
         ]));
     }
+
+    public function wxappLogin(ServerRequest $request)
+    {
+        $code = $request->getParam("code");
+
+        return $this->response(CommonLogic::getInstance()->wxappLogin($code));
+    }
 }

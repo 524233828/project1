@@ -170,7 +170,7 @@ class ClassLogic extends BaseLogic
         return $chapter;
     }
 
-    public function buyClass($class_id,$channel = 1)
+    public function buyClass($class_id,$channel = 1 ,$paysource = 0)
     {
         $class = ClassModel::getClass($class_id);
 
@@ -196,7 +196,7 @@ class ClassLogic extends BaseLogic
         ];
 
         //生成支付参数
-        $config = CommonLogic::getInstance()->createOrder($attributes);
+        $config = CommonLogic::getInstance()->createOrder($attributes, $paysource);
 
         //数据库记录订单
         //开启事务
@@ -208,7 +208,8 @@ class ClassLogic extends BaseLogic
             "create_time" => time(),
             "point" => 1,
             "user_id" => $_SESSION['uid'],
-            "channel_id" => $channel
+            "channel_id" => $channel,
+            "paysource" => $paysource
         ];
 
         $user_class_data = [
@@ -229,7 +230,5 @@ class ClassLogic extends BaseLogic
             return false;
         }
     }
-
-
 
 }

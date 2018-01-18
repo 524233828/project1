@@ -75,6 +75,11 @@ route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
     route()->post("/jssdk","CommonController@wechatJssdk");
 });
 
+//小程序接口
+route()->group(['prefix' => '/wxapp', 'middleware' => 'wxapp_dispatch'], function(){
+    route()->post("/login","CommonController@wxappLogin");
+});
+
 //后台
 route()->group("/admin",function(){
 

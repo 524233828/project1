@@ -8,6 +8,8 @@
 
 namespace Logic;
 
+use Component\Wxapp\Wxapp;
+use EasyWeChat\Foundation\Application;
 use EasyWeChat\Payment\Order;
 use Exception\OrderException;
 use Exception\UserException;
@@ -16,14 +18,12 @@ use Model\OrderModel;
 use Model\UserModel;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Service\SessionService;
 
 class CommonLogic extends BaseLogic
 {
     public function login()
     {
-//        $log = new Logger('login');
-//        $log_path = app()->getPath()."/runtime/logs";
-//        $log->pushHandler(new StreamHandler($log_path.'/login.log',Logger::DEBUG));
         $log = myLog("login");
         $log->addDebug("开始授权获取用户信息");
         $oauth = wechat()->oauth;
@@ -54,6 +54,7 @@ class CommonLogic extends BaseLogic
                 "remark" => "",
                 "groupid" => "",
                 "channel_id" => isset($_SESSION['channel'])?$_SESSION['channel']:1,
+                "openid_type" => 0,
             ];
         }else{
             $userService = wechat()->user;
@@ -73,6 +74,7 @@ class CommonLogic extends BaseLogic
                 "remark" => $userInfo->remark?:"",
                 "groupid" => $userInfo->groupid?:"",
                 "channel_id" => isset($_SESSION['channel'])?$_SESSION['channel']:1,
+                "openid_type" => 0,
             ];
         }
         $log->addDebug("用户信息：".json_encode($data));
@@ -158,7 +160,7 @@ class CommonLogic extends BaseLogic
      * @param $data
      * @return array|string
      */
-    public function createOrder($data)
+    public function createOrder($data, $paysource = 0)
     {
         $log = new Logger('createOrder');
         $log_path = app()->getPath()."/runtime/logs";
@@ -168,7 +170,16 @@ class CommonLogic extends BaseLogic
 
         $order = new Order($data);
 
-        $payment = wechat()->payment;
+        if($paysource == 0){
+            $payment = wechat()->payment;
+        }else{
+            //小程序支付
+            $payment = (new Application([
+                'app_id'  => 'wx85ba94e795ed698e',
+                'secret'  => '57a6d4c30b655ff90708478fec40f929'
+            ]))->payment;
+        }
+
 
         $result = $payment->prepare($order);
         $log->addDebug("统一下单结果：".$result->return_code);
@@ -193,5 +204,62 @@ class CommonLogic extends BaseLogic
         $config = $js->config($APIs);
 
         return $config;
+    }
+
+    public function wxappLogin($code)
+    {
+        $log = myLog("wxapp_login");
+//
+        $log->addDebug("开始请求");
+        $app_id = config()->get("wxapp_app_id");
+        $app_secret = config()->get("wxapp_app_secret");
+        $openid = "oFxQW0WLoZf2E1G62worZdSjI0Jk";
+        $log->addDebug("code:".$code);
+        $log->addDebug("app_id:".$app_id);
+        $log->addDebug("app_secret".$app_secret);
+        $wechat = new Wxapp($app_id,$app_secret);
+
+        if(empty($code)){
+            UserException::LoginFail();
+        }
+        $result = $wechat->login($code);
+
+        if(!isset($result['openid']))
+        {
+            UserException::LoginFail();
+        }
+
+        $log->addDebug("login_result:".json_encode($result));
+        /**
+         * @var SessionService;
+         */
+        $session = app()->get("session");
+
+        $session->setId($result['3rd_session']);
+
+        $session->start();
+        if(!isset($result['unionid'])||empty($result['unionid'])||!$user = UserModel::getUserByUnionId($result['unionid'])){
+            $data = [
+                "openid" => $result['openid'],
+                "unionid" => isset($result['unionid'])?$result['unionid']:"",
+                "openid_type" => 1,
+            ];
+            $log->addDebug("用户信息：".json_encode($data));
+            $_SESSION['userInfo'] = $data;
+            $my_user = UserModel::getUserByOpenId($data['openid']);
+
+            if(!$my_user)
+            {
+                $my_user['id'] = UserModel::addUser($data);
+            }
+            $_SESSION["uid"] = $my_user['id'];
+            if($my_user['id']){
+                return [];
+            }else{
+                UserException::LoginFail();
+            }
+        }else{
+            $_SESSION['uid'] = $user['id'];
+        }
     }
 }
