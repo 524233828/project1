@@ -59,7 +59,7 @@ class CommonController extends BaseController
     public function wxappLogin(ServerRequest $request)
     {
 
-        $params = json_decode($request->getBody()->getContents());
+        $params = json_decode($request->getBody()->getContents(),true);
         $code = $params['code'];
 
         return $this->response(CommonLogic::getInstance()->wxappLogin($code));
