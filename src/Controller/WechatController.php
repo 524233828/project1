@@ -16,7 +16,7 @@ class WechatController
     public function wxapp(ServerRequest $request)
     {
         $log = myLog("wxappCustomer");
-        $params = $request->getBody();
+        $params = $request->getQueryParams();
         $log->addDebug("params:".json_encode($params));
     }
 }
