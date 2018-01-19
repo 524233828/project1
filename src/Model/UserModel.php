@@ -61,4 +61,9 @@ class UserModel extends Model
 
         return $user;
     }
+
+    public static function updateUserByUid($uid, $data)
+    {
+        return database()->update(self::USER_TABLE, $data, ["id" => $uid]);
+    }
 }

@@ -264,4 +264,10 @@ class CommonLogic extends BaseLogic
 
         return ["session_id" => $result['3rd_session']];
     }
+
+    public function updateUser($params)
+    {
+        $uid = $_SESSION['uid'];
+        return UserModel::updateUserByUid($uid,$params);
+    }
 }

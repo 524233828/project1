@@ -43,6 +43,7 @@ route()->group(['prefix' => '/class', 'middleware' => 'dispatch'],function(){
     route()->get("/try","ClassController@getClassTry");
     route()->get("/chapter","ClassController@getClassChapter");
     route()->post("/buyClass","ClassController@createOrder")->withAddMiddleware("login");
+    route()->post("/buyClass/wxapp","Wxapp\ClassController@createOrder")->withAddMiddleware("login");
 });
 
 //个人中心首页

@@ -64,4 +64,10 @@ class CommonController extends BaseController
 
         return $this->response(CommonLogic::getInstance()->wxappLogin($code));
     }
+
+    public function updateUser(ServerRequest $request)
+    {
+        $params = json_decode($request->getBody()->getContents(),true);
+        return $this->response(CommonLogic::getInstance()->updateUser($params));
+    }
 }
