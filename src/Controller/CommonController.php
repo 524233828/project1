@@ -68,6 +68,15 @@ class CommonController extends BaseController
     public function updateUser(ServerRequest $request)
     {
         $params = json_decode($request->getBody()->getContents(),true);
-        return $this->response(CommonLogic::getInstance()->updateUser($params));
+        $data = [
+            "headimgurl" => $params['avatarUrl'],
+            "country" => $params['country'],
+            "province" => $params['province'],
+            "city" => $params['city'],
+            "language" => $params['language'],
+            "nickname" => $params['nickName'],
+            "gender" => $params['gender']
+        ];
+        return $this->response(CommonLogic::getInstance()->updateUser($data));
     }
 }

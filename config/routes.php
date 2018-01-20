@@ -172,5 +172,9 @@ route()->group("/wechat",function(){
     route()->put("/customer","WechatController@wxapp");
 });
 
+route()->group(["prefix" => "/wxapp", "middleware" => "dispatch"],function(){
+    route()->post("/user/update","CommonController@updateUser");
+});
+
 
 
