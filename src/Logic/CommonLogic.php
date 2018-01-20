@@ -213,7 +213,6 @@ class CommonLogic extends BaseLogic
         $log->addDebug("开始请求");
         $app_id = config()->get("wxapp_app_id");
         $app_secret = config()->get("wxapp_app_secret");
-        $openid = "oFxQW0WLoZf2E1G62worZdSjI0Jk";
         $log->addDebug("code:".$code);
         $log->addDebug("app_id:".$app_id);
         $log->addDebug("app_secret".$app_secret);
