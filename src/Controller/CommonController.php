@@ -75,7 +75,7 @@ class CommonController extends BaseController
             "city" => $params['city'],
             "language" => $params['language'],
             "nickname" => $params['nickName'],
-            "gender" => $params['gender']
+            "sex" => $params['gender']
         ];
         return $this->response(CommonLogic::getInstance()->updateUser($data));
     }
