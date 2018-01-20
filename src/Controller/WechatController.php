@@ -9,6 +9,7 @@
 namespace Controller;
 
 
+use Component\Wxapp\Wxapp;
 use EasyWeChat\Foundation\Application;
 use FastD\Http\ServerRequest;
 
@@ -22,21 +23,25 @@ class WechatController
         $body = $request->getBody()->getContents();
         $log->addDebug("params:".json_encode($params));
         $log->addDebug("body:".$body);
-        //小程序支付
-        $staff = (new Application([
-            'app_id'  => 'wx85ba94e795ed698e',
-            'secret'  => '57a6d4c30b655ff90708478fec40f929'
-        ]))->staff;
-        $result = $staff->send([
-            "touser"=> $open_id,
-            "msgtype"=> "link",
-            "link"=> [
-                "title"=> "Happy Day",
-                "description"=> "Is Really A Happy Day",
-                "url"=> "https://zucaib.com",
-                "thumb_url"=> "http://120.78.193.207/upload/7e93d1947a1f8509f27ebd59f8c81b6c.jpg"
+        $app_id = config()->get("wxapp_app_id");
+        $app_secret = config()->get("wxapp_app_secret");
+        $wxapp = new Wxapp($app_id,$app_secret);
+
+        $data = [
+            "touser" => $open_id,
+            "msgtype" => "link",
+            "link" => [
+                "title" => "哈哈哈哈哈",
+                "description" => "hhhhhhh",
+                "url" => "https://zucaib.com",
+                "thumb_url" => "http://120.78.193.207/upload/7e93d1947a1f8509f27ebd59f8c81b6c.jpg"
             ]
-        ]);
+        ];
+
+        $result = $wxapp->sendCustomerMsg($data);
+
+        $log->addDebug("Result:".$result);
+
 
     }
 }
