@@ -176,7 +176,12 @@ class CommonLogic extends BaseLogic
             //小程序支付
             $payment = (new Application([
                 'app_id'  => 'wx85ba94e795ed698e',
-                'secret'  => '57a6d4c30b655ff90708478fec40f929'
+                'secret'  => '57a6d4c30b655ff90708478fec40f929',
+                'payment' => [
+                    'merchant_id'        => '1493544892',
+                    'key'                => '2yaoyuan1367890POIMNBHYTSGBHJK67',
+                    'notify_url'         => 'http://www.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
+                ],
             ]))->payment;
         }
 
