@@ -173,10 +173,12 @@ class CommonLogic extends BaseLogic
         if($paysource == 0){
             $payment = wechat()->payment;
         }else{
+            $app_id = config()->get("wxapp_app_id");
+            $app_secret = config()->get("wxapp_app_secret");
             //小程序支付
             $payment = (new Application([
-                'app_id'  => 'wx85ba94e795ed698e',
-                'secret'  => '57a6d4c30b655ff90708478fec40f929',
+                'app_id'  => $app_id,
+                'secret'  => $app_secret,
                 'payment' => [
                     'merchant_id'        => '1493544892',
                     'key'                => '2yaoyuan1367890POIMNBHYTSGBHJK67',
