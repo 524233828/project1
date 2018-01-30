@@ -58,7 +58,7 @@ route()->group(['prefix' => '/my_class_list', 'middleware' => 'dispatch'],functi
 
 //我的课程详情
 route()->group(['prefix' => '/my_class', 'middleware' => 'dispatch'],function(){
-    route()->get("/info","MyClassController@getClassChapter")->withMiddleware("login");
+    route()->get("/info","MyClassController@getClassChapter")->withAddMiddleware("login");
     route()->post("/learn_percent","MyClassController@updateLearnPercent")->withAddMiddleware("login");
 });
 
