@@ -31,10 +31,10 @@ class WechatController
             "touser" => $open_id,
             "msgtype" => "link",
             "link" => [
-                "title" => "哈哈哈哈哈",
-                "description" => "hhhhhhh",
-                "url" => "https://zucaib.com",
-                "thumb_url" => "http://120.78.193.207/upload/7e93d1947a1f8509f27ebd59f8c81b6c.jpg"
+                "title" => "【稳稳收米】欢迎关注夜猫情报局！",
+                "description" => " 夜猫情报局一直致力于给大家提供迅捷实用的足彩情报 分享足彩技巧干货，帮助大家更稳地收米",
+                "url" => "http://mp.weixin.qq.com/s?__biz=MzIxOTg4MzkzNg==&mid=100000677&idx=1&sn=8e721c44bb987cbebafe82b207414dcb&chksm=17d5336a20a2ba7cb5d5b1d1bc3cbe36b49b2b9895c6ea12c2ec2d1cf2b17c68527a187ed55b#rd",
+                "thumb_url" => "http://www.ym8800.com/upload/maozhentan.png"
             ]
         ];
 
