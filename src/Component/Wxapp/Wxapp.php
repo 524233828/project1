@@ -184,7 +184,7 @@ class Wxapp
         //设置header
 //        curl_setopt($ch, CURLOPT_HEADER, FALSE);
         if($dataType=="JSON"){
-            $data = json_encode($data);
+            $data = self::json_encode($data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
                     'Content-Length: ' . strlen($data))
@@ -209,5 +209,55 @@ class Wxapp
             $error = curl_errno($ch);
             curl_close($ch);
         }
+    }
+
+    /**
+     * 微信api不支持中文转义的json结构
+     * @param array $arr
+     * @return json
+     */
+    public static function json_encode($arr) {
+        if (count($arr) == 0) return "[]";
+        $parts = array ();
+        $is_list = false;
+        //Find out if the given array is a numerical array
+        $keys = array_keys ( $arr );
+        $max_length = count ( $arr ) - 1;
+        if (($keys [0] === 0) && ($keys [$max_length] === $max_length )) { //See if the first key is 0 and last key is length - 1
+            $is_list = true;
+            for($i = 0; $i < count ( $keys ); $i ++) { //See if each key correspondes to its position
+                if ($i != $keys [$i]) { //A key fails at position check.
+                    $is_list = false; //It is an associative array.
+                    break;
+                }
+            }
+        }
+        foreach ( $arr as $key => $value ) {
+            if (is_array ( $value )) { //Custom handling for arrays
+                if ($is_list)
+                    $parts [] = self::json_encode ( $value ); /* :RECURSION: */
+                else
+                    $parts [] = '"' . $key . '":' . self::json_encode ( $value ); /* :RECURSION: */
+            } else {
+                $str = '';
+                if (! $is_list)
+                    $str = '"' . $key . '":';
+                //Custom handling for multiple data types
+                if (!is_string ( $value ) && is_numeric ( $value ) && $value<2000000000)
+                    $str .= $value; //Numbers
+                elseif ($value === false)
+                    $str .= 'false'; //The booleans
+                elseif ($value === true)
+                    $str .= 'true';
+                else
+                    $str .= '"' . addslashes ( $value ) . '"'; //All other things
+                // :TODO: Is there any more datatype we should be in the lookout for? (Object?)
+                $parts [] = $str;
+            }
+        }
+        $json = implode ( ',', $parts );
+        if ($is_list)
+            return '[' . $json . ']'; //Return numerical JSON
+        return '{' . $json . '}'; //Return associative JSON
     }
 }
