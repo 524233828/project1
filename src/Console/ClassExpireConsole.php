@@ -19,7 +19,7 @@ class ClassExpireConsole extends Command
 
     public function configure()
     {
-        $this->setName('class_expire')
+        $this->setName('yd:class_expire')
             ->setDescription('课程过期处理');
     }
 
