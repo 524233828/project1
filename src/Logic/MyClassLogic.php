@@ -32,16 +32,10 @@ class MyClassLogic extends BaseLogic
 
         $user_class = BuyModel::getUserClass($_SESSION['uid'],$class_id);
 
-        $buy_time = $user_class['update_time'];
-
         //判断购买是否过期
-        if($class['expire_month']!==0)
+        if($user_class['status']==2)
         {
-            $expire_time = strtotime(date("Y-m-d H:i:s",$buy_time)." +{$class['expire_month']} month");
-            if($expire_time<time())
-            {
-                ClassException::ClassExpire();
-            }
+            ClassException::ClassExpire();
         }
 
         //输出用户学习进度

@@ -67,7 +67,7 @@ class BuyModel extends BaseModel
         return database()->get(self::BUY_CLASS_TABLE,"*",$where);
     }
 
-    public static function buySuccess($order_id)
+    public static function buySuccess($order_id, $expire_month)
     {
         $where = [
             "order_id" => $order_id
@@ -75,7 +75,27 @@ class BuyModel extends BaseModel
 
         $data['status'] = 1;
         $data['update_time'] = time();
+        if($expire_month !== 0){
+            $data['end_time'] = strtotime(date("Y-m-d H:i:s",$data['update_time'])." +{$expire_month} month");
+        }
 
         return database()->update(self::BUY_CLASS_TABLE,$data,$where);
+    }
+
+    public static function getUserClassByOrderId($order_id, $column = null)
+    {
+        if(empty($column)){
+            $column = "*";
+        }
+        $where = [
+            "order_id" => $order_id
+        ];
+
+        return database()->get(self::BUY_CLASS_TABLE, $column, $where);
+    }
+
+    public static function updateUserClass($where = [], $data = [])
+    {
+        return database()->update(self::BUY_CLASS_TABLE, $data, $where);
     }
 }

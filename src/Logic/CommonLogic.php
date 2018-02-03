@@ -14,6 +14,7 @@ use EasyWeChat\Payment\Order;
 use Exception\OrderException;
 use Exception\UserException;
 use Model\BuyModel;
+use Model\ClassModel;
 use Model\OrderModel;
 use Model\UserModel;
 use Monolog\Handler\StreamHandler;
@@ -140,7 +141,9 @@ class CommonLogic extends BaseLogic
 
             database()->pdo->beginTransaction();
             $order_result = OrderModel::updateOrder($order_data,["order_id"=>$order_id]);
-            $buy_result = BuyModel::buySuccess($order_id);
+            $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
+            $class = ClassModel::getClass($user_class['class_id']);
+            $buy_result = BuyModel::buySuccess($order_id, $class['expire_month']);
             $log->addDebug("order_result：".$order_result);
             $log->addDebug("buy_result：".$buy_result);
             if($order_result&&$buy_result){
