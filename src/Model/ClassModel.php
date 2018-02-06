@@ -327,6 +327,11 @@ class ClassModel extends BaseModel
         return database()->id();
     }
 
+    public static function getChapter($id)
+    {
+        return database()->get(self::CHAPTER_TABLE,"*",["id" => $id]);
+    }
+
     //课时
     /**
      * 获取章节的课时列表

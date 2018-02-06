@@ -66,9 +66,10 @@ class AdminClassChapterLogic extends BaseLogic
             "desc" => $desc,
         ];
         $where = ["id"=>$id];
+        $chapter = ClassModel::getChapter($id);
         $count = ClassModel::countChapter(["class_id"=>$class_id,"chapter_no"=>$chapter_no]);
 
-        if($count>0){
+        if($count > 0 && $chapter['chapter_no'] != $chapter_no){
             ClassException::ChapterDuplicate();
         }
         return ClassModel::updateChapter($where,$data);
