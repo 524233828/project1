@@ -21,6 +21,10 @@ class BaseLogic{
     {
     }
 
+    /**
+     * 获取当前对象实例
+     * @return $this
+     */
     public static function getInstance()
     {
         $class_name = get_called_class();
