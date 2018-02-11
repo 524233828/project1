@@ -87,6 +87,9 @@ class AdminClassLessonLogic extends BaseLogic
      */
     public function addLesson($chapter_id,$resource_type,$title,$desc,$img_url,$lesson_no,$resource_data = [] )
     {
+        if(empty($lesson_no)){
+            $lesson_no = ClassModel::getMaxLesson($chapter_id)+1;
+        }
         $data = [
             "chapter_id"  => $chapter_id,
             "resource_type" => $resource_type,

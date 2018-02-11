@@ -34,6 +34,10 @@ class AdminClassChapterLogic extends BaseLogic
 
     public function addChapter($title,$chapter_no,$class_id,$desc)
     {
+
+        if(empty($chapter_no)){
+            $chapter_no = ClassModel::getMaxLesson($class_id)+1;
+        }
         $data = [
             "class_id" => $class_id,
             "chapter_no" => $chapter_no,

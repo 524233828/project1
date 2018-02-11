@@ -332,6 +332,11 @@ class ClassModel extends BaseModel
         return database()->get(self::CHAPTER_TABLE,"*",["id" => $id]);
     }
 
+    public static function getMaxChapter($class_id)
+    {
+        return $db->max(self::CHAPTER_TABLE, ["chapter_no"], ["class_id" => $class_id]);
+    }
+
     //课时
     /**
      * 获取章节的课时列表
@@ -376,5 +381,12 @@ class ClassModel extends BaseModel
         $db = database();
 
         return $db->count(self::LESSON_TABLE,"*",$where);
+    }
+
+    public static function getMaxLesson($chapter_id)
+    {
+        $db = database();
+
+        return $db->max(self::LESSON_TABLE, ["lesson_no"], ["chapter_id" => $chapter_id]);
     }
 }
