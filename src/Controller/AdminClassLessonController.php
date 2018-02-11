@@ -61,7 +61,7 @@ class AdminClassLessonController extends BaseController
         $title = $request->getParam("title");
         $desc = $request->getParam("desc");
         $img_url = $request->getParam("img_url");
-        $lesson_no = $request->getParam("lesson_no");
+        $lesson_no = $request->getParam("lesson_no","");
 
         $resource_data = $request->getParam("resource_data");
 //        var_dump($resource_data);exit;

@@ -42,7 +42,7 @@ class AdminClassChapterController extends BaseController
     public function addChapter(ServerRequest $request)
     {
         $title = $request->getParam("title");
-        $chapter_no = $request->getParam("chapter_no");
+        $chapter_no = $request->getParam("chapter_no","");
         $class_id = $request->getParam("class_id",1);
         $desc = $request->getParam("desc",1);
         $result = AdminClassChapterLogic::getInstance()->addChapter($title,$chapter_no,$class_id,$desc);
