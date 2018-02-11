@@ -334,7 +334,7 @@ class ClassModel extends BaseModel
 
     public static function getMaxChapter($class_id)
     {
-        return $db->max(self::CHAPTER_TABLE, ["chapter_no"], ["class_id" => $class_id]);
+        return database()->max(self::CHAPTER_TABLE, ["chapter_no"], ["class_id" => $class_id]);
     }
 
     //课时
