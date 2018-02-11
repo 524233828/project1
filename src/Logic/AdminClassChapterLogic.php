@@ -36,7 +36,7 @@ class AdminClassChapterLogic extends BaseLogic
     {
 
         if(empty($chapter_no)){
-            $chapter_no = ClassModel::getMaxLesson($class_id)+1;
+            $chapter_no = ClassModel::getMaxChapter($class_id)+1;
         }
         $data = [
             "class_id" => $class_id,
