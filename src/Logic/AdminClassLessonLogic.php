@@ -9,6 +9,7 @@
 namespace Logic;
 
 
+use EasyWeChat\Message\Article;
 use Exception\BaseException;
 use Exception\ClassException;
 use Model\ArticleModel;
@@ -95,7 +96,7 @@ class AdminClassLessonLogic extends BaseLogic
             "resource_type" => $resource_type,
             "title"     => $title,
             "desc"      => $desc,
-            "lesson_no"       => $lesson_no,
+            "lesson_no" => $lesson_no,
             "img_url"   => $img_url,
         ];
 
@@ -137,5 +138,46 @@ class AdminClassLessonLogic extends BaseLogic
     public function deleteLesson($id)
     {
         return ClassModel::deleteLesson($id);
+    }
+
+    public function updateLesson($id,$title,$desc,$img_url,$lesson_no,$resource_data = [])
+    {
+        //获取课的类型
+        $lesson = ClassModel::getLesson($id, ['resource_type','resource_id']);
+        $resource_type = $lesson['resource_type'];
+        $data = [
+            "title"     => $title,
+            "desc"      => $desc,
+            "lesson_no" => $lesson_no,
+            "img_url"   => $img_url,
+        ];
+
+        //开启事务
+        database()->pdo->beginTransaction();
+        if($resource_type ==0)
+        {
+            $result = MediaModel::getVideoByResourceId($resource_data['resource_id']);
+            MediaModel::updateVideoMediaTime($resource_data['resource_id'],$resource_data['media_time']);
+            if($result){
+                $data['resource_id'] = $result["id"];
+            }else{
+                BaseException::VideoNotFound();
+            }
+        }else{
+            $rdata['title'] = $resource_data['title'];
+            $rdata['img_url'] = $resource_data['img_url'];
+            $rdata['content'] = $resource_data['content'];
+            ArticleModel::updateArticle(['id' => $resource_data['id']], $resource_data);
+            $data['resource_id'] = $resource_data['id'];
+        }
+
+        if($result = ClassModel::updateLesson(['id' => $id],$data))
+        {
+            database()->pdo->commit();
+            return $result;
+        }else{
+            database()->pdo->rollBack();
+            BaseException::SystemError();
+        }
     }
 }

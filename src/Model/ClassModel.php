@@ -389,4 +389,24 @@ class ClassModel extends BaseModel
 
         return $db->max(self::LESSON_TABLE, ["lesson_no"], ["chapter_id" => $chapter_id]);
     }
+
+    public static function getLesson($id, $column = "*", $where = [])
+    {
+        if(!isset($where['id'])){
+            $where['id'] = $id;
+        }
+        return database()->get(self::LESSON_TABLE, $column, $where);
+    }
+
+    public static function updateLesson($where = [], $data = [])
+    {
+        $data['update_time'] = time();
+        $db = database();
+
+        $result = $db->update(self::LESSON_TABLE,$data,
+            $where
+        );
+
+        return $result;
+    }
 }

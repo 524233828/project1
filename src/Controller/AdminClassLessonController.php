@@ -85,4 +85,31 @@ class AdminClassLessonController extends BaseController
         $id = $request->getParam("id");
         return $this->response([AdminClassLessonLogic::getInstance()->deleteLesson($id)]);
     }
+
+    /**
+     * @name 更新章节的课
+     * @apiParam id|int|课的ID|true
+     * @apiParam title|string|标题|true
+     * @apiParam desc|string|描述|true
+     * @apiParam lesson_no|int|第几课|true
+     * @apiParam img_url|string|课的图片|true
+     * @apiParam resource_data.resource_id|string|视频资源ID|false
+     * @apiParam resource_data.id|int|文章资源唯一ID|false
+     * @apiParam resource_data.title|string|文章标题|false
+     * @apiParam resource_data.img_url|string|文章图片|false
+     * @apiParam resource_data.content|string|文章内容|false
+     * @param ServerRequest $request
+     * @return \Service\ApiResponse
+     */
+    public function updateLesson(ServerRequest $request)
+    {
+        $id = $request->getParam("id");
+        $title = $request->getParam("title");
+        $desc = $request->getParam("desc");
+        $img_url = $request->getParam("img_url");
+        $lesson_no = $request->getParam("lesson_no");
+        $resource_data = $request->getParam("resource_data");
+
+        return $this->response(AdminClassLessonLogic::getInstance()->updateLesson($id, $title, $desc, $img_url, $lesson_no, $resource_data));
+    }
 }

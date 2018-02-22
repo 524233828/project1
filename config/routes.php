@@ -127,6 +127,7 @@ route()->group("/admin",function(){
     route()->post("/lesson/add","AdminClassLessonController@addLesson");
 //    route()->post("/lesson/update","AdminClassLessonController@updateLesson");
     route()->post("/lesson/delete","AdminClassLessonController@deleteLesson");
+    route()->post("/lesson/update","AdminClassLessonController@updateLesson");
 
     //订单列表
     route()->post("/order/list","AdminOrderController@listOrder");
