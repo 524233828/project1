@@ -50,7 +50,7 @@ class ArticleModel
         $data['update_time'] = time();
         $db = database();
 
-        $result = $db->select(self::ARTICLE_TABLE,$data,
+        $result = $db->update(self::ARTICLE_TABLE,$data,
             $where
         );
 
