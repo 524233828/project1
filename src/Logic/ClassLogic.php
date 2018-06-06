@@ -195,8 +195,11 @@ class ClassLogic extends BaseLogic
             'openid'           => $_SESSION['userInfo']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
-        //生成支付参数
-        $config = CommonLogic::getInstance()->createOrder($attributes, $paysource);
+        if($class['price'] > 0){
+            //生成支付参数
+            $config = CommonLogic::getInstance()->createOrder($attributes, $paysource);
+        }
+
 
         //数据库记录订单
         //开启事务
@@ -224,7 +227,15 @@ class ClassLogic extends BaseLogic
         if($order_id&&$buy_id)
         {
             database()->pdo->commit();
-            return $config;
+            if(isset($config)){
+                return $config;
+            }else{
+                OrderModel::updateOrder(["status" => 1],["order_id"=>$order_id]);
+                $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
+                $class = ClassModel::getClass($user_class['class_id']);
+                BuyModel::buySuccess($order_id, $class['expire_month']);
+            }
+
         }else{
             database()->pdo->rollBack();
             return false;
