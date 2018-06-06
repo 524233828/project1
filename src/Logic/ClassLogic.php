@@ -224,7 +224,7 @@ class ClassLogic extends BaseLogic
         ];
         $order_id = OrderModel::addOrder($order_date);
         $buy_id = BuyModel::addUserClass($user_class_data);
-        if($order_id&&$buy_id)
+        if($order_id && $buy_id)
         {
             database()->pdo->commit();
             if(isset($config)){
@@ -234,6 +234,7 @@ class ClassLogic extends BaseLogic
                 $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
                 $class = ClassModel::getClass($user_class['class_id']);
                 BuyModel::buySuccess($order_id, $class['expire_month']);
+                return [];
             }
 
         }else{
