@@ -234,7 +234,7 @@ class ClassLogic extends BaseLogic
                 $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
                 $class = ClassModel::getClass($user_class['class_id']);
                 BuyModel::buySuccess($order_id, $class['expire_month']);
-                return ["is_buy" => true];
+                return ["timestamp" => time()];
             }
 
         }else{
