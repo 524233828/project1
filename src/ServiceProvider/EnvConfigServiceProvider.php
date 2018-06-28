@@ -19,8 +19,8 @@ class EnvConfigServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        if (file_exists(app()->getPath() . '/.env.yml')) {
-            config()->load(app()->getPath().'/.env.yml');
+        if (file_exists(app()->getPath() . '/.env.yml.yml')) {
+            config()->load(app()->getPath().'/.env.yml.yml');
         }
     }
 }

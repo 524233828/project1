@@ -9,15 +9,17 @@
 namespace Logic;
 
 use Exception\UserException;
+use Model\OrderModel;
 use Model\RecommendModel;
 class RecommendLogic extends BaseLogic
 {
-    public function index($uid, $id)
+    public function index($uid, $recommend_id)
     {
         $uid || UserException::UserNotFound();
 
         $buy = RecommendModel::getUserRecommend($uid, ['id']);
-        $recommend = RecommendModel::getRecommendById($id);
+        $recommend = RecommendModel::getRecommendById($recommend_id);
+        $recommend || UserException::UserNotFound();
 
         if (empty($buy)) {
             unset($recommend['imgs'], $recommend['info']);
@@ -27,5 +29,67 @@ class RecommendLogic extends BaseLogic
         }
 
         return $recommend;
+    }
+
+    public function pay($recommend_id, $channel = 1 ,$paysource = 0)
+    {
+        $recommend = RecommendModel::getRecommendById($recommend_id);
+        $recommend || UserException::UserNotFound();
+
+        //微信统一下单
+        $attributes = [
+            'trade_type'       => 'JSAPI',
+            'body'             => $recommend['title'],
+            'detail'           => $recommend['title'],
+            'out_trade_no'     => OrderModel::getOrderId(),
+            'total_fee'        => floor($recommend['price']*100), // 单位：分
+            'openid'           => $_SESSION['userInfo']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+        ];
+        $config = [];
+        if($recommend['price'] > 0){
+            //生成支付参数
+            $config = CommonLogic::getInstance()->createOrder($attributes, $paysource);
+        }
+
+        //数据库记录订单
+        //开启事务
+        database()->pdo->beginTransaction();
+
+        $order_date = [
+            "order_id" => $attributes['out_trade_no'],
+            "total_fee" => $recommend['price'],
+            "create_time" => time(),
+            "point" => 1,
+            "user_id" => $_SESSION['uid'],
+            "channel_id" => $channel,
+            "paysource" => $paysource
+        ];
+//
+//        $user_class_data = [
+//            "class_id"=>$recommend_id,
+//            "user_id"=>$_SESSION['uid'],
+//            "order_id"=>$attributes['out_trade_no'],
+//            "create_time"=>time(),
+//            "status"=>0,
+//        ];
+        $order_id = OrderModel::addOrder($order_date);
+//        $buy_id = BuyModel::addUserClass($user_class_data);
+        if($order_id && $buy_id)
+        {
+            database()->pdo->commit();
+            if(isset($config)){
+                return $config;
+            } else {
+                OrderModel::updateOrder(["status" => 1],["order_id"=>$order_id]);
+                $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
+                $recommend = ClassModel::getClass($user_class['class_id']);
+                BuyModel::buySuccess($order_id, $recommend['expire_month']);
+                return ["timestamp" => time()];
+            }
+
+        } else {
+            database()->pdo->rollBack();
+            return false;
+        }
     }
 }

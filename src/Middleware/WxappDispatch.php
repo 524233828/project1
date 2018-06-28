@@ -14,7 +14,7 @@ class WxappDispatch extends Middleware
     public function handle(ServerRequestInterface $request, DelegateInterface $next)
     {
         try {
-            $response = $next($request);
+            $response = $next->process($request);
         } catch (\Exception $e) {
 
             $response = new ApiResponse(

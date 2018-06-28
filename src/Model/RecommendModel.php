@@ -19,7 +19,7 @@ class RecommendModel
         return database()->get(
             self::USER_RECOMMEND_TABLE,
             $field,
-            ['uid' => $uid]
+            ['user_id' => $uid]
         );
     }
 

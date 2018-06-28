@@ -19,7 +19,8 @@ class RecommendController extends BaseController
      */
     public function index(ServerRequest $request)
     {
-        $uid = $_SESSION['uid'];
-        return $this->response(RecommendLogic::getInstance()->index($uid),flase);
+        $uid = 1;//$_SESSION['uid'];
+        $id = $request->getParam("id");
+        return $this->response(RecommendLogic::getInstance()->index($uid, $id),true);
     }
 }

@@ -24,7 +24,7 @@ class LoginCheck extends Middleware
         $_SESSION['channel'] = isset($_GET['channel'])?$_GET['channel']:isset($_SESSION['channel'])?$_SESSION['channel']:"";
 
         if (isset($_SESSION['uid'])&&!empty($_SESSION['uid'])) {
-            $response = $next($request);
+            $response = $next->process($request);
         } else {
 //            $wechat = \wechat();
 
