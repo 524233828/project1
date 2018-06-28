@@ -29,7 +29,7 @@ class RecommendLogic extends BaseLogic
             $recommend['is_paid'] = 0;
         }
         $recommend['logo'] = '';
-        $recommend['wx_qrcode'] = '';
+        $recommend['wx_qrcode'] = ' ';
 
         return $recommend;
     }
