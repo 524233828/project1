@@ -20,7 +20,15 @@ class RecommendController extends BaseController
     public function index(ServerRequest $request)
     {
         $uid = 1;//$_SESSION['uid'];
-        $id = $request->getParam("id");
-        return $this->response(RecommendLogic::getInstance()->index($uid, $id),true);
+        $recommend_id = $request->getParam("id");
+        return $this->response(RecommendLogic::getInstance()->index($uid, $recommend_id),true);
+    }
+
+    public function pay(ServerRequest $request)
+    {
+        $recommend_id = $request->getParam("id");
+        $channel = $request->getParam("channel");
+        $paysource = $request->getParam("paysource");
+        return $this->response(RecommendLogic::getInstance()->pay($recommend_id, $channel, $paysource),true);
     }
 }

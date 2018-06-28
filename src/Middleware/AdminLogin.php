@@ -21,7 +21,7 @@ class AdminLogin extends Middleware
     {
 
         if (isset($_SESSION['admin_id'])&&!empty($_SESSION['admin_id'])) {
-            $response = $next->process($request);
+            $response = $next($request);
         } else {
 
             $response =  new ApiResponse(

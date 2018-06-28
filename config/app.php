@@ -53,6 +53,7 @@ return [
         \ServiceProvider\WechatServiceProvider::class,
         \ServiceProvider\UploadServiceProvider::class,
         \ServiceProvider\SessionServiceProvider::class,
+        \FastD\Viewer\Viewer::class,
     ],
 
     /**

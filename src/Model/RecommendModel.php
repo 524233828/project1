@@ -32,4 +32,13 @@ class RecommendModel
         );
     }
 
+    public static function addUserRecommend($data)
+    {
+        database()->insert(
+            self::USER_RECOMMEND_TABLE,
+            $data
+        );
+        return database()->id();
+    }
+
 }

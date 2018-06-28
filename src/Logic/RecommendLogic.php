@@ -8,6 +8,7 @@
 
 namespace Logic;
 
+use Exception\RecommendException;
 use Exception\UserException;
 use Model\OrderModel;
 use Model\RecommendModel;
@@ -19,7 +20,7 @@ class RecommendLogic extends BaseLogic
 
         $buy = RecommendModel::getUserRecommend($uid, ['id']);
         $recommend = RecommendModel::getRecommendById($recommend_id);
-        $recommend || UserException::UserNotFound();
+        $recommend || RecommendException::RecommendNotExists();
 
         if (empty($buy)) {
             unset($recommend['imgs'], $recommend['info']);
@@ -27,6 +28,8 @@ class RecommendLogic extends BaseLogic
         } else {
             $recommend['is_paid'] = 0;
         }
+        $recommend['logo'] = '';
+        $recommend['wx_qrcode'] = '';
 
         return $recommend;
     }
@@ -34,7 +37,7 @@ class RecommendLogic extends BaseLogic
     public function pay($recommend_id, $channel = 1 ,$paysource = 0)
     {
         $recommend = RecommendModel::getRecommendById($recommend_id);
-        $recommend || UserException::UserNotFound();
+        $recommend || RecommendException::RecommendNotExists();
 
         //微信统一下单
         $attributes = [
@@ -42,7 +45,7 @@ class RecommendLogic extends BaseLogic
             'body'             => $recommend['title'],
             'detail'           => $recommend['title'],
             'out_trade_no'     => OrderModel::getOrderId(),
-            'total_fee'        => floor($recommend['price']*100), // 单位：分
+            'total_fee'        => floor($recommend['price'] * 100), // 单位：分
             'openid'           => $_SESSION['userInfo']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
         $config = [];
@@ -62,28 +65,19 @@ class RecommendLogic extends BaseLogic
             "point" => 1,
             "user_id" => $_SESSION['uid'],
             "channel_id" => $channel,
-            "paysource" => $paysource
+            "paysource" => $paysource,
+            "product_type" => 2,
+            "product_id" => $recommend['id']
         ];
-//
-//        $user_class_data = [
-//            "class_id"=>$recommend_id,
-//            "user_id"=>$_SESSION['uid'],
-//            "order_id"=>$attributes['out_trade_no'],
-//            "create_time"=>time(),
-//            "status"=>0,
-//        ];
+
         $order_id = OrderModel::addOrder($order_date);
-//        $buy_id = BuyModel::addUserClass($user_class_data);
-        if($order_id && $buy_id)
+        if($order_id)
         {
             database()->pdo->commit();
-            if(isset($config)){
+            if (isset($config)) {
                 return $config;
             } else {
-                OrderModel::updateOrder(["status" => 1],["order_id"=>$order_id]);
-                $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
-                $recommend = ClassModel::getClass($user_class['class_id']);
-                BuyModel::buySuccess($order_id, $recommend['expire_month']);
+                OrderModel::updateOrder(["status" => 1], ["order_id"=>$order_id]);
                 return ["timestamp" => time()];
             }
 

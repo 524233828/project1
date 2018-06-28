@@ -161,9 +161,7 @@ class CommonLogic extends BaseLogic
     /**
      * 微信统一下单
      * @param $data
-     * @param int $paysource
      * @return array|string
-     * @throws OrderException
      */
     public function createOrder($data, $paysource = 0)
     {

@@ -15,7 +15,7 @@ class Dispatch extends Middleware
     {
         app()->get("session")->start();
         try {
-            $response = $next->process($request);
+            $response = $next($request);
         } catch (\Exception $e) {
 
             if($e->getCode()!==0){

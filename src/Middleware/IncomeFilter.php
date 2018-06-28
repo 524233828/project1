@@ -29,7 +29,7 @@ class IncomeFilter extends Middleware
         }
         if($this->requestFilter($data))
         {
-            return $next->process($request);
+            return $next($request);
         }else{
             BaseException::ParamsError();
         }
