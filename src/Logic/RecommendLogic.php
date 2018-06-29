@@ -8,8 +8,10 @@
 
 namespace Logic;
 
+use Component\Setting;
 use Exception\RecommendException;
 use Exception\UserException;
+use Model\MediaModel;
 use Model\OrderModel;
 use Model\RecommendModel;
 class RecommendLogic extends BaseLogic
@@ -27,18 +29,20 @@ class RecommendLogic extends BaseLogic
 
         unset($recommend['watermarks']);
         if (empty($buy)) {
-            unset($recommend['imgs'], $recommend['info']);
+            $recommend['imgs'] = [];
+            $recommend['info'] = '';
             $recommend['is_paid'] = 0;
         } else {
+            $recommend['imgs'] = MediaModel::getImageByIds(explode(',', $recommend['imgs']));
             $recommend['is_paid'] = 1;
         }
-        $recommend['logo'] = '';
-        $recommend['wx_qrcode'] = '';
+        $recommend['logo'] = MediaModel::getImageById(setting::get('logo'));
+        $recommend['wx_qrcode'] = MediaModel::getImageById(setting::get('wx_qrcode'));
 
         return $recommend;
     }
 
-    public function pay($recommend_id, $channel = 1 ,$paysource = 0)
+    public function payment($recommend_id, $channel = 1 ,$paysource = 0)
     {
         $recommend = RecommendModel::getRecommendById($recommend_id);
         $recommend || RecommendException::RecommendNotExists();
