@@ -89,4 +89,26 @@ class MediaModel extends BaseModel
 
         return database()->update(self::MEDIA_TABLE,$data,$where);
     }
+
+    public static function getImageById($id)
+    {
+        $info = database()->get(self::IMAGE_TABLE, ['img_url'], [
+            "id" => $id
+        ]);
+        return isset($info['img_url']) ? $info['img_url'] : '';
+    }
+
+    public static function getImageByIds($ids)
+    {
+        $info = database()->select(self::IMAGE_TABLE, ['img_url'], [
+            "id" => $ids
+        ]);
+        $arr = [];
+        if ($info) {
+            foreach ($info as $v) {
+                $arr[] = $v['img_url'];
+            }
+        }
+        return $arr;
+    }
 }
