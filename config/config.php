@@ -12,5 +12,9 @@ return [
     "upload_dir" => "/upload",
 
     "wxapp_app_id" => "wxeebf4ed549cf121f",
-    "wxapp_app_secret" => '30ee824d32c9b23a59586ff4014738d1'
+    "wxapp_app_secret" => '30ee824d32c9b23a59586ff4014738d1',
+    'viewer' => [
+        'path' => [],
+        'options' => [],
+    ],
 ];

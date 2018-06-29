@@ -61,6 +61,11 @@ class ErrorCode
     const TEST_NOT_FOUND = 1400;
 
     /**
+     * 15xx推荐错误
+     */
+    const RECOMMEND_NOT_EXISTS = 1500;
+
+    /**
      * 99xx通用系统错误
      */
     const UPLOAD_FAIL = 9900;//上传失败
@@ -106,6 +111,10 @@ class ErrorCode
         self::UPLOAD_FAIL           => ['上传失败', Response::HTTP_BAD_GATEWAY],
         self::UNABLE_MIME_TYPE      => ['文件格式不支持', Response::HTTP_FORBIDDEN],
         self::VIDEO_NOT_FOUND      =>  ['视频资源不存在', Response::HTTP_NOT_FOUND],
+
+        //推荐错误
+        self::RECOMMEND_NOT_EXISTS      =>  ['推荐不存在', Response::HTTP_NOT_FOUND],
+
     ];
 
     /**
