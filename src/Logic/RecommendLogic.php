@@ -16,17 +16,21 @@ class RecommendLogic extends BaseLogic
 {
     public function index($uid, $recommend_id)
     {
-        $uid || UserException::UserNotFound();
-
-        $buy = RecommendModel::getUserRecommend($uid, ['id']);
         $recommend = RecommendModel::getRecommendById($recommend_id);
         $recommend || RecommendException::RecommendNotExists();
+        if ($uid) {
+            $recommend['is_login'] = 1;
+            $buy = RecommendModel::getUserRecommend($uid, ['id']);
+        } else {
+            $recommend['is_login'] = 0;
+        }
 
+        unset($recommend['watermarks']);
         if (empty($buy)) {
             unset($recommend['imgs'], $recommend['info']);
-            $recommend['is_paid'] = 1;
-        } else {
             $recommend['is_paid'] = 0;
+        } else {
+            $recommend['is_paid'] = 1;
         }
         $recommend['logo'] = '';
         $recommend['wx_qrcode'] = '';
