@@ -78,8 +78,8 @@ route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
 
 //推荐二维码生成
 route()->group(['prefix' => '/recommend', 'middleware' => 'dispatch'], function(){
-    route()->get("/index","RecommendController@index");
-    route()->post("/order_notify","RecommendController@notifyOrder");
+    route()->get("/index","RecommendController@index")->withAddMiddleware("login");;
+    route()->post("/payment","RecommendController@payment")->withAddMiddleware("login");
     route()->post("/jssdk","RecommendController@wechatJssdk");
 });
 
