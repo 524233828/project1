@@ -14,12 +14,15 @@ class RecommendModel
     const USER_RECOMMEND_TABLE = "db_user_recommend";
     const RECOMMEND_TABLE = "db_recommend";
 
-    public static function getUserRecommend($uid, $field = '*')
+    public static function getUserRecommend($uid, $recommend_id, $field = '*')
     {
         return database()->get(
             self::USER_RECOMMEND_TABLE,
             $field,
-            ['user_id' => $uid]
+            [
+                'user_id' => $uid,
+                'recommend_id' => $recommend_id
+            ]
         );
     }
 

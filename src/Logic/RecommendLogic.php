@@ -22,7 +22,7 @@ class RecommendLogic extends BaseLogic
         $recommend || RecommendException::RecommendNotExists();
         if ($uid) {
             $recommend['is_login'] = 1;
-            $buy = RecommendModel::getUserRecommend($uid, ['id']);
+            $buy = RecommendModel::getUserRecommend($uid, $recommend_id, ['id']);
         } else {
             $recommend['is_login'] = 0;
         }
