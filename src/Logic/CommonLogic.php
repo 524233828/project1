@@ -16,6 +16,7 @@ use Exception\UserException;
 use Model\BuyModel;
 use Model\ClassModel;
 use Model\OrderModel;
+use Model\RecommendModel;
 use Model\UserModel;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -141,15 +142,34 @@ class CommonLogic extends BaseLogic
 
             database()->pdo->beginTransaction();
             $order_result = OrderModel::updateOrder($order_data,["order_id"=>$order_id]);
-            $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
-            $class = ClassModel::getClass($user_class['class_id']);
-            $buy_result = BuyModel::buySuccess($order_id, $class['expire_month']);
-            $log->addDebug("order_result：".$order_result);
-            $log->addDebug("buy_result：".$buy_result);
-            if($order_result&&$buy_result){
-                database()->pdo->commit();
-            }else{
-                database()->pdo->rollBack();
+
+            if ($order['product_type'] == 2) {
+                $id = RecommendModel::addUserRecommend([
+                    'recommend_id' => $order['product_id'],
+                    'order_id' => $order_id,
+                    'user_id' => $order['user_id'],
+                    'create_time' => time(),
+                    'status' => 1,
+                ]);
+
+                $log->addDebug("order_result：" . $order_result);
+                $log->addDebug("recommend_id：" . $id);
+                if($order_result){
+                    database()->pdo->commit();
+                }else{
+                    database()->pdo->rollBack();
+                }
+            } else {
+                $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
+                $class = ClassModel::getClass($user_class['class_id']);
+                $buy_result = BuyModel::buySuccess($order_id, $class['expire_month']);
+                $log->addDebug("order_result：".$order_result);
+                $log->addDebug("buy_result：".$buy_result);
+                if($order_result&&$buy_result){
+                    database()->pdo->commit();
+                }else{
+                    database()->pdo->rollBack();
+                }
             }
         }
 
@@ -161,7 +181,9 @@ class CommonLogic extends BaseLogic
     /**
      * 微信统一下单
      * @param $data
+     * @param int $paysource
      * @return array|string
+     * @throws OrderException
      */
     public function createOrder($data, $paysource = 0)
     {

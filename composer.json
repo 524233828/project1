@@ -14,7 +14,8 @@
         "php": ">=5.6",
         "fastd/fastd": "^3.1",
         "overtrue/wechat":"^3.3",
-        "codeguy/upload":"v1.3.*"
+        "codeguy/upload":"v1.3",
+        "fastd/viewer": "^0.1.0"
     },
     "require-dev": {
         "phpunit/dbunit": "^2.0"

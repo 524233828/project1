@@ -76,6 +76,13 @@ route()->group(['prefix' => '/common', 'middleware' => 'dispatch'],function(){
     route()->post("/jssdk","CommonController@wechatJssdk");
 });
 
+//推荐二维码生成
+route()->group(['prefix' => '/recommend', 'middleware' => 'dispatch'], function(){
+    route()->get("/index","RecommendController@index")->withAddMiddleware("login");;
+    route()->post("/payment","RecommendController@payment")->withAddMiddleware("login");
+    route()->post("/jssdk","RecommendController@wechatJssdk");
+});
+
 //小程序接口
 route()->group(['prefix' => '/wxapp', 'middleware' => 'wxapp_dispatch'], function(){
     route()->post("/login","CommonController@wxappLogin");
