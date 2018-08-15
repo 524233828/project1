@@ -45,7 +45,7 @@ return [
         'key'                => '2yaoyuan1367890POIMNBHYTSGBHJK67',
 //        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
 //        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
-        'notify_url'         => 'http://www.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
+        'notify_url'         => 'http://kc.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
         // 'device_info'     => '013467007045764',
         // 'sub_app_id'      => '',
         // 'sub_merchant_id' => '',

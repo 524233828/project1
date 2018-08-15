@@ -69,7 +69,7 @@ class CommonLogic extends BaseLogic
                 "city" => $userInfo->city?:"未知",
                 "country" => $userInfo->coutry?:"未知",
                 "province" => $userInfo->province?:"未知",
-                "headimgurl"=> $userInfo->headimgurl?:"http://www.ym8800.com/static/img/preson.f518f1a.png",
+                "headimgurl"=> $userInfo->headimgurl?:"http://kc.ym8800.com/static/img/preson.f518f1a.png",
                 "subscribe_time" => $userInfo->subscribe_time?:time(),
                 "unionid" => $userInfo->unionid?:"",
                 "remark" => $userInfo->remark?:"",
@@ -185,7 +185,7 @@ class CommonLogic extends BaseLogic
                 'payment' => [
                     'merchant_id'        => '1493544892',
                     'key'                => '2yaoyuan1367890POIMNBHYTSGBHJK67',
-                    'notify_url'         => 'http://www.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
+                    'notify_url'         => 'http://kc.ym8800.com/common/order_notify',      // XXX: 绝对路径！！！！
                 ],
             ]))->payment;
         }
