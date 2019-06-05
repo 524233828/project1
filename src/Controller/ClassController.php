@@ -125,7 +125,7 @@ class ClassController extends BaseController
 
     public function wxappDataDecrypt(ServerRequest $request)
     {
-        $data = $request->getParam("enceryptedData");
+        $data = $request->getParam("encryptedData");
         $iv = $request->getParam("iv");
 
         return $this->response(ClassLogic::getInstance()->getData($data, $iv));
