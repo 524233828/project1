@@ -273,6 +273,7 @@ class CommonLogic extends BaseLogic
                 "openid" => $result['openid'],
                 "unionid" => isset($result['unionid'])?$result['unionid']:"",
                 "openid_type" => 1,
+                "session_key" => $result['session_key']
             ];
             $log->addDebug("用户信息：".json_encode($data));
             $_SESSION['userInfo'] = $data;
@@ -284,6 +285,7 @@ class CommonLogic extends BaseLogic
             }
             $log->addDebug("入库结果：".$my_user['id']);
             $_SESSION["uid"] = $my_user['id'];
+            $_SESSION["phone"] = isset($my_user['phone']) ? $my_user['phone'] : "";
             if($my_user['id']){
                 return ["session_id" => $result['3rd_session']];
             }else{

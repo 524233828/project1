@@ -112,14 +112,23 @@ class ClassController extends BaseController
         $class_id = $request->getParam("class_id");
         $channel = $request->getParam("channel",1);
         $paysource = $request->getParam("paysource",0);
+        $phone = $request->getParam("phone","");
 
-        if(!$result = ClassLogic::getInstance()->buyClass($class_id, $channel, $paysource)){
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id, $channel, $paysource, $phone)){
             OrderException::OrderCreateFail();
         }else{
             $result['timeStamp'] = $result['timestamp'];
             unset($result['timestamp']);
             return $this->response(["jsapiConfig"=>json_encode($result)]);
         }
+    }
+
+    public function wxappDataDecrypt(ServerRequest $request)
+    {
+        $data = $request->getParam("enceryptedData");
+        $iv = $request->getParam("iv");
+
+        return $this->response(ClassLogic::getInstance()->getData($data, $iv));
     }
 
 }

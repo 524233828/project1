@@ -8,12 +8,16 @@
 
 namespace Logic;
 
+use Component\Wxapp\Wxapp;
+use Exception\BaseException;
 use Exception\ClassException;
+use Exception\UserException;
 use Model\ArticleModel;
 use Model\BuyModel;
 use Model\ClassModel;
 use Model\MediaModel;
 use Model\OrderModel;
+use Model\UserModel;
 
 class ClassLogic extends BaseLogic
 {
@@ -170,7 +174,7 @@ class ClassLogic extends BaseLogic
         return $chapter;
     }
 
-    public function buyClass($class_id,$channel = 1 ,$paysource = 0)
+    public function buyClass($class_id,$channel = 1 ,$paysource = 0, $phone = "")
     {
         $class = ClassModel::getClass($class_id);
 
@@ -197,7 +201,20 @@ class ClassLogic extends BaseLogic
 
         if($class['price'] > 0){
             //生成支付参数
-            $config = CommonLogic::getInstance()->createOrder($attributes, $paysource);
+            $config = CommonLogic::getInstance()->createOrder($attributes);
+        }
+
+        //小程序特殊处理，只记录手机号无需付款
+        if($paysource == 1){
+            unset($config);
+
+            if(empty($phone)&& empty($_SESSION['phone'])){
+                UserException::UserNoPhone();
+            }
+
+            if(empty($_SESSION['phone'])){
+                UserModel::updateUserByUid($_SESSION['uid'], ["phone" => $phone]);
+            }
         }
 
 
@@ -212,7 +229,7 @@ class ClassLogic extends BaseLogic
             "point" => 1,
             "user_id" => $_SESSION['uid'],
             "channel_id" => $channel,
-            "paysource" => $paysource
+            "paysource" => $paysource,
         ];
 
         $user_class_data = [
@@ -220,7 +237,6 @@ class ClassLogic extends BaseLogic
             "user_id"=>$_SESSION['uid'],
             "order_id"=>$attributes['out_trade_no'],
             "create_time"=>time(),
-            "status"=>0,
         ];
         $order_id = OrderModel::addOrder($order_date);
         $buy_id = BuyModel::addUserClass($user_class_data);
@@ -241,6 +257,21 @@ class ClassLogic extends BaseLogic
             database()->pdo->rollBack();
             return false;
         }
+    }
+
+    public function getData($data, $iv)
+    {
+
+        if(empty($data) || empty($iv)){
+            BaseException::ParamsError();
+        }
+
+
+        $app_id = config()->get("wxapp_app_id");
+        $app_secret = config()->get("wxapp_app_secret");
+        $wxapp = new Wxapp($app_id, $app_secret);
+        $session_key = $_SESSION['userInfo']['session_key'];
+        return $wxapp->encryptedDataDecode($data, $session_key, $iv);
     }
 
 }

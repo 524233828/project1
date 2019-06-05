@@ -21,4 +21,9 @@ class UserException extends BaseException
     {
         throw new self(ErrorCode::msg(ErrorCode::LOGIN_FAIL),ErrorCode::LOGIN_FAIL);
     }
+
+    public static function UserNoPhone()
+    {
+        throw new self(ErrorCode::msg(ErrorCode::USER_NO_PHONE),ErrorCode::USER_NO_PHONE);
+    }
 }

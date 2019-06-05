@@ -49,6 +49,12 @@ class Wxapp
         return $my_sign===$sign;
     }
 
+    /**
+     * @param $data
+     * @param $session_key
+     * @param $iv
+     * @return mixed
+     */
     public function encryptedDataDecode($data,$session_key,$iv)
     {
         $pc = new WXBizDataCrypt($this->app_id, $session_key);
