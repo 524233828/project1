@@ -26,29 +26,24 @@ class WXBizDataCrypt
      *
 	 * @return int 成功0，失败返回对应的错误码
 	 */
-	public function decryptData( $encryptedData, $iv, &$data )
-	{
-		if (strlen($this->sessionKey) != 24) {
-			return ErrorCode::$IllegalAesKey;
-		}
-		$aesKey=base64_decode($this->sessionKey);
+    public function decryptData( $encryptedData, $iv, &$data )
+    {
+        if (strlen($this->sessionKey) != 24) {
+            return ErrorCode::$IllegalAesKey;
+        }
+        $aesKey=base64_decode($this->sessionKey);
 
 
-		if (strlen($iv) != 24) {
-			return ErrorCode::$IllegalIv;
-		}
-		$aesIV=base64_decode($iv);
+        if (strlen($iv) != 24) {
+            return ErrorCode::$IllegalIv;
+        }
+        $aesIV=base64_decode($iv);
 
-		$aesCipher=base64_decode($encryptedData);
+        $aesCipher=base64_decode($encryptedData);
 
-		$pc = new Prpcrypt($aesKey);
-		$result = $pc->decrypt($aesCipher,$aesIV);
+        $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
 
-		if ($result[0] != 0) {
-			return $result[0];
-		}
-
-        $dataObj=json_decode( $result[1] );
+        $dataObj=json_decode( $result );
         if( $dataObj  == NULL )
         {
             return ErrorCode::$IllegalBuffer;
@@ -57,9 +52,9 @@ class WXBizDataCrypt
         {
             return ErrorCode::$IllegalBuffer;
         }
-		$data = $result[1];
-		return ErrorCode::$OK;
-	}
+        $data = $result;
+        return ErrorCode::$OK;
+    }
 
 }
 
