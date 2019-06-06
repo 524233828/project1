@@ -50,15 +50,15 @@ class Wxapp
     }
 
     /**
-     * @param $data
+     * @param $encrypted_data
      * @param $session_key
      * @param $iv
      * @return mixed
      */
-    public function encryptedDataDecode($data,$session_key,$iv)
+    public function encryptedDataDecode($encrypted_data,$session_key,$iv)
     {
         $pc = new WXBizDataCrypt($this->app_id, $session_key);
-        $errCode = $pc->decryptData($data, $iv, $data );
+        $errCode = $pc->decryptData($encrypted_data, $iv, $data );
         if ($errCode == 0) {
             return $data;
         } else {
