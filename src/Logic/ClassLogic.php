@@ -206,7 +206,9 @@ class ClassLogic extends BaseLogic
 
         //小程序特殊处理，只记录手机号无需付款
         if($paysource == 1){
-            unset($config);
+            if(isset($config)){
+                unset($config);
+            }
 
             if(empty($phone)&& empty($_SESSION['phone'])){
                 UserException::UserNoPhone();
