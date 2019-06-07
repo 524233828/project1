@@ -248,10 +248,10 @@ class ClassLogic extends BaseLogic
             if(isset($config)){
                 return $config;
             }else{
-                OrderModel::updateOrder(["status" => 1],["order_id"=>$order_id]);
-                $user_class = BuyModel::getUserClassByOrderId($order_id, ['class_id']);
+                OrderModel::updateOrder(["status" => 1],["order_id"=>$order_date['order_id']]);
+                $user_class = BuyModel::getUserClassByOrderId($order_date['order_id'], ['class_id']);
                 $class = ClassModel::getClass($user_class['class_id']);
-                BuyModel::buySuccess($order_id, $class['expire_month']);
+                BuyModel::buySuccess($order_date['order_id'], $class['expire_month']);
                 database()->pdo->commit();
                 return ["timestamp" => time()];
             }
