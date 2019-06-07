@@ -267,6 +267,9 @@ class ClassLogic extends BaseLogic
         }
 
 
+        $log = myLog("wxapp_get_data");
+        $log->addDebug("data:".$data);
+        $log->addDebug("iv:".$iv);
         $app_id = config()->get("wxapp_app_id");
         $app_secret = config()->get("wxapp_app_secret");
         $wxapp = new Wxapp($app_id, $app_secret);
