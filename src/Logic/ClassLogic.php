@@ -252,7 +252,6 @@ class ClassLogic extends BaseLogic
                 $user_class = BuyModel::getUserClassByOrderId($order_date['order_id'], ['class_id']);
                 $class = ClassModel::getClass($user_class['class_id']);
                 BuyModel::buySuccess($order_date['order_id'], $class['expire_month']);
-                database()->pdo->commit();
                 return ["timestamp" => time()];
             }
 
