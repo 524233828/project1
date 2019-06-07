@@ -199,7 +199,7 @@ class ClassLogic extends BaseLogic
             'openid'           => $_SESSION['userInfo']['openid'], // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
         ];
 
-        if($class['price'] > 0){
+        if($class['price'] > 0 && $paysource == 0){
             //生成支付参数
             $config = CommonLogic::getInstance()->createOrder($attributes);
         }
