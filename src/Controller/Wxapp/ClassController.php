@@ -36,8 +36,9 @@ class ClassController extends BaseController
         $class_id = $params['class_id'];
         $channel = isset($params['channel'])?$params['channel']:1;
         $paysource = isset($params['paysource'])?$params['paysource']:1;
+        $phone = isset($params['phone'])?$params['phone']:"";
 
-        if(!$result = ClassLogic::getInstance()->buyClass($class_id, $channel, $paysource)){
+        if(!$result = ClassLogic::getInstance()->buyClass($class_id, $channel, $paysource,$phone)){
             OrderException::OrderCreateFail();
         }else{
             $result['timeStamp'] = $result['timestamp'];
